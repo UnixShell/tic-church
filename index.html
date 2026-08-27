@@ -17,7 +17,7 @@ input[type=text]{width:100%;padding:11px 1px;border:1px solid #dddcd4;border-rad
 .people-head{display:flex;justify-content:space-between}.remove{border:0;background:none;color:#a65353}.add,.btn{width:100%;padding:13px;border-radius:11px;font-size:16px}
 .add{border:1px dashed #5b6f55;background:#f8faf6;color:#43543f}.btn{border:0;background:#5b6f55;color:#fff;font-weight:700}
 .notice{background:#f4f0df;border-left:4px solid #a08a50;padding:12px;border-radius:8px}
-.result{display:none;background:#edf4ea;border-radius:12px;padding:14px;margin-top:13px}
+.result{display:none;background:#edf4ea;border-radius:12px;padding:14px;margin-top:13px}.result.error{background:#faece9}
 .small{font-size:12px;color:#777}
 </style>
 </head>
@@ -34,22 +34,22 @@ input[type=text]{width:100%;padding:11px 1px;border:1px solid #dddcd4;border-rad
 <form id="form">
 <div class="card">
 <h2>① 申请人情报</h2>
-<label class="title">所属教会 *</label>
+<label class="title">所属教会 <span class="required">*</span></label>
 <div class="options">
-<label class="option"><input type="radio" name="church" value="教会A" required><span>户田教会</span></label>
-<label class="option"><input type="radio" name="church" value="教会B"><span>池袋教会</span></label>
+<label class="option"><input type="radio" name="church" value="户田教会" required><span>户田教会</span></label>
+<label class="option"><input type="radio" name="church" value="池袋教会"><span>池袋教会</span></label>
 </div>
-<label class="title">姓名 *</label><input type="text" name="name" required>
-<label class="title">性别 *</label>
+<label class="title">姓名 <span class="required">*</span></label><input type="text" name="name" required>
+<label class="title">性别 <span class="required">*</span></label>
 <div class="options"><label class="option"><input type="radio" name="gender" value="男" required><span>男</span></label><label class="option"><input type="radio" name="gender" value="女"><span>女</span></label></div>
-<label class="title">类别 *</label>
+<label class="title">类别 <span class="required">*</span></label>
 <div class="options">
-<label class="option"><input type="radio" name="category" value="在职成人" required><span>成人</span></label>
-<label class="option"><input type="radio" name="category" value="学生"><span>留学生学生 ※</span></label>
+<label class="option"><input type="radio" name="category" value="成人" required><span>成人</span></label>
+<label class="option"><input type="radio" name="category" value="留学生"><span>留学生 ※</span></label>
 <label class="option"><input type="radio" name="category" value="小学生及学龄前儿童"><span>3岁～小学六年级</span></label>
 <label class="option"><input type="radio" name="category" value="3周岁以下幼儿"><span>3岁以下幼儿</span></label>
-<p>※ 仅限在日本留学生</p>
 </div>
+<p>※ 仅限在日本留学生</p>
 </div>
 
 <div class="card">
@@ -79,153 +79,177 @@ input[type=text]{width:100%;padding:11px 1px;border:1px solid #dddcd4;border-rad
 </div>
 
 <div class="card">
+<h2>⑥ 前往退修会场地的交通方式</h2>
+<p class="small">请选择您计划如何前往退修会场地。</p>
+<div class="options">
+<label class="option"><input type="radio" name="transport" value="自驾车" required><span>自驾车</span></label>
+<label class="option"><input type="radio" name="transport" value="电车"><span>电车</span></label>
+<label class="option"><input type="radio" name="transport" value="不知道，希望教会协助安排"><span>不知道，希望教会协助安排</span></label>
+</div>
+</div>
+
+<div class="card">
 <button class="btn" type="submit">提交报名</button>
-<div id="result" class="result"></div>
+<div id="result" class="result" aria-live="polite"></div>
 </div>
 </form>
 </div>
 
 <script>
 /* ====== 只需要修改这里 ====== */
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyQeFxSO1nuRI93yE4radiHeDdGDpgtA-M_dF-onORldXiHHChRC2I34PaRGFUnuQvh/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzUOwc93djqJi9q13h-Vk2AgqTpWhPF2uBBz0waPgqjHDqOu5onnv3YstjpyjUVH55m/exec';
 /* ============================= */
 
-let companionCount=0;
+let companionCount = 0;
 
-function schedule(prefix,id){
-return `
-<label class="title">参加日期 *</label>
-<div class="options">
-<label class="option"><input type="checkbox" name="${prefix}_days_${id}[]" value="10月10日"><span>10/10</span></label>
-<label class="option"><input type="checkbox" name="${prefix}_days_${id}[]" value="10月11日"><span>10/11</span></label>
-<label class="option"><input type="checkbox" name="${prefix}_days_${id}[]" value="10月12日"><span>10/12</span></label>
-</div>
-<label class="title">住宿</label>
-<div class="options">
-<label class="option"><input type="checkbox" name="${prefix}_nights_${id}[]" value="10月10日晚"><span>10/10晚</span></label>
-<label class="option"><input type="checkbox" name="${prefix}_nights_${id}[]" value="10月11日晚"><span>10/11晚</span></label>
-<label class="option"><input type="checkbox" name="${prefix}_nights_${id}[]" value="不住宿"><span>不住宿</span></label>
-</div>
-<label class="title">用餐</label>
-<div class="options">
-<label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/10晚餐"><span>10/10晚餐</span></label>
-<label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/11早餐"><span>10/11早餐</span></label>
-<label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/11午餐"><span>10/11午餐</span></label>
-<label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/11晚餐"><span>10/11晚餐</span></label>
-<label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/12早餐"><span>10/12早餐</span></label>
-<label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/12午餐"><span>10/12午餐</span></label>
-</div>`;
+function schedule(prefix, id) {
+  return `
+  <label class="title">参加日期 <span class="required">*</span></label>
+  <div class="options">
+  <label class="option"><input type="checkbox" name="${prefix}_days_${id}[]" value="10月10日"><span>10/10</span></label>
+  <label class="option"><input type="checkbox" name="${prefix}_days_${id}[]" value="10月11日"><span>10/11</span></label>
+  <label class="option"><input type="checkbox" name="${prefix}_days_${id}[]" value="10月12日"><span>10/12</span></label>
+  </div>
+  <label class="title">住宿</label>
+  <div class="options">
+  <label class="option"><input type="checkbox" name="${prefix}_nights_${id}[]" value="10月10日晚"><span>10/10晚</span></label>
+  <label class="option"><input type="checkbox" name="${prefix}_nights_${id}[]" value="10月11日晚"><span>10/11晚</span></label>
+  <label class="option"><input type="checkbox" name="${prefix}_nights_${id}[]" value="不住宿"><span>不住宿</span></label>
+  </div>
+  <label class="title">用餐</label>
+  <div class="options">
+  <label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/10晚餐"><span>10/10晚餐</span></label>
+  <label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/11早餐"><span>10/11早餐</span></label>
+  <label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/11午餐"><span>10/11午餐</span></label>
+  <label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/11晚餐"><span>10/11晚餐</span></label>
+  <label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/12早餐"><span>10/12早餐</span></label>
+  <label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/12午餐"><span>10/12午餐</span></label>
+  </div>`;
 }
 
-function addApplicant(){
-const b=document.createElement('div');b.className='people';
-b.innerHTML='<h3>申请人</h3>'+schedule('applicant',0);
-document.getElementById('participation').appendChild(b);
+function addApplicant() {
+  const block = document.createElement('div');
+  block.className = 'people';
+  block.innerHTML = '<h3>申请人</h3>' + schedule('applicant', 0);
+  document.getElementById('participation').appendChild(block);
 }
 
-function addCompanion(){
-companionCount++;
-const id=companionCount;
+function addCompanion() {
+  companionCount++;
+  const id = companionCount;
 
-const b=document.createElement('div');
-b.className='people';b.id='companion-'+id;
-b.innerHTML=`
-<div class="people-head"><strong>同行者 ${id}</strong>
-<button type="button" class="remove" onclick="removeCompanion(${id})">删除</button></div>
-<label class="title">姓名 *</label>
-<input type="text" name="companion_name[]" required>
-<label class="title">性别 *</label>
-<div class="options">
-<label class="option"><input type="radio" name="companion_gender_${id}" value="男" required><span>男</span></label>
-<label class="option"><input type="radio" name="companion_gender_${id}" value="女"><span>女</span></label>
-</div>
-<label class="title">人员类型 *</label>
-<div class="options">
-<label class="option"><input type="radio" name="companion_type_${id}" value="在职成人" required><span>成人</span></label>
-<label class="option"><input type="radio" name="companion_type_${id}" value="小学生及学龄前儿童"><span>3岁～小学六年级</span></label>
-<label class="option"><input type="radio" name="companion_type_${id}" value="3周岁以下幼儿"><span>3岁以下幼儿</span></label>
-</div>`;
-document.getElementById('companions').appendChild(b);
+  const companion = document.createElement('div');
+  companion.className = 'people';
+  companion.id = 'companion-' + id;
+  companion.innerHTML = `
+  <div class="people-head"><strong>同行者 ${id}</strong>
+  <button type="button" class="remove" onclick="removeCompanion(${id})">删除</button></div>
+  <label class="title">姓名 <span class="required">*</span></label>
+  <input type="text" name="companion_name[]" required>
+  <label class="title">性别 <span class="required">*</span></label>
+  <div class="options">
+  <label class="option"><input type="radio" name="companion_gender_${id}" value="男" required><span>男</span></label>
+  <label class="option"><input type="radio" name="companion_gender_${id}" value="女"><span>女</span></label>
+  </div>
+  <label class="title">人员类型 <span class="required">*</span></label>
+  <div class="options">
+  <label class="option"><input type="radio" name="companion_type_${id}" value="成人" required><span>成人</span></label>
+  <label class="option"><input type="radio" name="companion_type_${id}" value="学生"><span>留学生 ※</span></label>
+  <label class="option"><input type="radio" name="companion_type_${id}" value="小学生及学龄前儿童"><span>3岁～小学六年级</span></label>
+  <label class="option"><input type="radio" name="companion_type_${id}" value="3周岁以下幼儿"><span>3岁以下幼儿</span></label>
+  </div>`;
+  document.getElementById('companions').appendChild(companion);
 
-const p=document.createElement('div');p.className='people';p.id='participation-'+id;
-p.innerHTML='<h3>同行者 '+id+'</h3>'+schedule('companion',id);
-document.getElementById('participation').appendChild(p);
+  const participation = document.createElement('div');
+  participation.className = 'people';
+  participation.id = 'participation-' + id;
+  participation.innerHTML = '<h3>同行者 ' + id + '</h3>' + schedule('companion', id);
+  document.getElementById('participation').appendChild(participation);
 }
 
-function removeCompanion(id){
-document.getElementById('companion-'+id)?.remove();
-document.getElementById('participation-'+id)?.remove();
+function removeCompanion(id) {
+  document.getElementById('companion-' + id)?.remove();
+  document.getElementById('participation-' + id)?.remove();
 }
 
-function checked(name){
-return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(x=>x.value);
+function checked(name) {
+  return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(input => input.value);
 }
 
 addApplicant();
 
-document.getElementById('form').addEventListener('submit',async function(e){
-e.preventDefault();
+document.getElementById('form').addEventListener('submit', async function (event) {
+  event.preventDefault();
 
-if(GOOGLE_SCRIPT_URL.includes('请粘贴')){
-alert('请先把 Google Apps Script 的 Web App URL 填入 HTML 顶部的 GOOGLE_SCRIPT_URL。');
-return;
-}
+  if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('请粘贴')) {
+    alert('请先把 Google Apps Script 的 Web App URL 填入 HTML 顶部的 GOOGLE_SCRIPT_URL。');
+    return;
+  }
 
-const fd=new FormData(this);
-const applicant={
-name:fd.get('name'),
-gender:fd.get('gender'),
-category:fd.get('category'),
-days:checked('applicant_days_0[]'),
-nights:checked('applicant_nights_0[]'),
-meals:checked('applicant_meals_0[]')
-};
+  const formData = new FormData(this);
+  const applicant = {
+    name: formData.get('name'),
+    gender: formData.get('gender'),
+    category: formData.get('category'),
+    days: checked('applicant_days_0[]'),
+    nights: checked('applicant_nights_0[]'),
+    meals: checked('applicant_meals_0[]')
+  };
 
-if(!applicant.days.length){alert('请选择报名人的参加日期。');return;}
+  if (!applicant.days.length) {
+    alert('请选择申请人的参加日期。');
+    return;
+  }
 
-const companions=[];
-for(const box of document.querySelectorAll('#companions .people')){
-const id=box.id.replace('companion-','');
-const name=box.querySelector('input[name="companion_name[]"]').value.trim();
-const gender=box.querySelector(`input[name="companion_gender_${id}"]:checked`)?.value||'';
-const category=box.querySelector(`input[name="companion_type_${id}"]:checked`)?.value||'';
-const days=checked(`companion_days_${id}[]`);
-const nights=checked(`companion_nights_${id}[]`);
-const meals=checked(`companion_meals_${id}[]`);
-if(!name||!gender||!category||!days.length){alert(`请完整填写同行人员 ${id}。`);return;}
-companions.push({name,gender,category,days,nights,meals});
-}
+  const companions = [];
+  for (const block of document.querySelectorAll('#companions .people')) {
+    const id = block.id.replace('companion-', '');
+    const name = block.querySelector('input[name="companion_name[]"]').value.trim();
+    const gender = block.querySelector(`input[name="companion_gender_${id}"]:checked`)?.value || '';
+    const category = block.querySelector(`input[name="companion_type_${id}"]:checked`)?.value || '';
+    const days = checked(`companion_days_${id}[]`);
+    const nights = checked(`companion_nights_${id}[]`);
+    const meals = checked(`companion_meals_${id}[]`);
+    if (!name || !gender || !category || !days.length) {
+      alert(`请完整填写同行者 ${id} 的资料。`);
+      return;
+    }
+    companions.push({ name, gender, category, days, nights, meals });
+  }
 
-const data={
-church:fd.get('church'),
-familyId:'',
-applicant,
-companions,
-newfriend:fd.get('newfriend')||'',
-newfriendName:fd.get('newfriendName')||'',
-note:fd.get('note')||''
-};
+  const data = {
+    church: formData.get('church'),
+    familyId: '',
+    applicant,
+    companions,
+    newfriend: formData.get('newfriend') || '',
+    newfriendName: formData.get('newfriendName') || '',
+    note: formData.get('note') || '',
+    transport: formData.get('transport')
+  };
 
-const result=document.getElementById('result');
-result.style.display='block';
-result.textContent='正在提交报名资料……';
+  const result = document.getElementById('result');
+  result.classList.remove('error');
+  result.style.display = 'block';
+  result.textContent = '正在提交报名资料……';
 
-try{
-const response=await fetch(GOOGLE_SCRIPT_URL,{
-method:'POST',
-mode:'no-cors',
-headers:{'Content-Type':'text/plain;charset=utf-8'},
-body:JSON.stringify(data)
-});
-result.innerHTML='<b>报名资料已提交！</b><br>感谢您的报名。教会同工会根据报名资料进行后续安排。';
-this.reset();
-document.getElementById('companions').innerHTML='';
-document.getElementById('participation').innerHTML='';
-companionCount=0;
-addApplicant();
-}catch(err){
-result.innerHTML='<b>提交失败</b><br>请检查网络连接，或联系教会同工。';
-}
+  try {
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(data)
+    });
+    result.innerHTML = '<b>报名资料已提交！</b><br>感谢您的报名。教会同工会根据报名资料进行后续安排。';
+    this.reset();
+    document.getElementById('companions').innerHTML = '';
+    document.getElementById('participation').innerHTML = '';
+    companionCount = 0;
+    addApplicant();
+  } catch (error) {
+    result.classList.add('error');
+    result.innerHTML = '<b>提交失败</b><br>请检查网络连接，或联系教会同工。';
+  }
 });
 </script>
 </body>
