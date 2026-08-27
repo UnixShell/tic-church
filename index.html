@@ -9,7 +9,7 @@ body{margin:0;background:#f5f3ed;color:#292b27;font-family:-apple-system,BlinkMa
 .wrap{max-width:760px;margin:auto;padding:18px 15px 50px}.hero{background:linear-gradient(145deg,#52684d,#83937a);color:#fff;border-radius:22px;padding:30px 22px}
 .hero h1{font-size:27px;margin:12px 0 4px}.card{background:#fff;border-radius:17px;padding:21px 18px;margin:14px 0;box-shadow:0 4px 18px #00000008}
 h2{font-size:18px}.title{display:block;font-weight:700;margin:14px 0 7px}.required{color:#a65353}
-input[type=text]{width:100%;padding:11px 12px;border:1px solid #dddcd4;border-radius:10px;font-size:15px}
+input[type=text]{width:100%;padding:11px 1px;border:1px solid #dddcd4;border-radius:10px;font-size:15px}
 .options{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.option{position:relative}.option input{position:absolute;opacity:0}
 .option span{display:block;border:1px solid #dddcd4;border-radius:10px;padding:9px;text-align:center;cursor:pointer}
 .option input:checked+span{background:#edf2ea;border-color:#5b6f55;font-weight:700}
@@ -23,7 +23,7 @@ input[type=text]{width:100%;padding:11px 12px;border:1px solid #dddcd4;border-ra
 </head>
 <body>
 <div class="wrap">
-<section class="hero"><h1>2026年教会退修会</h1><p>10月10日（六）～10月12日（一）</p></section>
+<section class="hero"><h1>2026年教会退修会参加意愿申请</h1><p>10月10日（六）～10月12日（一）</p></section>
 
 <div class="card">
 <h2>关于退修会</h2>
@@ -33,33 +33,34 @@ input[type=text]{width:100%;padding:11px 12px;border:1px solid #dddcd4;border-ra
 
 <form id="form">
 <div class="card">
-<h2>① 报名人</h2>
+<h2>① 申请人情报</h2>
 <label class="title">所属教会 *</label>
 <div class="options">
-<label class="option"><input type="radio" name="church" value="教会A" required><span>教会A</span></label>
-<label class="option"><input type="radio" name="church" value="教会B"><span>教会B</span></label>
+<label class="option"><input type="radio" name="church" value="教会A" required><span>户田教会</span></label>
+<label class="option"><input type="radio" name="church" value="教会B"><span>池袋教会</span></label>
 </div>
 <label class="title">姓名 *</label><input type="text" name="name" required>
 <label class="title">性别 *</label>
 <div class="options"><label class="option"><input type="radio" name="gender" value="男" required><span>男</span></label><label class="option"><input type="radio" name="gender" value="女"><span>女</span></label></div>
-<label class="title">人员类型 *</label>
+<label class="title">类别 *</label>
 <div class="options">
-<label class="option"><input type="radio" name="category" value="在职成人" required><span>在职成人</span></label>
-<label class="option"><input type="radio" name="category" value="学生"><span>学生</span></label>
+<label class="option"><input type="radio" name="category" value="在职成人" required><span>成人</span></label>
+<label class="option"><input type="radio" name="category" value="学生"><span>留学生学生 ※</span></label>
 <label class="option"><input type="radio" name="category" value="小学生及学龄前儿童"><span>3岁～小学六年级</span></label>
 <label class="option"><input type="radio" name="category" value="3周岁以下幼儿"><span>3岁以下幼儿</span></label>
+<p>※ 仅限在日本留学生</p>
 </div>
 </div>
 
 <div class="card">
-<h2>② 家庭／同行人员</h2>
-<p class="small">每点击一次按钮，就增加一组姓名、性别、人员类型。</p>
+<h2>② 家庭／同行者情报</h2>
+<p class="small">每点击一次按钮，就增加一组姓名、性别、类别。</p>
 <div id="companions"></div>
-<button type="button" class="add" onclick="addCompanion()">＋ 添加同行人员</button>
+<button type="button" class="add" onclick="addCompanion()">＋ 添加同行者</button>
 </div>
 
 <div class="card">
-<h2>③ 每位人员的参加安排</h2>
+<h2>③ 参加详细</h2>
 <div id="participation"></div>
 </div>
 
@@ -118,7 +119,7 @@ return `
 
 function addApplicant(){
 const b=document.createElement('div');b.className='people';
-b.innerHTML='<h3>报名人</h3>'+schedule('applicant',0);
+b.innerHTML='<h3>申请人</h3>'+schedule('applicant',0);
 document.getElementById('participation').appendChild(b);
 }
 
@@ -129,7 +130,7 @@ const id=companionCount;
 const b=document.createElement('div');
 b.className='people';b.id='companion-'+id;
 b.innerHTML=`
-<div class="people-head"><strong>同行人员 ${id}</strong>
+<div class="people-head"><strong>同行者 ${id}</strong>
 <button type="button" class="remove" onclick="removeCompanion(${id})">删除</button></div>
 <label class="title">姓名 *</label>
 <input type="text" name="companion_name[]" required>
@@ -140,15 +141,14 @@ b.innerHTML=`
 </div>
 <label class="title">人员类型 *</label>
 <div class="options">
-<label class="option"><input type="radio" name="companion_type_${id}" value="在职成人" required><span>在职成人</span></label>
-<label class="option"><input type="radio" name="companion_type_${id}" value="学生"><span>学生</span></label>
+<label class="option"><input type="radio" name="companion_type_${id}" value="在职成人" required><span>成人</span></label>
 <label class="option"><input type="radio" name="companion_type_${id}" value="小学生及学龄前儿童"><span>3岁～小学六年级</span></label>
 <label class="option"><input type="radio" name="companion_type_${id}" value="3周岁以下幼儿"><span>3岁以下幼儿</span></label>
 </div>`;
 document.getElementById('companions').appendChild(b);
 
 const p=document.createElement('div');p.className='people';p.id='participation-'+id;
-p.innerHTML='<h3>同行人员 '+id+'</h3>'+schedule('companion',id);
+p.innerHTML='<h3>同行者 '+id+'</h3>'+schedule('companion',id);
 document.getElementById('participation').appendChild(p);
 }
 
