@@ -16,19 +16,34 @@ input[type=text]{width:100%;padding:11px 1px;border:1px solid #dddcd4;border-rad
 .people{border:1px solid #dddcd4;background:#fafaf7;border-radius:13px;padding:15px;margin:11px 0}
 .people-head{display:flex;justify-content:space-between}.remove{border:0;background:none;color:#a65353}.add,.btn{width:100%;padding:13px;border-radius:11px;font-size:16px}
 .add{border:1px dashed #5b6f55;background:#f8faf6;color:#43543f}.btn{border:0;background:#5b6f55;color:#fff;font-weight:700}
-.notice{background:#f4f0df;border-left:4px solid #a08a50;padding:12px;border-radius:8px}
+.notice{background:#f4f0df;border-left:4px solid #a08a50;padding:12px;border-radius:8px}.fee-list{list-style:none;padding:0;margin:10px 0}.fee-list li{padding:8px 0;border-bottom:1px solid #ece9df}.fee-list li:last-child{border-bottom:0}.fee-list strong{color:#43543f}.address{line-height:1.7}
 .result{display:none;background:#edf4ea;border-radius:12px;padding:14px;margin-top:13px}.result.error{background:#faece9}
 .small{font-size:12px;color:#777}
 </style>
 </head>
 <body>
 <div class="wrap">
-<section class="hero"><h1>2026年教会退修会参加意愿申请</h1><p>10月10日（六）～10月12日（一）</p></section>
+<section class="hero"><h1>2026年教会退修会报名登记</h1><p>10月10日（六）～10月12日（一）</p></section>
 
 <div class="card">
 <h2>关于退修会</h2>
 <p>邀请弟兄姊妹暂时放下日常生活的忙碌，在敬拜、祷告、信息与团契中亲近神，也彼此建立。盼望每一位参加者都能重新得力。</p>
-<div class="notice">目前先报名，暂不收款。预计9月5日确认场地费用，9月6日以后另行通知并开始收款。</div>
+</div>
+
+<div class="card">
+<h2>退修会费用</h2>
+<p>三天两夜，含六餐：</p>
+<ul class="fee-list">
+<li>大人（高中生以上）：<strong>9,200円</strong></li>
+<li>3岁～中学生：<strong>6,700円</strong></li>
+<li>3岁未满：<strong>1,200円</strong></li>
+</ul>
+<div class="notice">9月10日 17:00 前完成报名，每人可享 <strong>500円</strong> 折扣。报名后如需变更或取消，请于10月2日前提出；10月2日后取消，费用为100%。</div>
+</div>
+
+<div class="card">
+<h2>退修会地址</h2>
+<p class="address">千葉市少年自然の家<br>〒297-0217 千葉県長生郡長柄町針ヶ谷字中野1591-40</p>
 </div>
 
 <form id="form">
@@ -44,12 +59,10 @@ input[type=text]{width:100%;padding:11px 1px;border:1px solid #dddcd4;border-rad
 <div class="options"><label class="option"><input type="radio" name="gender" value="男" required><span>男</span></label><label class="option"><input type="radio" name="gender" value="女"><span>女</span></label></div>
 <label class="title">类别 <span class="required">*</span></label>
 <div class="options">
-<label class="option"><input type="radio" name="category" value="成人" required><span>成人</span></label>
-<label class="option"><input type="radio" name="category" value="留学生"><span>留学生 ※</span></label>
-<label class="option"><input type="radio" name="category" value="小学生及学龄前儿童"><span>3岁～小学六年级</span></label>
-<label class="option"><input type="radio" name="category" value="3周岁以下幼儿"><span>3岁以下幼儿</span></label>
+<label class="option"><input type="radio" name="category" value="大人（高中生以上）" required><span>大人（高中生以上）</span></label>
+<label class="option"><input type="radio" name="category" value="3岁～中学生"><span>3岁～中学生</span></label>
+<label class="option"><input type="radio" name="category" value="3岁未满"><span>3岁未满</span></label>
 </div>
-<p>※ 仅限在日本留学生</p>
 </div>
 
 <div class="card">
@@ -60,8 +73,8 @@ input[type=text]{width:100%;padding:11px 1px;border:1px solid #dddcd4;border-rad
 </div>
 
 <div class="card">
-<h2>③ 参加详细</h2>
-<div id="participation"></div>
+<h2>③ 参加安排</h2>
+<p>本次报名原则上为<strong>全程参加</strong>：10月10日～12日（三天两夜），含六餐。若有特殊情况，请在备注中说明。</p>
 </div>
 
 <div class="card">
@@ -75,7 +88,7 @@ input[type=text]{width:100%;padding:11px 1px;border:1px solid #dddcd4;border-rad
 
 <div class="card">
 <h2>⑤ 备注</h2>
-<input type="text" name="note" placeholder="特殊饮食、住宿、儿童等情况">
+<input type="text" name="note" placeholder="特殊需求、饮食、住宿、儿童等情况请填写">
 </div>
 
 <div class="card">
@@ -102,36 +115,18 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzUOwc93djqJi
 
 let companionCount = 0;
 
-function schedule(prefix, id) {
-  return `
-  <label class="title">参加日期 <span class="required">*</span></label>
-  <div class="options">
-  <label class="option"><input type="checkbox" name="${prefix}_days_${id}[]" value="10月10日"><span>10/10</span></label>
-  <label class="option"><input type="checkbox" name="${prefix}_days_${id}[]" value="10月11日"><span>10/11</span></label>
-  <label class="option"><input type="checkbox" name="${prefix}_days_${id}[]" value="10月12日"><span>10/12</span></label>
-  </div>
-  <label class="title">住宿</label>
-  <div class="options">
-  <label class="option"><input type="checkbox" name="${prefix}_nights_${id}[]" value="10月10日晚"><span>10/10晚</span></label>
-  <label class="option"><input type="checkbox" name="${prefix}_nights_${id}[]" value="10月11日晚"><span>10/11晚</span></label>
-  <label class="option"><input type="checkbox" name="${prefix}_nights_${id}[]" value="不住宿"><span>不住宿</span></label>
-  </div>
-  <label class="title">用餐</label>
-  <div class="options">
-  <label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/10晚餐"><span>10/10晚餐</span></label>
-  <label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/11早餐"><span>10/11早餐</span></label>
-  <label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/11午餐"><span>10/11午餐</span></label>
-  <label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/11晚餐"><span>10/11晚餐</span></label>
-  <label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/12早餐"><span>10/12早餐</span></label>
-  <label class="option"><input type="checkbox" name="${prefix}_meals_${id}[]" value="10/12午餐"><span>10/12午餐</span></label>
-  </div>`;
-}
+const FULL_RETREAT = {
+  days: ['10月10日', '10月11日', '10月12日'],
+  nights: ['10月10日晚', '10月11日晚'],
+  meals: ['10/10晚餐', '10/11早餐', '10/11午餐', '10/11晚餐', '10/12早餐', '10/12午餐']
+};
 
-function addApplicant() {
-  const block = document.createElement('div');
-  block.className = 'people';
-  block.innerHTML = '<h3>申请人</h3>' + schedule('applicant', 0);
-  document.getElementById('participation').appendChild(block);
+function fullRetreatDetails() {
+  return {
+    days: [...FULL_RETREAT.days],
+    nights: [...FULL_RETREAT.nights],
+    meals: [...FULL_RETREAT.meals]
+  };
 }
 
 function addCompanion() {
@@ -153,30 +148,16 @@ function addCompanion() {
   </div>
   <label class="title">人员类型 <span class="required">*</span></label>
   <div class="options">
-  <label class="option"><input type="radio" name="companion_type_${id}" value="成人" required><span>成人</span></label>
-  <label class="option"><input type="radio" name="companion_type_${id}" value="学生"><span>留学生 ※</span></label>
-  <label class="option"><input type="radio" name="companion_type_${id}" value="小学生及学龄前儿童"><span>3岁～小学六年级</span></label>
-  <label class="option"><input type="radio" name="companion_type_${id}" value="3周岁以下幼儿"><span>3岁以下幼儿</span></label>
+  <label class="option"><input type="radio" name="companion_type_${id}" value="大人（高中生以上）" required><span>大人（高中生以上）</span></label>
+  <label class="option"><input type="radio" name="companion_type_${id}" value="3岁～中学生"><span>3岁～中学生</span></label>
+  <label class="option"><input type="radio" name="companion_type_${id}" value="3岁未满"><span>3岁未满</span></label>
   </div>`;
   document.getElementById('companions').appendChild(companion);
-
-  const participation = document.createElement('div');
-  participation.className = 'people';
-  participation.id = 'participation-' + id;
-  participation.innerHTML = '<h3>同行者 ' + id + '</h3>' + schedule('companion', id);
-  document.getElementById('participation').appendChild(participation);
 }
 
 function removeCompanion(id) {
   document.getElementById('companion-' + id)?.remove();
-  document.getElementById('participation-' + id)?.remove();
 }
-
-function checked(name) {
-  return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(input => input.value);
-}
-
-addApplicant();
 
 document.getElementById('form').addEventListener('submit', async function (event) {
   event.preventDefault();
@@ -191,15 +172,8 @@ document.getElementById('form').addEventListener('submit', async function (event
     name: formData.get('name'),
     gender: formData.get('gender'),
     category: formData.get('category'),
-    days: checked('applicant_days_0[]'),
-    nights: checked('applicant_nights_0[]'),
-    meals: checked('applicant_meals_0[]')
+    ...fullRetreatDetails()
   };
-
-  if (!applicant.days.length) {
-    alert('请选择申请人的参加日期。');
-    return;
-  }
 
   const companions = [];
   for (const block of document.querySelectorAll('#companions .people')) {
@@ -207,14 +181,11 @@ document.getElementById('form').addEventListener('submit', async function (event
     const name = block.querySelector('input[name="companion_name[]"]').value.trim();
     const gender = block.querySelector(`input[name="companion_gender_${id}"]:checked`)?.value || '';
     const category = block.querySelector(`input[name="companion_type_${id}"]:checked`)?.value || '';
-    const days = checked(`companion_days_${id}[]`);
-    const nights = checked(`companion_nights_${id}[]`);
-    const meals = checked(`companion_meals_${id}[]`);
-    if (!name || !gender || !category || !days.length) {
+    if (!name || !gender || !category) {
       alert(`请完整填写同行者 ${id} 的资料。`);
       return;
     }
-    companions.push({ name, gender, category, days, nights, meals });
+    companions.push({ name, gender, category, ...fullRetreatDetails() });
   }
 
   const data = {
@@ -240,12 +211,10 @@ document.getElementById('form').addEventListener('submit', async function (event
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(data)
     });
-    result.innerHTML = '<b>报名资料已提交！</b><br>感谢您的报名。教会同工会根据报名资料进行后续安排。';
+    result.innerHTML = '<b>报名资料已送出！</b><br>感谢您的报名。教会同工会根据报名资料进行后续安排。';
     this.reset();
     document.getElementById('companions').innerHTML = '';
-    document.getElementById('participation').innerHTML = '';
     companionCount = 0;
-    addApplicant();
   } catch (error) {
     result.classList.add('error');
     result.innerHTML = '<b>提交失败</b><br>请检查网络连接，或联系教会同工。';
