@@ -25,7 +25,7 @@ select,textarea{width:100%;border:1px solid var(--line);border-radius:9px;backgr
 
 <section class="intro" aria-labelledby="intro-title">
 <h2 id="intro-title">填写方式</h2>
-<p>请在自己的工作栏选择日期与开始／结束时间，并填写工作内容后按「提交」。资料会写入 Google Sheets；下方活动时间表会显示全体同工最新提交的安排。</p>
+<p>请在自己的工作栏选择日期与开始／结束时间，并填写工作内容后按「提交」。Google Sheets 是唯一的最新资料；页面会每 10 秒自动同步，并在切回页面时立即显示最后一次操作后的最新安排。</p>
 <p id="sync-status" class="hint" aria-live="polite">正在从 Google Sheets 读取活动时间表……</p>
 </section>
 
@@ -52,9 +52,11 @@ const STORAGE_KEY = 'retreat-2026-activity-schedule-v2';
 const LEGACY_STORAGE_KEY = 'retreat-2026-activity-schedule-v1';
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwpvojJdSZpzzTtRT8h-RFQw_zTUEoeEktw3sU-7t7kQXWQX0qjvx1oxmf-9lT_iM7ZtA/exec';
 const SCHEDULE_FORM_TYPE = 'activitySchedule';
+const SYNC_INTERVAL_MS = 10000;
 let scheduleEntries = [];
 const pendingCreatedIds = new Set();
 const pendingDeletedIds = new Set();
+let remoteSyncInProgress = false;
 
 function makeTimeOptions(selected) {
   let options = '';
@@ -292,10 +294,12 @@ function sendScheduleRequest(payload) {
 }
 
 function loadEntriesFromSheets() {
+  if (remoteSyncInProgress) return;
   if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('请粘贴')) {
     setSyncStatus('尚未设定 Google Sheets 连接地址。', true);
     return;
   }
+  remoteSyncInProgress = true;
   setSyncStatus('正在从 Google Sheets 读取活动时间表……');
   const callbackName = 'activityScheduleCallback' + Date.now() + Math.floor(Math.random() * 100000);
   const script = document.createElement('script');
@@ -303,6 +307,7 @@ function loadEntriesFromSheets() {
   const finish = function() {
     if (finished) return;
     finished = true;
+    remoteSyncInProgress = false;
     script.remove();
     delete window[callbackName];
   };
@@ -320,6 +325,7 @@ function loadEntriesFromSheets() {
     }
     const remoteEntries = normalizeRemoteEntries(response.entries);
     const remoteIds = new Set(remoteEntries.map(function(entry) { return entry.id; }));
+    const localEntriesById = new Map(scheduleEntries.map(function(entry) { return [entry.id, entry]; }));
     // 删除后以 Google Sheets 的资料为准；若仍读到该记录，自动再次发送删除请求。
     const deletesToRetry = [];
     pendingDeletedIds.forEach(function(id) {
@@ -329,16 +335,27 @@ function loadEntriesFromSheets() {
         deletesToRetry.push(id);
       }
     });
+    const createsToRetry = [];
     pendingCreatedIds.forEach(function(id) {
-      if (remoteIds.has(id)) pendingCreatedIds.delete(id);
+      if (remoteIds.has(id)) {
+        pendingCreatedIds.delete(id);
+        return;
+      }
+      const entry = localEntriesById.get(id);
+      if (entry && !pendingDeletedIds.has(id)) {
+        createsToRetry.push(entry);
+      } else {
+        pendingCreatedIds.delete(id);
+      }
     });
 
     const merged = new Map();
     remoteEntries.forEach(function(entry) {
       if (!pendingDeletedIds.has(entry.id)) merged.set(entry.id, entry);
     });
-    scheduleEntries.forEach(function(entry) {
-      if (!pendingDeletedIds.has(entry.id) && !merged.has(entry.id)) merged.set(entry.id, entry);
+    // 只保留本次页面刚提交、仍在等待写入的资料；其他旧本机缓存一律以 Google Sheets 覆盖。
+    createsToRetry.forEach(function(entry) {
+      if (!merged.has(entry.id)) merged.set(entry.id, entry);
     });
     scheduleEntries = Array.from(merged.values());
     saveEntries();
@@ -349,10 +366,8 @@ function loadEntriesFromSheets() {
       sendScheduleRequest({ formType: SCHEDULE_FORM_TYPE, action: 'delete', id: id });
     });
 
-    scheduleEntries.forEach(function(entry) {
-      if (!remoteIds.has(entry.id) && !pendingCreatedIds.has(entry.id)) {
-        syncEntryToSheets(entry);
-      }
+    createsToRetry.forEach(function(entry) {
+      syncEntryToSheets(entry);
     });
   };
   script.onerror = function() {
@@ -368,6 +383,13 @@ buildStaffBoard();
 loadLocalEntries();
 refresh();
 loadEntriesFromSheets();
+window.setInterval(function() {
+  if (!document.hidden) loadEntriesFromSheets();
+}, SYNC_INTERVAL_MS);
+document.addEventListener('visibilitychange', function() {
+  if (!document.hidden) loadEntriesFromSheets();
+});
+window.addEventListener('focus', loadEntriesFromSheets);
 </script>
 </body>
 </html>
