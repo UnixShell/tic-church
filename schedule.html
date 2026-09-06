@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026年退修会｜活动时间表</title>
+<style>
+:root{--forest:#365747;--forest-dark:#254336;--paper:#f5f3ed;--surface:#fff;--ink:#27332d;--muted:#66736b;--line:#dbe1dc;--soft:#eef4ef;--danger:#a54f4f}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans SC","Hiragino Sans GB",sans-serif}
+.wrap{max-width:1380px;margin:auto;padding:22px 16px 54px}.hero{background:linear-gradient(135deg,var(--forest-dark),var(--forest));border-radius:22px;color:#fff;padding:28px 24px}.hero h1{margin:0;font-size:28px}.hero p{margin:8px 0 0;opacity:.9}
+.intro{background:var(--surface);border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 5px 20px #1f382308}.intro p{margin:0;line-height:1.7}.intro .hint{color:var(--muted);font-size:13px;margin-top:8px}
+.staff-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.staff-card{background:var(--surface);border-radius:16px;padding:16px;box-shadow:0 4px 16px #1f382308;min-width:0}.staff-card h2{font-size:18px;margin:0 0 4px}.staff-card .sub{font-size:12px;color:var(--muted);margin:0 0 13px}
+label{display:block;font-size:13px;font-weight:650;margin:10px 0 5px}.time-row{display:grid;grid-template-columns:1fr 20px 1fr;align-items:center;gap:6px}.time-row span{text-align:center;color:var(--muted)}
+select,textarea{width:100%;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:inherit;padding:8px}textarea{resize:vertical;min-height:68px}.submit-slot{border-radius:10px;padding:10px 12px;font:inherit;font-weight:650;cursor:pointer;width:100%;border:0;background:var(--forest);color:#fff;margin-top:14px}
+.activity-schedule{margin:34px 0 0}.activity-schedule h2{color:var(--forest);font-size:32px;margin:0 0 16px}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;background:var(--surface);font-size:16px}.table th,.table td{padding:15px 16px;text-align:left;vertical-align:top;border:1px solid #c8d4ce}.table th{background:var(--forest);color:#fff;font-size:17px;font-weight:650}.table th:nth-child(1),.table td:nth-child(1){width:15%;white-space:nowrap}.table th:nth-child(2),.table td:nth-child(2){width:19%;white-space:nowrap}.table th:nth-child(4),.table td:nth-child(4){width:15%;text-align:center}.table th:nth-child(5),.table td:nth-child(5){width:11%;text-align:center}.remove-entry{border:1px solid #d9b6b6;border-radius:7px;background:#fff;color:var(--danger);font:inherit;padding:5px 9px;cursor:pointer}.empty{color:var(--muted);padding:14px 0}.invalid{color:var(--danger);font-size:12px}
+@media(max-width:1040px){.staff-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.wrap{padding:14px 12px 36px}.hero{padding:23px 18px}.hero h1{font-size:24px}.staff-grid{grid-template-columns:1fr}.intro,.summary{padding:17px}.table{min-width:640px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="hero">
+<h1>2026年退修会｜活动时间表</h1>
+<p>10月10日（六）～10月12日（一）｜同工资料收集与统筹</p>
+</header>
+
+<section class="intro" aria-labelledby="intro-title">
+<h2 id="intro-title">填写方式</h2>
+<p>请在自己的工作栏选择日期与开始／结束时间，并填写工作内容后按「提交」。资料会写入 Google Sheets；下方活动时间表会显示全体同工最新提交的安排。</p>
+<p id="sync-status" class="hint" aria-live="polite">正在从 Google Sheets 读取活动时间表……</p>
+</section>
+
+<section id="staff-board" class="staff-grid" aria-label="同工工作栏"></section>
+
+<section class="activity-schedule" aria-labelledby="schedule-title">
+<h2 id="schedule-title">活动时间表</h2>
+<div id="overview" aria-live="polite"></div>
+</section>
+</main>
+
+<script>
+const STAFF = ['丛泉传道', '王春雷传道', '段中瑞', '周勇强', '金蕾', '陈彩钦', '许洁', '代博'];
+const STAFF_NAME_MIGRATIONS = {
+  '丛传': '丛泉传道',
+  '王传': '王春雷传道'
+};
+const DAYS = [
+  { value: '2026-10-10', label: '10/10（六）' },
+  { value: '2026-10-11', label: '10/11（日）' },
+  { value: '2026-10-12', label: '10/12（一）' }
+];
+const STORAGE_KEY = 'retreat-2026-activity-schedule-v2';
+const LEGACY_STORAGE_KEY = 'retreat-2026-activity-schedule-v1';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwpvojJdSZpzzTtRT8h-RFQw_zTUEoeEktw3sU-7t7kQXWQX0qjvx1oxmf-9lT_iM7ZtA/exec';
+const SCHEDULE_FORM_TYPE = 'activitySchedule';
+let scheduleEntries = [];
+const pendingCreatedIds = new Set();
+const pendingDeletedIds = new Set();
+
+function makeTimeOptions(selected) {
+  let options = '';
+  for (let hour = 0; hour < 24; hour++) {
+    for (const minute of [0, 30]) {
+      const value = String(hour).padStart(2, '0') + ':' + String(minute).padStart(2, '0');
+      options += '<option value="' + value + '"' + (value === selected ? ' selected' : '') + '>' + value + '</option>';
+    }
+  }
+  options += '<option value="24:00"' + (selected === '24:00' ? ' selected' : '') + '>24:00</option>';
+  return options;
+}
+
+function makeDateOptions(selected) {
+  return DAYS.map(function(day) {
+    return '<option value="' + day.value + '"' + (day.value === selected ? ' selected' : '') + '>' + day.label + '</option>';
+  }).join('');
+}
+
+function buildStaffBoard() {
+  const board = document.getElementById('staff-board');
+  STAFF.forEach(function(name) {
+    const card = document.createElement('section');
+    card.className = 'staff-card';
+    card.dataset.staff = name;
+    card.innerHTML =
+      '<h2>' + name + '</h2>' +
+      '<p class="sub">填写后按「提交」，项目会加入下方活动时间表。</p>' +
+      '<form class="staff-form">' +
+      '<label>日期<select class="slot-date">' + makeDateOptions('2026-10-10') + '</select></label>' +
+      '<label>时间</label><div class="time-row">' +
+      '<select class="slot-start" aria-label="开始时间">' + makeTimeOptions('09:00') + '</select><span>至</span>' +
+      '<select class="slot-end" aria-label="结束时间">' + makeTimeOptions('10:00') + '</select></div>' +
+      '<label>工作内容<textarea class="slot-task" placeholder="例如：接待、敬拜预备、儿童活动、交通安排等" required></textarea></label>' +
+      '<button class="submit-slot" type="submit">提交</button></form>';
+    card.querySelector('.staff-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      submitEntry(card);
+    });
+    board.appendChild(card);
+  });
+}
+
+function submitEntry(card) {
+  const date = card.querySelector('.slot-date').value;
+  const start = card.querySelector('.slot-start').value;
+  const end = card.querySelector('.slot-end').value;
+  const task = card.querySelector('.slot-task').value.trim();
+  if (end <= start) {
+    alert('结束时间需晚于开始时间。');
+    return;
+  }
+  if (!task) {
+    alert('请填写工作内容。');
+    return;
+  }
+  const entry = {
+    id: Date.now() + '-' + Math.random().toString(16).slice(2),
+    staff: card.dataset.staff,
+    date: date,
+    start: start,
+    end: end,
+    task: task
+  };
+  scheduleEntries.push(entry);
+  saveEntries();
+  card.querySelector('.staff-form').reset();
+  refresh();
+  syncEntryToSheets(entry);
+}
+
+function getEntries() {
+  return scheduleEntries.slice().map(function(entry) {
+    return Object.assign({}, entry, { valid: entry.end > entry.start });
+  }).sort(function(a, b) {
+    return (a.date + a.start + a.staff).localeCompare(b.date + b.start + b.staff, 'zh-CN');
+  });
+}
+
+function displayDate(value) {
+  const day = DAYS.find(function(item) { return item.value === value; });
+  return day ? day.label : value;
+}
+
+function normalizeStaffName(name) {
+  return STAFF_NAME_MIGRATIONS[name] || name;
+}
+
+function refresh() {
+  const entries = getEntries();
+  const overview = document.getElementById('overview');
+  overview.innerHTML = '';
+  if (!entries.length) {
+    overview.innerHTML = '<p class="empty">请先在各同工的工作栏中填写活动安排。</p>';
+    return;
+  }
+  const tableWrap = document.createElement('div');
+  tableWrap.className = 'table-wrap';
+  const table = document.createElement('table');
+  table.className = 'table';
+  table.innerHTML = '<thead><tr><th>日期</th><th>时间</th><th>内容</th><th>负责人</th><th>操作</th></tr></thead>';
+  const body = document.createElement('tbody');
+  entries.forEach(function(entry) {
+    const row = document.createElement('tr');
+    const date = document.createElement('td');
+    const time = document.createElement('td');
+    const task = document.createElement('td');
+    const staff = document.createElement('td');
+    const action = document.createElement('td');
+    date.textContent = displayDate(entry.date);
+    time.textContent = entry.start + '–' + entry.end;
+    task.textContent = entry.task;
+    staff.textContent = entry.staff;
+    if (!entry.valid) {
+      const warning = document.createElement('div');
+      warning.className = 'invalid';
+      warning.textContent = '结束时间需晚于开始时间';
+      task.appendChild(warning);
+    }
+    const removeButton = document.createElement('button');
+    removeButton.type = 'button';
+    removeButton.className = 'remove-entry';
+    removeButton.textContent = '删除';
+    removeButton.addEventListener('click', function() {
+      deleteEntry(entry.id);
+    });
+    action.appendChild(removeButton);
+    row.append(date, time, task, staff, action);
+    body.appendChild(row);
+  });
+  table.appendChild(body);
+  tableWrap.appendChild(table);
+  overview.appendChild(tableWrap);
+}
+
+function saveEntries() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(scheduleEntries));
+}
+
+function deleteEntry(id) {
+  if (!confirm('确定删除这项活动安排吗？')) return;
+  pendingDeletedIds.add(id);
+  scheduleEntries = scheduleEntries.filter(function(entry) { return entry.id !== id; });
+  saveEntries();
+  refresh();
+  syncDeleteToSheets(id);
+}
+
+function loadLocalEntries() {
+  let saved = [];
+  try {
+    const currentDraft = localStorage.getItem(STORAGE_KEY);
+    if (currentDraft) {
+      saved = JSON.parse(currentDraft);
+    } else {
+      const legacyDraft = JSON.parse(localStorage.getItem(LEGACY_STORAGE_KEY) || '{}');
+      if (legacyDraft && !Array.isArray(legacyDraft)) {
+        Object.keys(legacyDraft).forEach(function(legacyStaff) {
+          const staff = normalizeStaffName(legacyStaff);
+          const records = Array.isArray(legacyDraft[legacyStaff]) ? legacyDraft[legacyStaff] : [];
+          records.forEach(function(record, index) {
+            saved.push({
+              id: 'legacy-' + staff + '-' + index,
+              staff: staff,
+              date: record.date,
+              start: record.start,
+              end: record.end,
+              task: record.task
+            });
+          });
+        });
+      }
+    }
+  } catch (error) {
+    saved = [];
+  }
+  scheduleEntries = Array.isArray(saved) ? saved.map(function(entry, index) {
+    return Object.assign({}, entry, {
+      id: entry.id || 'saved-' + index,
+      staff: normalizeStaffName(entry.staff)
+    });
+  }).filter(function(entry) {
+    return entry && STAFF.includes(entry.staff) && entry.date && entry.start && entry.end && entry.task;
+  }) : [];
+  saveEntries();
+}
+
+function setSyncStatus(message, isError) {
+  const status = document.getElementById('sync-status');
+  status.textContent = message;
+  status.style.color = isError ? 'var(--danger)' : '';
+}
+
+function normalizeRemoteEntries(entries) {
+  return Array.isArray(entries) ? entries.map(function(entry) {
+    return {
+      id: String(entry.id || ''),
+      staff: normalizeStaffName(String(entry.staff || '')),
+      date: String(entry.date || ''),
+      start: String(entry.start || ''),
+      end: String(entry.end || ''),
+      task: String(entry.task || '')
+    };
+  }).filter(function(entry) {
+    return entry.id && STAFF.includes(entry.staff) && entry.date && entry.start && entry.end && entry.task;
+  }) : [];
+}
+
+function syncEntryToSheets(entry) {
+  pendingCreatedIds.add(entry.id);
+  setSyncStatus('正在写入 Google Sheets……');
+  sendScheduleRequest({ formType: SCHEDULE_FORM_TYPE, action: 'create', entry: entry });
+}
+
+function syncDeleteToSheets(id) {
+  setSyncStatus('正在从 Google Sheets 删除资料……');
+  sendScheduleRequest({ formType: SCHEDULE_FORM_TYPE, action: 'delete', id: id });
+}
+
+function sendScheduleRequest(payload) {
+  if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('请粘贴')) {
+    setSyncStatus('请先在 HTML 中设定活动时间表 Apps Script 的 /exec 地址。', true);
+    return;
+  }
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload)
+  }).then(function() {
+    window.setTimeout(loadEntriesFromSheets, 900);
+  }).catch(function() {
+    setSyncStatus('暂时无法连线至 Google Sheets。请检查网络后重新打开页面。', true);
+  });
+}
+
+function loadEntriesFromSheets() {
+  if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('请粘贴')) {
+    setSyncStatus('尚未设定 Google Sheets 连接地址。', true);
+    return;
+  }
+  setSyncStatus('正在从 Google Sheets 读取活动时间表……');
+  const callbackName = 'activityScheduleCallback' + Date.now() + Math.floor(Math.random() * 100000);
+  const script = document.createElement('script');
+  let finished = false;
+  const finish = function() {
+    if (finished) return;
+    finished = true;
+    script.remove();
+    delete window[callbackName];
+  };
+  const timer = window.setTimeout(function() {
+    finish();
+    setSyncStatus('读取 Google Sheets 逾时。请稍后重新打开页面。', true);
+  }, 15000);
+
+  window[callbackName] = function(response) {
+    window.clearTimeout(timer);
+    finish();
+    if (!response || !response.ok) {
+      setSyncStatus('无法读取 Google Sheets：' + ((response && response.error) || '请检查 Apps Script 部署。'), true);
+      return;
+    }
+    const remoteEntries = normalizeRemoteEntries(response.entries);
+    const remoteIds = new Set(remoteEntries.map(function(entry) { return entry.id; }));
+    pendingDeletedIds.forEach(function(id) {
+      if (!remoteIds.has(id)) pendingDeletedIds.delete(id);
+    });
+    pendingCreatedIds.forEach(function(id) {
+      if (remoteIds.has(id)) pendingCreatedIds.delete(id);
+    });
+
+    const merged = new Map();
+    remoteEntries.forEach(function(entry) {
+      if (!pendingDeletedIds.has(entry.id)) merged.set(entry.id, entry);
+    });
+    scheduleEntries.forEach(function(entry) {
+      if (!pendingDeletedIds.has(entry.id) && !merged.has(entry.id)) merged.set(entry.id, entry);
+    });
+    scheduleEntries = Array.from(merged.values());
+    saveEntries();
+    refresh();
+    setSyncStatus('已从 Google Sheets 载入最新活动时间表。');
+
+    scheduleEntries.forEach(function(entry) {
+      if (!remoteIds.has(entry.id) && !pendingCreatedIds.has(entry.id)) {
+        syncEntryToSheets(entry);
+      }
+    });
+  };
+  script.onerror = function() {
+    window.clearTimeout(timer);
+    finish();
+    setSyncStatus('无法读取 Google Sheets。请确认 Apps Script 已重新部署为 Web App。', true);
+  };
+  script.src = GOOGLE_SCRIPT_URL + '?action=activitySchedule&callback=' + encodeURIComponent(callbackName) + '&t=' + Date.now();
+  document.body.appendChild(script);
+}
+
+buildStaffBoard();
+loadLocalEntries();
+refresh();
+loadEntriesFromSheets();
+</script>
+</body>
+</html>
