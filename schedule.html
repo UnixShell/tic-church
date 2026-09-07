@@ -360,7 +360,7 @@ function loadEntriesFromSheets() {
     scheduleEntries = Array.from(merged.values());
     saveEntries();
     refresh();
-    setSyncStatus('已更新');
+    setSyncStatus('正在读取…');
 
     deletesToRetry.forEach(function(id) {
       sendScheduleRequest({ formType: SCHEDULE_FORM_TYPE, action: 'delete', id: id });
