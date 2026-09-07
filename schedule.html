@@ -360,7 +360,7 @@ function loadEntriesFromSheets() {
     scheduleEntries = Array.from(merged.values());
     saveEntries();
     refresh();
-    setSyncStatus('已从 Google Sheets 载入最新活动时间表。');
+    setSyncStatus('已更新');
 
     deletesToRetry.forEach(function(id) {
       sendScheduleRequest({ formType: SCHEDULE_FORM_TYPE, action: 'delete', id: id });
