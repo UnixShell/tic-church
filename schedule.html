@@ -25,8 +25,8 @@ select,textarea{width:100%;border:1px solid var(--line);border-radius:9px;backgr
 
 <section class="intro" aria-labelledby="intro-title">
 <h2 id="intro-title">填写方式</h2>
-<p>请在自己的工作栏选择日期与开始／结束时间，并填写工作内容后按「提交」。页面会每 5 秒自动同步，并在切回页面时立即显示最后一次操作后的最新安排。</p>
-<p id="sync-status" class="hint" aria-live="polite">正在从 Google Sheets 读取活动时间表……</p>
+<p>请各位同工在自己所属的名字栏中选择日期与开始／结束时间，并填写工作内容后按「提交」。</p>
+<p id="sync-status" class="hint" aria-live="polite">正在读取……</p>
 </section>
 
 <section id="staff-board" class="staff-grid" aria-label="同工工作栏"></section>
@@ -300,7 +300,7 @@ function loadEntriesFromSheets() {
     return;
   }
   remoteSyncInProgress = true;
-  setSyncStatus('正在从 Google Sheets 读取活动时间表……');
+  setSyncStatus('正在读取……');
   const callbackName = 'activityScheduleCallback' + Date.now() + Math.floor(Math.random() * 100000);
   const script = document.createElement('script');
   let finished = false;
