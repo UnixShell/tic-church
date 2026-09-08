@@ -19,6 +19,11 @@ input[type=text],textarea{box-sizing:border-box;width:100%;padding:11px;border:1
 .notice{background:#f4f0df;border-left:4px solid #a08a50;padding:12px;border-radius:8px}.fee-list{list-style:none;padding:0;margin:10px 0}.fee-list li{padding:8px 0;border-bottom:1px solid #ece9df}.fee-list li:last-child{border-bottom:0}.fee-list strong{color:#43543f}.address{line-height:1.7}
 .result{display:none;background:#edf4ea;border-radius:12px;padding:14px;margin-top:13px}.result.error{background:#faece9}
 .small{font-size:12px;color:#777}
+.query-row{display:flex;gap:9px}.query-row input{flex:1}.query-row .btn{width:auto;min-width:92px;padding-left:20px;padding-right:20px}
+.query-results{margin-top:14px}.query-family{border:1px solid #dddcd4;border-radius:13px;padding:15px;margin-top:12px;background:#fafaf7}
+.query-meta{font-size:13px;color:#666;line-height:1.7;margin-bottom:10px}.member{border-top:1px solid #e5e3dc;padding:10px 0;line-height:1.7}.member:first-of-type{border-top:0}
+.member-fee{color:#43543f;font-weight:700}.discount{color:#a06d25;font-size:13px}.family-total{text-align:right;border-top:2px solid #d8d8cf;padding-top:11px;font-size:18px;font-weight:700;color:#43543f}
+@media(max-width:480px){.query-row{display:block}.query-row .btn{width:100%;margin-top:9px}}
 </style>
 </head>
 <body>
@@ -110,6 +115,18 @@ input[type=text],textarea{box-sizing:border-box;width:100%;padding:11px;border:1
 <div id="result" class="result" aria-live="polite"></div>
 </div>
 </form>
+
+<div class="card">
+<h2>查询报名资料</h2>
+<p class="small">输入报名者姓名，可查询同一报名编号下的全部家庭成员及所需费用。</p>
+<form id="queryForm">
+<div class="query-row">
+<input type="text" id="queryName" placeholder="请输入报名者姓名" required>
+<button class="btn" type="submit">查询</button>
+</div>
+</form>
+<div id="queryResult" class="query-results" aria-live="polite"></div>
+</div>
 </div>
 
 <script>
@@ -226,6 +243,96 @@ document.getElementById('form').addEventListener('submit', async function (event
     result.innerHTML = '<b>提交失败</b><br>请检查网络连接，或联系教会同工。';
   }
 });
+
+document.getElementById('queryForm').addEventListener('submit', function (event) {
+  event.preventDefault();
+  const name = document.getElementById('queryName').value.trim();
+  const output = document.getElementById('queryResult');
+  if (!name) return;
+
+  output.innerHTML = '<div class="result" style="display:block">正在查询报名资料……</div>';
+  queryByJsonp(name)
+    .then(renderQueryResult)
+    .catch(function (error) {
+      output.innerHTML = '<div class="result error" style="display:block"><b>查询失败</b><br>' + escapeHtml(error.message || '请稍后再试。') + '</div>';
+    });
+});
+
+function queryByJsonp(name) {
+  return new Promise(function (resolve, reject) {
+    const callback = '__registrationQuery' + Date.now() + Math.floor(Math.random() * 10000);
+    const script = document.createElement('script');
+    let finished = false;
+    const cleanup = function () {
+      delete window[callback];
+      script.remove();
+    };
+    const timer = setTimeout(function () {
+      if (finished) return;
+      finished = true;
+      cleanup();
+      reject(new Error('查询超时，请检查网络后重试。'));
+    }, 15000);
+
+    window[callback] = function (data) {
+      if (finished) return;
+      finished = true;
+      clearTimeout(timer);
+      cleanup();
+      if (!data || !data.ok) reject(new Error((data && data.error) || '未能读取报名资料。'));
+      else resolve(data);
+    };
+    script.onerror = function () {
+      if (finished) return;
+      finished = true;
+      clearTimeout(timer);
+      cleanup();
+      reject(new Error('无法连接报名资料服务。'));
+    };
+    script.src = GOOGLE_SCRIPT_URL + '?action=query&name=' + encodeURIComponent(name) + '&callback=' + callback + '&_=' + Date.now();
+    document.body.appendChild(script);
+  });
+}
+
+function renderQueryResult(data) {
+  const output = document.getElementById('queryResult');
+  if (!data.groups || data.groups.length === 0) {
+    output.innerHTML = '<div class="result error" style="display:block">没有找到该姓名的报名资料，请确认姓名是否与报名时一致。</div>';
+    return;
+  }
+
+  output.innerHTML = data.groups.map(function (group) {
+    const members = group.members.map(function (member) {
+      const discount = member.discount > 0
+        ? '<div class="discount">早期报名优惠：－' + yen(member.discount) + '（原价 ' + yen(member.baseFee) + '）</div>'
+        : '';
+      return '<div class="member">' +
+        '<b>' + escapeHtml(member.name) + '</b><br>' +
+        '所属教会：' + escapeHtml(member.church || '未填写') + '<br>' +
+        '性别：' + escapeHtml(member.gender || '未填写') + '<br>' +
+        '人员类型：' + escapeHtml(member.category || '未填写') + '<br>' +
+        '<span class="member-fee">个人费用：' + yen(member.fee) + '</span>' + discount +
+        '</div>';
+    }).join('');
+
+    return '<section class="query-family">' +
+      '<div class="query-meta">报名编号：' + escapeHtml(group.registrationId) + '<br>提交时间：' + escapeHtml(group.submittedAt) +
+      (group.discounted ? '<br><span class="discount">本家庭符合每人减免 500円 条件</span>' : '') + '</div>' +
+      members +
+      '<div class="family-total">家庭总费用：' + yen(group.totalFee) + '</div>' +
+      '</section>';
+  }).join('');
+}
+
+function yen(value) {
+  return Number(value || 0).toLocaleString('ja-JP') + '円';
+}
+
+function escapeHtml(value) {
+  return String(value == null ? '' : value).replace(/[&<>"']/g, function (character) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character];
+  });
+}
 </script>
 </body>
 </html>
