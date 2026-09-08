@@ -154,7 +154,7 @@ function submitEntry(card) {
   };
   scheduleEntries.push(entry);
   saveEntries();
-  card.querySelector('.staff-form').reset();
+  card.querySelector('.slot-task').value = '';
   refresh();
   syncEntryToSheets(entry);
 }
