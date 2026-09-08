@@ -9,11 +9,12 @@
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans SC","Hiragino Sans GB",sans-serif}
 .wrap{max-width:1380px;margin:auto;padding:22px 16px 54px}.hero{background:linear-gradient(135deg,var(--forest-dark),var(--forest));border-radius:22px;color:#fff;padding:28px 24px}.hero h1{margin:0;font-size:28px}.hero p{margin:8px 0 0;opacity:.9}
 .intro{background:var(--surface);border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 5px 20px #1f382308}.intro p{margin:0;line-height:1.7}.intro .hint{color:var(--muted);font-size:13px;margin-top:8px}
-.staff-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.staff-card{background:var(--surface);border-radius:16px;padding:16px;box-shadow:0 4px 16px #1f382308;min-width:0}.staff-card h2{font-size:18px;margin:0 0 4px}.staff-card .sub{font-size:12px;color:var(--muted);margin:0 0 13px}
+.staff-grid{display:grid;grid-template-columns:minmax(0,680px);gap:14px}.staff-card{background:var(--surface);border-radius:16px;padding:16px;box-shadow:0 4px 16px #1f382308;min-width:0}.staff-card h2{font-size:18px;margin:0 0 4px}.staff-card .sub{font-size:12px;color:var(--muted);margin:0 0 13px}
 label{display:block;font-size:13px;font-weight:650;margin:10px 0 5px}.time-row{display:grid;grid-template-columns:1fr 20px 1fr;align-items:center;gap:6px}.time-row span{text-align:center;color:var(--muted)}
 select,textarea{width:100%;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:inherit;padding:8px}textarea{resize:vertical;min-height:68px}.submit-slot{border-radius:10px;padding:10px 12px;font:inherit;font-weight:650;cursor:pointer;width:100%;border:0;background:var(--forest);color:#fff;margin-top:14px}
-.activity-schedule{margin:34px 0 0}.activity-schedule h2{color:var(--forest);font-size:32px;margin:0 0 16px}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;background:var(--surface);font-size:16px}.table th,.table td{padding:15px 16px;text-align:left;vertical-align:top;border:1px solid #c8d4ce}.table th{background:var(--forest);color:#fff;font-size:17px;font-weight:650}.table th:nth-child(1),.table td:nth-child(1){width:15%;white-space:nowrap}.table th:nth-child(2),.table td:nth-child(2){width:19%;white-space:nowrap}.table th:nth-child(4),.table td:nth-child(4){width:15%;text-align:center}.table th:nth-child(5),.table td:nth-child(5){width:11%;text-align:center}.remove-entry{border:1px solid #d9b6b6;border-radius:7px;background:#fff;color:var(--danger);font:inherit;padding:5px 9px;cursor:pointer}.empty{color:var(--muted);padding:14px 0}.invalid{color:var(--danger);font-size:12px}
-@media(max-width:1040px){.staff-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.wrap{padding:14px 12px 36px}.hero{padding:23px 18px}.hero h1{font-size:24px}.staff-grid{grid-template-columns:1fr}.intro,.summary{padding:17px}.table{min-width:640px}}
+.audience-options{display:flex;flex-wrap:wrap;gap:8px}.audience-option{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:14px;font-weight:500;margin:0;cursor:pointer}.audience-option input{width:16px;height:16px;margin:0;accent-color:var(--forest)}
+.activity-schedule{margin:34px 0 0}.activity-schedule h2{color:var(--forest);font-size:32px;margin:0 0 16px}.schedule-section{margin:24px 0}.schedule-section h3{color:var(--forest-dark);font-size:22px;margin:0 0 10px}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;background:var(--surface);font-size:16px}.table th,.table td{padding:15px 16px;text-align:left;vertical-align:top;border:1px solid #c8d4ce}.table th{background:var(--forest);color:#fff;font-size:17px;font-weight:650}.table th:nth-child(1),.table td:nth-child(1){width:15%;white-space:nowrap}.table th:nth-child(2),.table td:nth-child(2){width:19%;white-space:nowrap}.table th:nth-child(4),.table td:nth-child(4){width:15%;text-align:center}.table th:nth-child(5),.table td:nth-child(5){width:11%;text-align:center}.remove-entry{border:1px solid #d9b6b6;border-radius:7px;background:#fff;color:var(--danger);font:inherit;padding:5px 9px;cursor:pointer}.empty{color:var(--muted);padding:14px 0}.invalid{color:var(--danger);font-size:12px}
+@media(max-width:600px){.wrap{padding:14px 12px 36px}.hero{padding:23px 18px}.hero h1{font-size:24px}.staff-grid{grid-template-columns:1fr}.intro,.summary{padding:17px}.table{min-width:640px}}
 </style>
 </head>
 <body>
@@ -25,11 +26,11 @@ select,textarea{width:100%;border:1px solid var(--line);border-radius:9px;backgr
 
 <section class="intro" aria-labelledby="intro-title">
 <h2 id="intro-title">填写方式</h2>
-<p>请各位同工在自己所属的名字栏中选择日期与开始／结束时间，并填写工作内容后按「提交」。</p>
-<p id="sync-status" class="hint" aria-live="polite">正在读取……</p>
+<p>请选择自己的姓名、面向对象、日期与开始／结束时间，并填写工作内容后按「提交」。</p>
+<p id="sync-status" class="hint" aria-live="polite">努力更新中。</p>
 </section>
 
-<section id="staff-board" class="staff-grid" aria-label="同工工作栏"></section>
+<section id="staff-board" class="staff-grid" aria-label="工作安排填写区"></section>
 
 <section class="activity-schedule" aria-labelledby="schedule-title">
 <h2 id="schedule-title">活动时间表</h2>
@@ -52,11 +53,15 @@ const STORAGE_KEY = 'retreat-2026-activity-schedule-v2';
 const LEGACY_STORAGE_KEY = 'retreat-2026-activity-schedule-v1';
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwpvojJdSZpzzTtRT8h-RFQw_zTUEoeEktw3sU-7t7kQXWQX0qjvx1oxmf-9lT_iM7ZtA/exec';
 const SCHEDULE_FORM_TYPE = 'activitySchedule';
-const SYNC_INTERVAL_MS = 30000;
+const SYNC_INTERVAL_MS = 5000;
+const SYNC_LOADING_MESSAGE = '正在从 Google Sheets 读取活动时间表……';
+const SYNC_LOADING_MAX_DOTS = 5;
 let scheduleEntries = [];
 const pendingCreatedIds = new Set();
 const pendingDeletedIds = new Set();
 let remoteSyncInProgress = false;
+let syncLoadingTimer = null;
+let syncLoadingDots = 1;
 
 function makeTimeOptions(selected) {
   let options = '';
@@ -76,34 +81,52 @@ function makeDateOptions(selected) {
   }).join('');
 }
 
+function makeStaffOptions() {
+  return '<option value="" selected disabled>请选择姓名</option>' + STAFF.map(function(name) {
+    return '<option value="' + name + '">' + name + '</option>';
+  }).join('');
+}
+
 function buildStaffBoard() {
   const board = document.getElementById('staff-board');
-  STAFF.forEach(function(name) {
-    const card = document.createElement('section');
-    card.className = 'staff-card';
-    card.dataset.staff = name;
-    card.innerHTML =
-      '<h2>' + name + '</h2>' +
-      '<p class="sub">填写后按「提交」，项目会加入下方活动时间表。</p>' +
-      '<form class="staff-form">' +
-      '<label>日期<select class="slot-date">' + makeDateOptions('2026-10-10') + '</select></label>' +
-      '<label>时间</label><div class="time-row">' +
-      '<select class="slot-start" aria-label="开始时间">' + makeTimeOptions('09:00') + '</select><span>至</span>' +
-      '<select class="slot-end" aria-label="结束时间">' + makeTimeOptions('10:00') + '</select></div>' +
-      '<label>工作内容<textarea class="slot-task" placeholder="例如：接待、敬拜预备、儿童活动、交通安排等" required></textarea></label>' +
-      '<button class="submit-slot" type="submit">提交</button></form>';
-    card.querySelector('.staff-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      submitEntry(card);
+  const card = document.createElement('section');
+  card.className = 'staff-card';
+  card.innerHTML =
+    '<h2>活动安排</h2>' +
+    '<p class="sub">选择姓名后填写安排，按「提交」即可加入下方活动时间表。</p>' +
+    '<form class="staff-form">' +
+    '<label>姓名<select class="slot-staff" required>' + makeStaffOptions() + '</select></label>' +
+    '<label>日期<select class="slot-date">' + makeDateOptions('2026-10-10') + '</select></label>' +
+    '<label>时间</label><div class="time-row">' +
+    '<select class="slot-start" aria-label="开始时间">' + makeTimeOptions('09:00') + '</select><span>至</span>' +
+    '<select class="slot-end" aria-label="结束时间">' + makeTimeOptions('10:00') + '</select></div>' +
+    '<label>面向对象</label><div class="audience-options" role="group" aria-label="面向对象（请选择一项）">' +
+    '<label class="audience-option"><input class="slot-audience" type="checkbox" value="全体">全体</label>' +
+    '<label class="audience-option"><input class="slot-audience" type="checkbox" value="儿童主日学">儿童主日学</label>' +
+    '<label class="audience-option"><input class="slot-audience" type="checkbox" value="成人">成人</label></div>' +
+    '<label>活动内容<textarea class="slot-task" placeholder="例如：接待、敬拜预备、儿童活动、交通安排等" required></textarea></label>' +
+    '<button class="submit-slot" type="submit">提交</button></form>';
+  card.querySelectorAll('.slot-audience').forEach(function(option) {
+    option.addEventListener('change', function() {
+      if (!option.checked) return;
+      card.querySelectorAll('.slot-audience').forEach(function(otherOption) {
+        if (otherOption !== option) otherOption.checked = false;
+      });
     });
-    board.appendChild(card);
   });
+  card.querySelector('.staff-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    submitEntry(card);
+  });
+  board.appendChild(card);
 }
 
 function submitEntry(card) {
+  const staff = card.querySelector('.slot-staff').value;
   const date = card.querySelector('.slot-date').value;
   const start = card.querySelector('.slot-start').value;
   const end = card.querySelector('.slot-end').value;
+  const selectedAudience = card.querySelector('.slot-audience:checked');
   const task = card.querySelector('.slot-task').value.trim();
   if (end <= start) {
     alert('结束时间需晚于开始时间。');
@@ -113,13 +136,21 @@ function submitEntry(card) {
     alert('请填写工作内容。');
     return;
   }
+  if (!staff) {
+    alert('请选择姓名。');
+    return;
+  }
+  if (!selectedAudience) {
+    alert('请选择一个面向对象。');
+    return;
+  }
   const entry = {
     id: Date.now() + '-' + Math.random().toString(16).slice(2),
-    staff: card.dataset.staff,
+    staff: staff,
     date: date,
     start: start,
     end: end,
-    task: task
+    task: '【' + selectedAudience.value + '】' + task
   };
   scheduleEntries.push(entry);
   saveEntries();
@@ -145,13 +176,29 @@ function normalizeStaffName(name) {
   return STAFF_NAME_MIGRATIONS[name] || name;
 }
 
-function refresh() {
-  const entries = getEntries();
-  const overview = document.getElementById('overview');
-  overview.innerHTML = '';
+function getEntryAudience(entry) {
+  const match = entry.task.match(/^【(全体|儿童主日学|成人)】/);
+  // 旧资料没有面向对象时，预设为全体，避免拆分后看不到已有活动。
+  return match ? match[1] : '全体';
+}
+
+function displayEntryTask(entry) {
+  return /^【(全体|儿童主日学|成人)】/.test(entry.task) ? entry.task : '【全体】' + entry.task;
+}
+
+function createScheduleSection(title, entries, scheduleType) {
+  const section = document.createElement('section');
+  section.className = 'schedule-section';
+  section.dataset.scheduleType = scheduleType;
+  const heading = document.createElement('h3');
+  heading.textContent = title;
+  section.appendChild(heading);
   if (!entries.length) {
-    overview.innerHTML = '<p class="empty">请先在各同工的工作栏中填写活动安排。</p>';
-    return;
+    const empty = document.createElement('p');
+    empty.className = 'empty';
+    empty.textContent = '暂无活动安排。';
+    section.appendChild(empty);
+    return section;
   }
   const tableWrap = document.createElement('div');
   tableWrap.className = 'table-wrap';
@@ -168,7 +215,7 @@ function refresh() {
     const action = document.createElement('td');
     date.textContent = displayDate(entry.date);
     time.textContent = entry.start + '–' + entry.end;
-    task.textContent = entry.task;
+    task.textContent = displayEntryTask(entry);
     staff.textContent = entry.staff;
     if (!entry.valid) {
       const warning = document.createElement('div');
@@ -189,7 +236,34 @@ function refresh() {
   });
   table.appendChild(body);
   tableWrap.appendChild(table);
-  overview.appendChild(tableWrap);
+  section.appendChild(tableWrap);
+  return section;
+}
+
+function refresh() {
+  const entries = getEntries();
+  const overview = document.getElementById('overview');
+  const scrollPositions = {};
+  overview.querySelectorAll('.schedule-section').forEach(function(section) {
+    const tableWrap = section.querySelector('.table-wrap');
+    if (tableWrap) scrollPositions[section.dataset.scheduleType] = tableWrap.scrollLeft;
+  });
+  overview.innerHTML = '';
+  const adultEntries = entries.filter(function(entry) {
+    const audience = getEntryAudience(entry);
+    return audience === '全体' || audience === '成人';
+  });
+  const childrenEntries = entries.filter(function(entry) {
+    const audience = getEntryAudience(entry);
+    return audience === '全体' || audience === '儿童主日学';
+  });
+  overview.appendChild(createScheduleSection('成人活动时间表', adultEntries, 'adult'));
+  overview.appendChild(createScheduleSection('儿童主日学活动时间表', childrenEntries, 'children'));
+  overview.querySelectorAll('.schedule-section').forEach(function(section) {
+    const tableWrap = section.querySelector('.table-wrap');
+    const scrollLeft = scrollPositions[section.dataset.scheduleType];
+    if (tableWrap && typeof scrollLeft === 'number') tableWrap.scrollLeft = scrollLeft;
+  });
 }
 
 function saveEntries() {
@@ -246,8 +320,32 @@ function loadLocalEntries() {
 
 function setSyncStatus(message, isError) {
   const status = document.getElementById('sync-status');
+  if (message === SYNC_LOADING_MESSAGE) {
+    startSyncLoadingIndicator();
+    return;
+  }
+  stopSyncLoadingIndicator();
   status.textContent = message;
   status.style.color = isError ? 'var(--danger)' : '';
+}
+
+function startSyncLoadingIndicator() {
+  const status = document.getElementById('sync-status');
+  stopSyncLoadingIndicator();
+  syncLoadingDots = 1;
+  status.textContent = '努力更新中' + '。'.repeat(syncLoadingDots);
+  status.style.color = '';
+  syncLoadingTimer = window.setInterval(function() {
+    syncLoadingDots = syncLoadingDots % SYNC_LOADING_MAX_DOTS + 1;
+    status.textContent = '努力更新中' + '。'.repeat(syncLoadingDots);
+  }, 1000);
+}
+
+function stopSyncLoadingIndicator() {
+  if (syncLoadingTimer) {
+    window.clearInterval(syncLoadingTimer);
+    syncLoadingTimer = null;
+  }
 }
 
 function normalizeRemoteEntries(entries) {
@@ -300,7 +398,7 @@ function loadEntriesFromSheets() {
     return;
   }
   remoteSyncInProgress = true;
-  setSyncStatus('正在读取……');
+  setSyncStatus(SYNC_LOADING_MESSAGE);
   const callbackName = 'activityScheduleCallback' + Date.now() + Math.floor(Math.random() * 100000);
   const script = document.createElement('script');
   let finished = false;
@@ -360,7 +458,7 @@ function loadEntriesFromSheets() {
     scheduleEntries = Array.from(merged.values());
     saveEntries();
     refresh();
-    setSyncStatus('正在读取…');
+    // 成功读取后持续显示五秒更新动画；下一轮同步会从一个句号重新开始。
 
     deletesToRetry.forEach(function(id) {
       sendScheduleRequest({ formType: SCHEDULE_FORM_TYPE, action: 'delete', id: id });
