@@ -8,6 +8,7 @@
 body{margin:0;background:#f5f3ed;color:#292b27;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif}
 .wrap{max-width:760px;margin:auto;padding:18px 15px 50px}.hero{background:linear-gradient(145deg,#52684d,#83937a);color:#fff;border-radius:22px;padding:30px 22px}
 .hero h1{font-size:27px;margin:12px 0 4px}.card{background:#fff;border-radius:17px;padding:21px 18px;margin:14px 0;box-shadow:0 4px 18px #00000008}
+.registration-summary{margin-top:18px;padding-top:16px;border-top:1px solid #ffffff59}.registration-summary h2{font-size:16px;margin:0 0 10px}.count-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.count-item{padding:9px 5px;border-radius:10px;background:#ffffff1c;text-align:center}.count-item span{display:block;font-size:12px;opacity:.9}.count-item strong{display:inline-block;font-size:24px;line-height:1.25;margin-top:3px}.count-item small{font-size:12px;margin-left:2px}.count-status{min-height:16px;margin:9px 0 0;font-size:12px;opacity:.86}
 h2{font-size:18px}.title{display:block;font-weight:700;margin:14px 0 7px}.required{color:#a65353}
 input[type=text],textarea{box-sizing:border-box;width:100%;padding:11px;border:1px solid #dddcd4;border-radius:10px;font:inherit;font-size:15px}textarea{resize:vertical}
 .options{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.option{position:relative}.option input{position:absolute;opacity:0}
@@ -23,12 +24,22 @@ input[type=text],textarea{box-sizing:border-box;width:100%;padding:11px;border:1
 .query-results{margin-top:14px}.query-family{border:1px solid #dddcd4;border-radius:13px;padding:15px;margin-top:12px;background:#fafaf7}
 .query-meta{font-size:13px;color:#666;line-height:1.7;margin-bottom:10px}.member{border-top:1px solid #e5e3dc;padding:10px 0;line-height:1.7}.member:first-of-type{border-top:0}
 .member-fee{color:#43543f;font-weight:700}.discount{color:#a06d25;font-size:13px}.family-total{text-align:right;border-top:2px solid #d8d8cf;padding-top:11px;font-size:18px;font-weight:700;color:#43543f}
-@media(max-width:480px){.query-row{display:block}.query-row .btn{width:100%;margin-top:9px}}
+@media(max-width:480px){.count-grid{grid-template-columns:repeat(2,1fr)}.query-row{display:block}.query-row .btn{width:100%;margin-top:9px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<section class="hero"><h1>2026年教会退修会报名登记</h1><p>10月10日（六）～10月12日（一）</p></section>
+<section class="hero"><h1>2026年教会退修会报名登记</h1><p>10月10日（六）～10月12日（一）</p>
+<section class="registration-summary" aria-labelledby="registration-count-title">
+<h2 id="registration-count-title">目前报名人数</h2>
+<div class="count-grid" aria-live="polite">
+<div class="count-item"><span>大人</span><strong id="count-adult">—</strong><small>人</small></div>
+<div class="count-item"><span>3岁～中学生</span><strong id="count-children">—</strong><small>人</small></div>
+<div class="count-item"><span>3岁未满</span><strong id="count-under3">—</strong><small>人</small></div>
+<div class="count-item"><span>合计</span><strong id="count-total">—</strong><small>人</small></div>
+</div>
+<p id="count-status" class="count-status">正在读取报名人数……</p>
+</section></section>
 
 <div class="card">
 <h2>关于退修会</h2>
@@ -136,6 +147,62 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwpBbg_jVyoTl
 
 let companionCount = 0;
 
+function loadRegistrationSummary() {
+  const status = document.getElementById('count-status');
+  if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('请粘贴')) {
+    status.textContent = '报名人数尚未连线。';
+    return;
+  }
+  status.textContent = '正在读取报名人数……';
+  getRegistrationSummaryByJsonp()
+    .then(function(data) {
+      if (!data || !data.ok || !data.counts) throw new Error((data && data.error) || '未能读取报名人数。');
+      const counts = data.counts;
+      document.getElementById('count-adult').textContent = Number(counts.adult) || 0;
+      document.getElementById('count-children').textContent = Number(counts.children) || 0;
+      document.getElementById('count-under3').textContent = Number(counts.under3) || 0;
+      document.getElementById('count-total').textContent = Number(counts.total) || 0;
+      status.textContent = '已更新目前报名人数。';
+    })
+    .catch(function() {
+      status.textContent = '暂时无法读取报名人数。';
+    });
+}
+
+function getRegistrationSummaryByJsonp() {
+  return new Promise(function(resolve, reject) {
+    const callback = '__registrationSummary' + Date.now() + Math.floor(Math.random() * 10000);
+    const script = document.createElement('script');
+    let finished = false;
+    const cleanup = function() {
+      delete window[callback];
+      script.remove();
+    };
+    const timer = setTimeout(function() {
+      if (finished) return;
+      finished = true;
+      cleanup();
+      reject(new Error('读取报名人数逾时。'));
+    }, 15000);
+    window[callback] = function(data) {
+      if (finished) return;
+      finished = true;
+      clearTimeout(timer);
+      cleanup();
+      resolve(data);
+    };
+    script.onerror = function() {
+      if (finished) return;
+      finished = true;
+      clearTimeout(timer);
+      cleanup();
+      reject(new Error('无法连接报名资料服务。'));
+    };
+    script.src = GOOGLE_SCRIPT_URL + '?action=summary&callback=' + encodeURIComponent(callback) + '&_=' + Date.now();
+    document.body.appendChild(script);
+  });
+}
+
 const FULL_RETREAT = {
   days: ['10月10日', '10月11日', '10月12日'],
   nights: ['10月10日晚', '10月11日晚'],
@@ -238,6 +305,7 @@ document.getElementById('form').addEventListener('submit', async function (event
     this.reset();
     document.getElementById('companions').innerHTML = '';
     companionCount = 0;
+    window.setTimeout(loadRegistrationSummary, 1000);
   } catch (error) {
     result.classList.add('error');
     result.innerHTML = '<b>提交失败</b><br>请检查网络连接，或联系教会同工。';
@@ -333,6 +401,8 @@ function escapeHtml(value) {
     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character];
   });
 }
+
+loadRegistrationSummary();
 </script>
 </body>
 </html>
