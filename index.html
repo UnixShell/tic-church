@@ -42,6 +42,18 @@ input[type=text],textarea{box-sizing:border-box;width:100%;padding:11px;border:1
 </section></section>
 
 <div class="card">
+<h2>查询报名资料</h2>
+<p class="small">输入报名者姓名，可查询同一报名编号下的全部家庭成员及所需费用。</p>
+<form id="queryForm">
+<div class="query-row">
+<input type="text" id="queryName" placeholder="请输入报名者姓名" required>
+<button class="btn" type="submit">查询</button>
+</div>
+</form>
+<div id="queryResult" class="query-results" aria-live="polite"></div>
+</div>
+
+<div class="card">
 <h2>关于退修会</h2>
 <p>邀请弟兄姊妹暂时放下日常生活的忙碌，在敬拜、祷告、信息与团契中亲近神，也彼此建立。盼望每一位参加者都能重新得力。</p>
 </div>
@@ -127,17 +139,6 @@ input[type=text],textarea{box-sizing:border-box;width:100%;padding:11px;border:1
 </div>
 </form>
 
-<div class="card">
-<h2>查询报名资料</h2>
-<p class="small">输入报名者姓名，可查询同一报名编号下的全部家庭成员及所需费用。</p>
-<form id="queryForm">
-<div class="query-row">
-<input type="text" id="queryName" placeholder="请输入报名者姓名" required>
-<button class="btn" type="submit">查询</button>
-</div>
-</form>
-<div id="queryResult" class="query-results" aria-live="polite"></div>
-</div>
 </div>
 
 <script>
