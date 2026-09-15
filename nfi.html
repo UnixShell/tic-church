@@ -2,24 +2,26 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173958">
 <title>新朋友登记 · 东京池袋基督教会</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a3c68'/%3E%3Cpath d='M16 7v18M9 13h14' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
 <style>
-:root{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:#18304b;background:#f1f5fa;font-size:16px}
+:root{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:#18304b;background:#f1f5fa;font-size:16px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 *{box-sizing:border-box}
-body{margin:0}
-header{background:#173958;color:#fff;padding:22px max(24px,calc((100% - 880px)/2));border-bottom:4px solid #d4aa55}
+html{scroll-behavior:smooth;background:#173958}
+body{margin:0;min-height:100vh;min-height:100svh;background:#f1f5fa;overflow-x:hidden;-webkit-tap-highlight-color:#17395822}
+header{background:#173958;color:#fff;padding-top:calc(22px + env(safe-area-inset-top));padding-right:max(24px,env(safe-area-inset-right),calc((100% - 880px)/2));padding-bottom:22px;padding-left:max(24px,env(safe-area-inset-left),calc((100% - 880px)/2));border-bottom:4px solid #d4aa55}
 header p{margin:0;font-size:14px;color:#cfdeec}
 header strong{display:block;font-size:21px;margin-top:6px;font-weight:600}
-main{max-width:880px;margin:32px auto;padding:0 22px 50px}
+main{max-width:880px;margin:32px auto;padding:0 max(22px,env(safe-area-inset-right)) calc(50px + env(safe-area-inset-bottom)) max(22px,env(safe-area-inset-left))}
 h1{font-size:30px;letter-spacing:.03em;margin:0 0 8px}
 h1:focus{outline:none}
 p{line-height:1.7}
 .intro{color:#53677c;margin:0 0 24px}
 .notice{border:1px solid #b9cce0;background:#e7eff8;border-radius:8px;padding:14px 18px;font-size:14px;line-height:1.7;margin:0 0 24px}
 form{background:#fff;border:1px solid #d8e1ec;border-radius:12px;box-shadow:0 6px 22px #16395908;padding:30px}
-.friend-entry{border:1px solid #d8e1ec;border-radius:10px;padding:24px;margin-bottom:22px;background:#fff}
+.friend-entry{border:1px solid #d8e1ec;border-radius:10px;padding:24px;margin-bottom:22px;background:#fff;scroll-margin-top:16px}
 .entry-heading{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}
 .entry-heading h2{font-size:21px;margin:0}
 fieldset{border:0;padding:0;margin:0 0 28px}
@@ -27,36 +29,59 @@ fieldset:last-child{margin-bottom:0}
 legend{font-weight:650;font-size:18px;width:100%;padding:0 0 14px;margin-bottom:20px;border-bottom:1px solid #e3e9f0}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:21px 24px}
 label{display:block;font-size:15px;font-weight:500;margin-bottom:8px}
-input,select{font:inherit;width:100%;min-width:0;border:1px solid #adbdce;border-radius:6px;background:#fff;color:#18304b;padding:12px;min-height:48px}
+input,select{font-family:inherit;font-size:16px;line-height:1.35;width:100%;min-width:0;border:1px solid #adbdce;border-radius:6px;background:#fff;color:#18304b;padding:12px;min-height:48px}
+input[type="date"]{min-width:0}
 input:focus,select:focus,button:focus-visible{outline:3px solid #aecbe7;outline-offset:2px;border-color:#173958}
 .required{color:#9c3e38}
 .full{grid-column:1/-1}
-button{font:inherit;border:0;border-radius:7px;padding:13px 23px;background:#173958;color:#fff;font-weight:600;min-height:48px;cursor:pointer}
+button{font:inherit;border:0;border-radius:7px;padding:13px 23px;background:#173958;color:#fff;font-weight:600;min-height:48px;cursor:pointer;touch-action:manipulation;-webkit-appearance:none}
 button:disabled{background:#dce4ec;color:#617080;cursor:not-allowed}
 .remove-entry{min-height:40px;padding:8px 15px;background:#fff;color:#8b332f;border:1px solid #cfa8a5}
 .add-entry{width:100%;background:#fff;color:#173958;border:1px dashed #7896b4;margin:0 0 26px}
 .actions{border-top:1px solid #e3e9f0;padding-top:23px;display:flex;align-items:center;justify-content:space-between;gap:18px}
 .status{font-size:14px;color:#566b80;margin:0}
-dialog{width:min(92vw,480px);border:0;border-radius:12px;padding:0;box-shadow:0 20px 60px #10294055;color:#18304b}
+dialog{width:min(92vw,480px);max-height:min(82vh,640px);max-height:min(82svh,640px);border:0;border-radius:12px;padding:0;box-shadow:0 20px 60px #10294055;color:#18304b;overflow:auto;overscroll-behavior:contain}
 dialog::backdrop{background:#10294088}
 .dialog-body{padding:28px}
 .dialog-body h2{margin:0 0 12px;font-size:22px}
 .dialog-body p{margin:0;color:#53677c}
 .dialog-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:24px}
 .dialog-cancel{background:#fff;color:#173958;border:1px solid #adbdce}
-@media(max-width:600px){
-  main{margin:24px auto;padding:0 16px 32px}
-  form{padding:18px}
-  .friend-entry{padding:20px 16px}
+@media(max-width:700px){
+  header{padding-top:calc(18px + env(safe-area-inset-top));padding-right:max(18px,env(safe-area-inset-right));padding-bottom:18px;padding-left:max(18px,env(safe-area-inset-left))}
+  header strong{font-size:20px}
+  main{margin:20px auto;padding:0 max(12px,env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
+  h1{font-size:25px;line-height:1.3}
+  .intro{margin-bottom:18px}
+  .notice{padding:13px 14px;margin-bottom:18px}
+  form{padding:14px;border-radius:12px}
+  .friend-entry{padding:18px 14px;margin-bottom:16px}
+  .entry-heading{align-items:flex-start;gap:12px;margin-bottom:18px}
+  .entry-heading h2{font-size:20px;padding-top:8px}
+  .remove-entry{min-height:44px;padding:9px 14px;white-space:nowrap}
+  fieldset{margin-bottom:24px}
+  legend{font-size:17px;margin-bottom:16px;padding-bottom:12px}
   .grid{grid-template-columns:1fr;gap:18px}
-  .actions{align-items:stretch;flex-direction:column}
+  label{font-size:16px}
+  input,select{min-height:52px;padding:13px 12px;border-radius:8px}
+  button{min-height:50px}
+  .add-entry{margin-bottom:20px}
+  .actions{align-items:stretch;flex-direction:column;gap:14px;padding-top:20px;padding-bottom:max(2px,env(safe-area-inset-bottom))}
+  .status{text-align:center;line-height:1.55}
   .actions button{width:100%}
-  h1{font-size:26px}
-  header{padding:18px 22px}
-  .dialog-actions{flex-direction:column-reverse}
+  dialog{width:calc(100% - 24px);max-height:calc(100svh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));margin-top:max(12px,env(safe-area-inset-top));margin-bottom:max(12px,env(safe-area-inset-bottom));border-radius:14px}
+  .dialog-body{padding:22px 18px calc(18px + env(safe-area-inset-bottom))}
+  .dialog-body h2{font-size:21px}
+  .dialog-actions{flex-direction:column}
   .dialog-actions button{width:100%}
 }
+@media(max-width:380px){
+  main{padding-right:max(8px,env(safe-area-inset-right));padding-left:max(8px,env(safe-area-inset-left))}
+  form{padding:10px}
+  .friend-entry{padding:16px 12px}
+}
 @media(prefers-reduced-motion:no-preference){input,select{transition:border-color .15s}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -77,11 +102,11 @@ dialog::backdrop{background:#10294088}
         <legend>新朋友信息</legend>
         <div class="grid">
           <div><label>日期 <span class="required">*</span></label><input data-field="日期" data-id="visit-date" name="日期" type="date" required></div>
-          <div><label>姓名 <span class="required">*</span></label><input data-field="姓名" data-id="name" name="姓名" maxlength="100" required></div>
+          <div><label>姓名 <span class="required">*</span></label><input data-field="姓名" data-id="name" name="姓名" maxlength="100" enterkeyhint="next" required></div>
           <div><label>电话</label><input data-field="电话" data-id="phone" name="电话" type="text" inputmode="numeric" pattern="[0-9]*" title="请输入数字"></div>
           <div><label>出生地</label><input data-field="出生地" data-id="birthplace" name="出生地" maxlength="150"></div>
           <div><label>职业</label><input data-field="职业" data-id="occupation" name="职业" maxlength="100"></div>
-          <div><label>邮箱</label><input data-field="邮箱" data-id="email" name="邮箱" type="email" maxlength="254"></div>
+          <div><label>邮箱</label><input data-field="邮箱" data-id="email" name="邮箱" type="email" inputmode="email" autocapitalize="none" spellcheck="false" maxlength="254"></div>
           <div class="full"><label>地址</label><input data-field="地址" data-id="address" name="地址" maxlength="300"></div>
         </div>
       </fieldset>
@@ -97,7 +122,7 @@ dialog::backdrop{background:#10294088}
     </section>
   </div>
   <button id="addFriend" type="button" class="add-entry">＋ 添加新朋友</button>
-  <div class="actions"><p class="status">所有新朋友会一次保存到登记表</p><button id="submitButton" type="submit">提交登记</button></div>
+  <div class="actions"><p id="batchStatus" class="status">当前 1 名新朋友，将一次保存到登记表</p><button id="submitButton" type="submit">提交登记</button></div>
 </form>
 </main>
 
@@ -119,6 +144,7 @@ const form=document.getElementById('registration');
 const friends=document.getElementById('friends');
 const addButton=document.getElementById('addFriend');
 const submitButton=document.getElementById('submitButton');
+const batchStatus=document.getElementById('batchStatus');
 const feedback=document.getElementById('feedback');
 const confirmDialog=document.getElementById('confirmDialog');
 const confirmMessage=document.getElementById('confirmMessage');
@@ -148,6 +174,7 @@ function normalizeEntries(){
     });
   });
   addButton.disabled=all.length>=MAX_FRIENDS;
+  batchStatus.textContent='当前 '+all.length+' 名新朋友，将一次保存到登记表';
 }
 function clearEntry(entry){
   entry.querySelectorAll('input,select').forEach(control=>{control.value='';control.disabled=false;});
@@ -179,7 +206,8 @@ addButton.addEventListener('click',()=>{
   clearEntry(copy);
   friends.appendChild(copy);
   normalizeEntries();
-  copy.querySelector('[data-field="姓名"]').focus();
+  copy.querySelector('[data-field="姓名"]').focus({preventScroll:true});
+  copy.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
 });
 friends.addEventListener('click',event=>{
   const removeButton=event.target.closest('.remove-entry');
