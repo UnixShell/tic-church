@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>新朋友登记 · 东京池袋基督教会</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a3c68'/%3E%3Cpath d='M16 7v18M9 13h14' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+<style>
+:root{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:#18304b;background:#f1f5fa;font-size:16px}
+*{box-sizing:border-box}
+body{margin:0}
+header{background:#173958;color:#fff;padding:22px max(24px,calc((100% - 880px)/2));border-bottom:4px solid #d4aa55}
+header p{margin:0;font-size:14px;color:#cfdeec}
+header strong{display:block;font-size:21px;margin-top:6px;font-weight:600}
+main{max-width:880px;margin:32px auto;padding:0 22px 50px}
+h1{font-size:30px;letter-spacing:.03em;margin:0 0 8px}
+h1:focus{outline:none}
+p{line-height:1.7}
+.intro{color:#53677c;margin:0 0 24px}
+.notice{border:1px solid #b9cce0;background:#e7eff8;border-radius:8px;padding:14px 18px;font-size:14px;line-height:1.7;margin:0 0 24px}
+form{background:#fff;border:1px solid #d8e1ec;border-radius:12px;box-shadow:0 6px 22px #16395908;padding:30px}
+.friend-entry{border:1px solid #d8e1ec;border-radius:10px;padding:24px;margin-bottom:22px;background:#fff}
+.entry-heading{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}
+.entry-heading h2{font-size:21px;margin:0}
+fieldset{border:0;padding:0;margin:0 0 28px}
+fieldset:last-child{margin-bottom:0}
+legend{font-weight:650;font-size:18px;width:100%;padding:0 0 14px;margin-bottom:20px;border-bottom:1px solid #e3e9f0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:21px 24px}
+label{display:block;font-size:15px;font-weight:500;margin-bottom:8px}
+input,select{font:inherit;width:100%;min-width:0;border:1px solid #adbdce;border-radius:6px;background:#fff;color:#18304b;padding:12px;min-height:48px}
+input:focus,select:focus,button:focus-visible{outline:3px solid #aecbe7;outline-offset:2px;border-color:#173958}
+.required{color:#9c3e38}
+.full{grid-column:1/-1}
+button{font:inherit;border:0;border-radius:7px;padding:13px 23px;background:#173958;color:#fff;font-weight:600;min-height:48px;cursor:pointer}
+button:disabled{background:#dce4ec;color:#617080;cursor:not-allowed}
+.remove-entry{min-height:40px;padding:8px 15px;background:#fff;color:#8b332f;border:1px solid #cfa8a5}
+.add-entry{width:100%;background:#fff;color:#173958;border:1px dashed #7896b4;margin:0 0 26px}
+.actions{border-top:1px solid #e3e9f0;padding-top:23px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.status{font-size:14px;color:#566b80;margin:0}
+dialog{width:min(92vw,480px);border:0;border-radius:12px;padding:0;box-shadow:0 20px 60px #10294055;color:#18304b}
+dialog::backdrop{background:#10294088}
+.dialog-body{padding:28px}
+.dialog-body h2{margin:0 0 12px;font-size:22px}
+.dialog-body p{margin:0;color:#53677c}
+.dialog-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:24px}
+.dialog-cancel{background:#fff;color:#173958;border:1px solid #adbdce}
+@media(max-width:600px){
+  main{margin:24px auto;padding:0 16px 32px}
+  form{padding:18px}
+  .friend-entry{padding:20px 16px}
+  .grid{grid-template-columns:1fr;gap:18px}
+  .actions{align-items:stretch;flex-direction:column}
+  .actions button{width:100%}
+  h1{font-size:26px}
+  header{padding:18px 22px}
+  .dialog-actions{flex-direction:column-reverse}
+  .dialog-actions button{width:100%}
+}
+@media(prefers-reduced-motion:no-preference){input,select{transition:border-color .15s}}
+</style>
+</head>
+<body>
+<header><p>东京池袋基督教会</p><strong>新朋友登记</strong></header>
+<main>
+<h1 id="pageTitle" tabindex="-1">主日新人资料</h1>
+<p class="intro">请按新朋友提供的信息填写。标有 <span class="required">*</span> 的项目为必填。</p>
+<aside class="notice">日期和姓名为必填项。其他不清楚的项目可以留空，提交后会统一记录为「不明」。需要同时登记多人时，请点击下方的「添加新朋友」。</aside>
+<aside id="feedback" class="notice" role="status" aria-live="polite" hidden></aside>
+<form id="registration" autocomplete="off">
+  <div id="friends">
+    <section class="friend-entry">
+      <div class="entry-heading">
+        <h2>新朋友 1</h2>
+        <button type="button" class="remove-entry" hidden>删除</button>
+      </div>
+      <fieldset>
+        <legend>新朋友信息</legend>
+        <div class="grid">
+          <div><label>日期 <span class="required">*</span></label><input data-field="日期" data-id="visit-date" name="日期" type="date" required></div>
+          <div><label>姓名 <span class="required">*</span></label><input data-field="姓名" data-id="name" name="姓名" maxlength="100" required></div>
+          <div><label>电话</label><input data-field="电话" data-id="phone" name="电话" type="text" inputmode="numeric" pattern="[0-9]*" title="请输入数字"></div>
+          <div><label>出生地</label><input data-field="出生地" data-id="birthplace" name="出生地" maxlength="150"></div>
+          <div><label>职业</label><input data-field="职业" data-id="occupation" name="职业" maxlength="100"></div>
+          <div><label>邮箱</label><input data-field="邮箱" data-id="email" name="邮箱" type="email" maxlength="254"></div>
+          <div class="full"><label>地址</label><input data-field="地址" data-id="address" name="地址" maxlength="300"></div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>教会相关资料</legend>
+        <div class="grid">
+          <div><label>是否受洗？</label><select data-field="是否受洗？" data-id="baptized" name="是否受洗？"><option value=""></option><option>是</option><option>否</option></select></div>
+          <div><label>受洗时间和教会</label><input data-field="受洗时间和教会" data-id="baptism" name="受洗时间和教会" maxlength="300"></div>
+          <div><label>介绍人</label><input data-field="介绍人" data-id="referrer" name="介绍人" maxlength="150"></div>
+          <div><label>是否进入牧场</label><select data-field="是否进入牧场" data-id="group" name="是否进入牧场"><option value=""></option><option>是</option><option>否</option></select></div>
+        </div>
+      </fieldset>
+    </section>
+  </div>
+  <button id="addFriend" type="button" class="add-entry">＋ 添加新朋友</button>
+  <div class="actions"><p class="status">所有新朋友会一次保存到登记表</p><button id="submitButton" type="submit">提交登记</button></div>
+</form>
+</main>
+
+<dialog id="confirmDialog" aria-labelledby="confirmTitle">
+  <div class="dialog-body">
+    <h2 id="confirmTitle">确认提交</h2>
+    <p id="confirmMessage"></p>
+    <div class="dialog-actions">
+      <button id="cancelSubmit" type="button" class="dialog-cancel">返回检查</button>
+      <button id="confirmSubmit" type="button">确定提交</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+const GOOGLE_SCRIPT_URL='https://script.google.com/macros/s/AKfycbzvCN2i6eaF3hWyLAIzHryrxV1kB3r1or0YL2gWjPxphDqXjsX6G9V6t1CsZ6fpUb1Byg/exec';
+const MAX_FRIENDS=20;
+const form=document.getElementById('registration');
+const friends=document.getElementById('friends');
+const addButton=document.getElementById('addFriend');
+const submitButton=document.getElementById('submitButton');
+const feedback=document.getElementById('feedback');
+const confirmDialog=document.getElementById('confirmDialog');
+const confirmMessage=document.getElementById('confirmMessage');
+const confirmButton=document.getElementById('confirmSubmit');
+const cancelButton=document.getElementById('cancelSubmit');
+let pending=null;
+
+function todayInTokyo(){
+  return new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+}
+function createRequestId(){
+  if(window.crypto&&typeof window.crypto.randomUUID==='function')return window.crypto.randomUUID();
+  return Date.now()+'-'+Math.random().toString(36).slice(2)+'-'+Math.random().toString(36).slice(2);
+}
+function entries(){
+  return Array.from(friends.querySelectorAll('.friend-entry'));
+}
+function normalizeEntries(){
+  const all=entries();
+  all.forEach((entry,index)=>{
+    entry.querySelector('h2').textContent='新朋友 '+(index+1);
+    entry.querySelector('.remove-entry').hidden=all.length===1;
+    entry.querySelectorAll('[data-field]').forEach(control=>{
+      const id=control.dataset.id+'-'+(index+1);
+      control.id=id;
+      control.closest('div').querySelector('label').htmlFor=id;
+    });
+  });
+  addButton.disabled=all.length>=MAX_FRIENDS;
+}
+function clearEntry(entry){
+  entry.querySelectorAll('input,select').forEach(control=>{control.value='';control.disabled=false;});
+  entry.querySelector('[data-field="日期"]').value=todayInTokyo();
+}
+function collectEntries(){
+  return entries().map(entry=>{
+    const record={};
+    entry.querySelectorAll('[data-field]').forEach(control=>{record[control.dataset.field]=control.value;});
+    return record;
+  });
+}
+function setLocked(locked){
+  form.querySelectorAll('input,select,.remove-entry,#addFriend').forEach(control=>{control.disabled=locked;});
+  submitButton.disabled=locked;
+}
+function tell(text){
+  feedback.textContent=text;
+  feedback.hidden=false;
+}
+function focusTop(){
+  document.getElementById('pageTitle').focus({preventScroll:true});
+  window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+}
+
+addButton.addEventListener('click',()=>{
+  if(entries().length>=MAX_FRIENDS)return;
+  const copy=entries()[0].cloneNode(true);
+  clearEntry(copy);
+  friends.appendChild(copy);
+  normalizeEntries();
+  copy.querySelector('[data-field="姓名"]').focus();
+});
+friends.addEventListener('click',event=>{
+  const removeButton=event.target.closest('.remove-entry');
+  if(!removeButton)return;
+  removeButton.closest('.friend-entry').remove();
+  normalizeEntries();
+});
+
+form.addEventListener('submit',event=>{
+  event.preventDefault();
+  if(submitButton.disabled||!form.reportValidity())return;
+  const requestId=pending?pending.requestId:createRequestId();
+  pending={requestId,entries:collectEntries()};
+  const names=pending.entries.map(entry=>entry['姓名'].trim());
+  confirmMessage.textContent='即将提交 '+names.length+' 名新朋友：'+names.join('、')+'。确认后资料会写入登记表。';
+  if(typeof confirmDialog.showModal==='function')confirmDialog.showModal();
+  else if(window.confirm(confirmMessage.textContent))startSubmission();
+  else pending=null;
+});
+cancelButton.addEventListener('click',()=>{
+  confirmDialog.close();
+  pending=null;
+});
+confirmDialog.addEventListener('cancel',()=>{pending=null;});
+confirmButton.addEventListener('click',()=>{
+  confirmDialog.close();
+  focusTop();
+  startSubmission();
+});
+
+function startSubmission(){
+  if(!pending)return;
+  setLocked(true);
+  submitButton.textContent='正在保存…';
+  tell('已送出 '+pending.entries.length+' 名新朋友，正在等待表格确认。');
+  submitRegistrationFast(pending).then(status=>{
+    if(status.state==='error'){
+      const error=new Error(status.error||'登记资料未能保存。');
+      error.canEdit=true;
+      throw error;
+    }
+    if(status.state!=='saved')throw new Error('服务器暂时没有返回保存确认。');
+    const savedCount=pending.entries.length;
+    pending=null;
+    resetForm();
+    setLocked(false);
+    submitButton.textContent='提交登记';
+    tell('已保存 '+savedCount+' 名新朋友，可以继续登记。');
+    focusTop();
+  }).catch(fail);
+}
+function resetForm(){
+  const all=entries();
+  all.slice(1).forEach(entry=>entry.remove());
+  form.reset();
+  clearEntry(entries()[0]);
+  normalizeEntries();
+}
+function fail(error){
+  if(error.canEdit){
+    pending=null;
+    setLocked(false);
+    submitButton.textContent='提交登记';
+    tell('未能保存：'+error.message+' 请修改后重新提交。');
+  }else{
+    setLocked(true);
+    submitButton.disabled=false;
+    submitButton.textContent='重试保存';
+    tell('保存未确认：'+(error.message||'连接中断')+' 当前资料已保留，点击重试将提交同一批登记，请勿刷新页面。');
+  }
+  focusTop();
+}
+function submitRegistrationFast(payload){
+  // POST 与状态确认并行执行，避免先等 POST 完成后再开始第二次网络往返。
+  fetch(GOOGLE_SCRIPT_URL,{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body:JSON.stringify(payload)
+  }).catch(()=>{});
+  return waitForConfirmation(payload.requestId,10,1000);
+}
+async function waitForConfirmation(requestId,maxAttempts=10,firstDelay=0){
+  if(firstDelay>0)await new Promise(resolve=>setTimeout(resolve,firstDelay));
+  for(let attempt=0;attempt<maxAttempts;attempt++){
+    if(attempt>0)await new Promise(resolve=>setTimeout(resolve,600));
+    try{
+      const status=await checkStatus(requestId);
+      if(status.state==='saved'||status.state==='error')return status;
+    }catch(error){}
+  }
+  return {state:'pending'};
+}
+function checkStatus(requestId){
+  return new Promise((resolve,reject)=>{
+    const callback='newFriendsStatus'+Date.now()+Math.floor(Math.random()*10000);
+    const script=document.createElement('script');
+    let finished=false;
+    const cleanup=()=>{delete window[callback];script.remove();};
+    const timer=setTimeout(()=>{if(finished)return;finished=true;cleanup();reject(new Error('查询超时'));},5000);
+    window[callback]=payload=>{if(finished)return;finished=true;clearTimeout(timer);cleanup();resolve(payload||{state:'pending'});};
+    script.onerror=()=>{if(finished)return;finished=true;clearTimeout(timer);cleanup();reject(new Error('无法查询保存状态'));};
+    script.src=GOOGLE_SCRIPT_URL+'?action=status&requestId='+encodeURIComponent(requestId)+'&callback='+callback;
+    document.head.appendChild(script);
+  });
+}
+
+clearEntry(entries()[0]);
+normalizeEntries();
+</script>
+</body>
+</html>
