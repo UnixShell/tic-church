@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>【深度技术档案】GMO非法访问事件及黑客入侵全链路还原</title>
+    <style>
+        :root {
+            --bg-dark: #0b1120;
+            --card-bg: #151f32;
+            --card-border: #283650;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-red: #f43f5e;
+            --accent-amber: #fbbf24;
+            --accent-emerald: #34d399;
+            --code-bg: #070b14;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans", "Meiryo", sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.65;
+            padding: max(20px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+            overflow-x: hidden;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* Quick Navigation Bar for Mobile */
+        .quick-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 17, 32, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+            margin: 0 -14px 20px -14px;
+            padding: 10px 14px;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
+        }
+        .quick-nav::-webkit-scrollbar {
+            display: none;
+        }
+        .nav-pill {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            transition: all 0.2s;
+        }
+        .nav-pill:active, .nav-pill:hover {
+            color: #fff;
+            border-color: var(--accent-blue);
+            background: rgba(56, 189, 248, 0.15);
+        }
+
+        /* Header Styles */
+        header {
+            border-bottom: 2px solid var(--accent-blue);
+            padding-bottom: 18px;
+            margin-bottom: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .badge-row {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .badge-red { background: rgba(244, 63, 94, 0.18); color: var(--accent-red); border: 1px solid rgba(244, 63, 94, 0.5); }
+        .badge-blue { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.5); }
+        .badge-amber { background: rgba(251, 191, 36, 0.15); color: var(--accent-amber); border: 1px solid rgba(251, 191, 36, 0.5); }
+
+        h1 {
+            font-size: clamp(1.35rem, 4.8vw, 1.85rem);
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.35;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        /* Alert Banner */
+        .alert-box {
+            background: rgba(244, 63, 94, 0.1);
+            border: 1px solid rgba(244, 63, 94, 0.35);
+            border-left: 4px solid var(--accent-red);
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            font-size: 0.92rem;
+        }
+
+        .alert-title {
+            color: var(--accent-red);
+            font-weight: 700;
+            font-size: 0.96rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 18px 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+            scroll-margin-top: 60px;
+        }
+
+        @media (min-width: 640px) {
+            body { padding: 30px 24px; }
+            .section-card { padding: 26px 28px; margin-bottom: 26px; }
+            .quick-nav { margin: 0 0 24px 0; border-radius: 8px; }
+        }
+
+        h2 {
+            font-size: clamp(1.12rem, 3.8vw, 1.3rem);
+            color: var(--accent-blue);
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        @media (min-width: 640px) {
+            h2 {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        h2 span.en-sub {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        h3 {
+            font-size: 1rem;
+            color: var(--accent-amber);
+            margin: 16px 0 8px 0;
+            line-height: 1.4;
+        }
+
+        p {
+            font-size: 0.94rem;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-position: outside;
+            margin-left: 18px;
+            margin-bottom: 12px;
+            font-size: 0.93rem;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: #ffffff;
+        }
+
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            background-color: var(--code-bg);
+            color: var(--accent-emerald);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            border: 1px solid #1e293b;
+            word-break: break-all;
+        }
+
+        .code-block {
+            background-color: var(--code-bg);
+            border: 1px solid var(--card-border);
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 0.82rem;
+            color: var(--accent-emerald);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+            margin: 10px 0 14px 0;
+        }
+
+        /* Responsive Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-top: 12px;
+        }
+
+        @media (min-width: 720px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+                gap: 18px;
+            }
+        }
+
+        .sub-box {
+            background: rgba(11, 17, 32, 0.55);
+            border: 1px solid var(--card-border);
+            padding: 14px 15px;
+            border-radius: 8px;
+        }
+
+        .sub-box h3 {
+            margin-top: 0;
+        }
+
+        /* Responsive Table */
+        .forensic-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            font-size: 0.9rem;
+        }
+
+        .forensic-table th, .forensic-table td {
+            border: 1px solid var(--card-border);
+            padding: 12px 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .forensic-table th {
+            background-color: rgba(11, 17, 32, 0.85);
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        @media (max-width: 680px) {
+            .forensic-table thead {
+                display: none;
+            }
+            .forensic-table, .forensic-table tbody, .forensic-table tr, .forensic-table td {
+                display: block;
+                width: 100%;
+            }
+            .forensic-table tr {
+                background: rgba(11, 17, 32, 0.55);
+                border: 1px solid var(--card-border);
+                border-radius: 8px;
+                margin-bottom: 12px;
+                padding: 12px;
+            }
+            .forensic-table td {
+                border: none;
+                padding: 6px 0;
+            }
+            .forensic-table td::before {
+                content: attr(data-label);
+                display: block;
+                font-size: 0.75rem;
+                font-weight: 700;
+                color: var(--accent-blue);
+                text-transform: uppercase;
+                margin-bottom: 2px;
+            }
+            .forensic-table td:first-child {
+                border-bottom: 1px solid var(--card-border);
+                padding-bottom: 8px;
+                margin-bottom: 6px;
+                font-size: 1rem;
+                color: var(--accent-amber);
+            }
+            .forensic-table td:first-child::before {
+                display: none;
+            }
+        }
+
+        /* Quote Block */
+        blockquote {
+            background: rgba(11, 17, 32, 0.65);
+            border-left: 3px solid var(--accent-amber);
+            padding: 12px 14px;
+            margin: 12px 0;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Metric Cards */
+        .metrics-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 14px 0;
+        }
+
+        @media (min-width: 640px) {
+            .metrics-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .metric-card {
+            background: rgba(11, 17, 32, 0.7);
+            border: 1px solid var(--card-border);
+            padding: 14px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .metric-val {
+            font-size: 1.45rem;
+            font-weight: 800;
+            margin: 4px 0;
+        }
+
+        .val-red { color: var(--accent-red); }
+        .val-amber { color: var(--accent-amber); }
+        .val-emerald { color: var(--accent-emerald); }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Timeline */
+        .timeline {
+            border-left: 2px solid var(--accent-blue);
+            margin-left: 8px;
+            padding-left: 16px;
+            margin-top: 14px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -23px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent-blue);
+            border-radius: 50%;
+            border: 2px solid var(--bg-dark);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--accent-amber);
+            font-size: 0.92rem;
+            margin-bottom: 2px;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 1px solid var(--card-border);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Sticky Mobile Quick Nav -->
+    <nav class="quick-nav">
+        <a href="#sec0" class="nav-pill">⏱️ 完整时间线</a>
+        <a href="#sec1" class="nav-pill">🔓 黑客入侵全过程</a>
+        <a href="#sec2" class="nav-pill">🌐 基础设施指纹</a>
+        <a href="#sec3" class="nav-pill">🔍 源码与追踪</a>
+        <a href="#sec4" class="nav-pill">📊 元数据取证</a>
+        <a href="#sec5" class="nav-pill">💥 金额造假审计</a>
+        <a href="#sec6" class="nav-pill">👤 1号受害者曝光</a>
+    </nav>
+
+    <header>
+        <div class="badge-row">
+            <span class="badge badge-red">CONFIDENTIAL / FORENSIC</span>
+            <span class="badge badge-blue">ATTACK CHAIN RECONSTRUCTION</span>
+            <span class="badge badge-amber">GMO DESKTOP CLOUD</span>
+        </div>
+        <h1>【深度技术档案】GMO非法访问事件：全事件时间线与黑客入侵全链路还原</h1>
+        <p class="subtitle">全面汇编日本安全研究人员及独立开发者的取证成果，详细拆解黑客入侵路径、RDP反向渗透机制、勒索交涉时间线及泄密网站技术特征</p>
+    </header>
+
+    <div class="alert-box">
+        <div class="alert-title">⚠️ 极高风险安全警告（切勿直接访问）</div>
+        <p style="margin-bottom:0;">攻击者开设的泄密网站源码中嵌有隐蔽的 <code>1×1</code> 像素追踪信标（<code>track.php</code>）。任何直接访问该域名的行为都会导致访问者的真实 IP 地址、操作系统及浏览器指纹被攻击者后台实时捕获。请务必通过本脱敏档案或安全镜像站查阅。</p>
+    </div>
+
+    <!-- Section 0: Full Timeline -->
+    <div class="section-card" id="sec0">
+        <h2>
+            <span>0. 完整事件交涉与攻防时间线</span>
+            <span class="en-sub">Complete Incident Timeline</span>
+        </h2>
+        <p>从黑客静默潜入、发起勒索、到搭建泄密网站并公开首名受害者的完整演进脉络：</p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">2026年10月14日 22:53 - 23:16（初始潜入与外泄）</div>
+                <p>攻击者攻破 GMO 虚拟桌面（VPS）基础设施后，编写自动化脚本，利用 Windows 远程桌面的<strong>本地磁盘映射通道（<code>\tsclient\</code>）</strong>反向进入在线用户的本地电脑，在 20 多分钟内批量复制了 <strong>4,352 个文件</strong>（含浏览器历史、证件、财务表等本地数据）。</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2026年10月21日（首封威胁邮件）</div>
+                <p>攻击者开始向 GMO 互联网集团高管发送附带被盗数据样本的勒索邮件（署名 Dmitry Orlov），狮子大开口索要 <strong>5,000 万美元</strong>（约 76 亿日元）赎金。</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2026年10月22日 - 10月25日（交涉破裂与恶意爆仓）</div>
+                <p>攻击者多次发送催促邮件并拨打跨国电话施压；期间在后台编写脚本，批量操控 1,260 个用户的 MT4/MT5 外汇交易终端执行高频、满仓的反向恶意交易，蓄意将账户余额清空。GMO 察觉后紧急宣布关闭服务并进行安全维护，坚决拒绝妥协。</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2026年10月26日（泄密网站上线）</div>
+                <p>由于 GMO 拒绝支付赎金，攻击者在明网上正式上线泄密站点 <code>coronamng[.]store</code>，发布 <code>samples.zip</code> 取证包，将赎金要求降至 <strong>100 万美元</strong>，并公开倒计时，设定 10月27日 12:00 为首波曝光最后期限。</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2026年10月27日 12:00（“被害者 第1号”曝光）</div>
+                <p>最后期限届满，攻击者准时发布第 13 号声明，上线“被害者 第1号”独立页面，详尽公开了首名日本用户的实名档案、FX 明文密码及浏览器行为画像；但未兑现此前威胁的“加密锁死所有本地电脑”的勒索软件攻击。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 1: Hack Attack Chain -->
+    <div class="section-card" id="sec1">
+        <h2>
+            <span>1. 黑客入侵手段与完整攻击链路还原</span>
+            <span class="en-sub">Hack Attack Chain &amp; Infiltration Mechanism</span>
+        </h2>
+        <p>安全研究人员对攻击者公开的日志样本（如 <code>samples.zip</code> 中的 <code>INFO.txt</code>）及受损账户表现进行逆向分析后，还原了黑客实现此次攻击的**全套技术手段与入侵链条**：</p>
+
+        <div class="grid-2">
+            <div class="sub-box">
+                <h3>① 初始突破口：VPS 云端基础设施沦陷</h3>
+                <ul>
+                    <li><strong>服务定位：</strong>受害服务为 GMO 旗下的“お名前.com デスクトップクラウド”，广泛用于 FX 外汇自动交易（MetaTrader 挂机）。</li>
+                    <li><strong>突破手段：</strong>攻击者通过扫描暴露在公网上的 RDP（远程桌面，默认端口 3389）服务，利用弱口令、已知系统漏洞或凭证泄露，成功获取了云端虚拟桌面（VPS）的最高管理员权限（Administrator）。</li>
+                </ul>
+            </div>
+            <div class="sub-box">
+                <h3>② 核心杀招：RDP 本地磁盘映射“反向渗透”</h3>
+                <ul>
+                    <li><strong>漏洞根源：</strong>用户在自己家中的电脑上使用 Windows 远程桌面连接云端 VPS 时，默认勾选了<strong>“将本地磁盘（如 C 盘、D 盘）挂载到远程服务器”</strong>（RDP 配置文件参数：<code>drivestoredirect:s:*</code>）。</li>
+                    <li><strong>反向渗透：</strong>攻击者掌控 VPS 后，顺着这个挂载通道，直接反向访问并穿越到了用户家中的物理电脑硬盘（路径表现为 <code>\tsclient\c\</code>）。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="sub-box" style="margin-top: 14px;">
+            <h3>③ 自动化脚本洗劫与金融破坏手段</h3>
+            <ul>
+                <li><strong>本地文件批量窃取：</strong>攻击者编写自动化脚本，在 10 月 14 日深夜静默运行，短短 20 多分钟内从用户本地电脑中检索并打包带走了 4,352 个敏感文件，包括个人证件照片、财务表格、浏览器 SQLite 密码数据库及完整历史访问记录（History）。</li>
+                <li><strong>FX 终端恶意爆仓（Financial Sabotage）：</strong>攻击者发现用户挂在虚拟桌面上的 MT4 / MT5 外汇交易软件处于登录状态且保存了明文密码，随即编写批量脚本操控终端，故意执行大量高频、满仓的反向极端交易，强行将 1,260 个账户的账面资金迅速亏空清零。</li>
+                <li><strong>心理恐慌与精神羞辱战术：</strong>将盗取的用户隐私与浏览器书签/历史交叉比对，为受害者撰写“个人生活画像”，并通过每日中午 12 点“挤牙膏”式公开一人信息的方式，对受害者及其亲友进行持续的精神虐待与社会工程学施压。</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section-card" id="sec2">
+        <h2>
+            <span>2. 攻击者基础设施与网络指纹</span>
+            <span class="en-sub">Infrastructure &amp; Network Forensics</span>
+        </h2>
+        <p>研究人员通过对泄密网站进行网络测绘（Shodan/Censys）与 DNS 追踪，还原了攻击者的底层隐藏架构：</p>
+        <div class="grid-2">
+            <div class="sub-box">
+                <h3>① 域名与关联邮箱命名规律</h3>
+                <ul>
+                    <li><strong>泄密站点域名：</strong><code>coronamng[.]store</code>（直接注册于明网，未使用 Tor 暗网 <code>.onion</code> 域名，意在降低普通受害者的访问门槛以制造更大恐慌）。</li>
+                    <li><strong>关联勒索邮箱：</strong><code>boromngap@gmail.com</code>（现已被 Google 封停）。</li>
+                    <li><strong>命名特征：</strong>邮箱前缀 <code>boromngap</code> 与网站域名 <code>coronamng</code> 均包含 <strong><code>mng</code></strong> 字样（疑似 Management 的缩写，或特定黑客工具/团伙的内部代号）。</li>
+                </ul>
+            </div>
+            <div class="sub-box">
+                <h3>② 匿名托管与“7,130+站点”掩护</h3>
+                <ul>
+                    <li><strong>注册与托管商：</strong>海外服务商 <strong>Namecheap, Inc.</strong>。攻击者利用其支持加密货币（BTC）支付及免费提供 <code>Withheld for Privacy</code>（WHOIS 隐私保护）的特性，抹去了实名注册信息。</li>
+                    <li><strong>服务器环境：</strong>运行于 <strong>LiteSpeed</strong> Web 服务器，采用廉价共享主机（Shared Hosting）。</li>
+                    <li><strong>人海掩护策略：</strong>经反向 IP 查询，该服务器同一 IP 地址下同时挂载了 <strong>超过 7,130 个</strong> 其他网站，攻击者借此规避基于单一 IP 的封锁并干扰溯源。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section-card" id="sec3">
+        <h2>
+            <span>3. 网站源码拆解与恶意追踪机制</span>
+            <span class="en-sub">Source Code Audit &amp; Tracking Trap</span>
+        </h2>
+        <p>独立开发者下载并审计了该网站的全部前端 HTML5 源码与脚本，发现了极高风险的监控后门与母语破绽：</p>
+
+        <h3>① 站点目录与页面结构</h3>
+        <ul>
+            <li><code>/index.html</code>：主勒索声明、倒计时器、所谓“已破坏账户比例（声称破坏17%、约77亿日元）”及挑拨用户向 GMO 施压的言论。</li>
+            <li><code>/timeline.html</code>：记录从 10 月 21 日以来的威胁邮件发送、跨国催促电话及最后通牒时间线。</li>
+            <li><code>/data.html</code> &amp; <code>/samples.zip</code>：提供 25 张威胁邮件与系统截图、2 份 Excel 表格（列有 1,260 个受损 MT4/MT5 外汇账户）及 10 台 VPS 的窃密日志样本。</li>
+            <li><code>/plan.html</code>：后续破坏计划、暗网兜售预告及赎金要求（从最初邮件索要 5,000 万美元降至网站公开要求的 100 万美元）。</li>
+            <li><code>/victim1.html</code>（10月27日 12:00 新增）：<strong>“被害者 第1号”</strong>个人隐私全曝光独立页面。</li>
+        </ul>
+
+        <h3>② 隐蔽追踪信标（track.php）触发机制</h3>
+        <div class="code-block">&lt;!-- 嵌于网页 HTML 底部的 1x1 像素隐蔽追踪代码 --&gt;
+&lt;img src="track.php" width="1" height="1" alt="" style="display:none;" /&gt;</div>
+        <ul>
+            <li><strong>收集维度：</strong>当浏览器加载网页时会自动请求 <code>track.php</code>，后端随即记录访问者的 <strong>真实 IP 地址、User-Agent（操作系统版本、浏览器型号、设备类型）、HTTP Referer（来源页面）以及精确访问时间戳</strong>。</li>
+            <li><strong>战术意图：</strong>攻击者借此监控日本警方、GMO 安全团队是否在调查该站点，同时筛选出因恐慌而高频刷新页面的受害者 IP。</li>
+        </ul>
+
+        <h3>③ JavaScript 源码中的“母语破绽”（accounts.js 等）</h3>
+        <ul>
+            <li>网站前端展示的日语威胁信虽然语法通顺，但带有明显的欧美语言翻译腔（疑似 DeepL 翻译或 AI 生成）。</li>
+            <li><strong>核心破绽：</strong>研究人员在检视负责渲染受损账户数据的 JavaScript 脚本源码（如 <code>accounts.js</code>）时，发现了开发者遗留的<strong>代码注释（Comments）</strong>。这些注释使用了<strong>极其地道、符合日本本土程序员习惯的自然日语词汇与语法</strong>，直接戳穿了其“纯外籍黑客团伙”的伪装。</li>
+        </ul>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="section-card" id="sec4">
+        <h2>
+            <span>4. 公开样本（samples.zip）取证与元数据矛盾</span>
+            <span class="en-sub">Digital Forensics &amp; Metadata Contradictions</span>
+        </h2>
+        <p>研究人员对压缩包内的 25 张截图、2 份 Excel 表格及日志进行了深度的二进制与元数据（Exif / Document Properties）分析，发现了多国工具混用的痕迹：</p>
+
+        <table class="forensic-table">
+            <thead>
+                <tr>
+                    <th>取证对象 / 维度</th>
+                    <th>提取出的关键技术特征</th>
+                    <th>安全研究人员推导结论</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="取证对象"><strong>📌 自称身份与邮箱</strong></td>
+                    <td data-label="关键技术特征">邮件署名 <strong>Dmitry Orlov</strong>（德米特里·奥尔洛夫），使用 Gmail 联系</td>
+                    <td data-label="研究人员推导结论">典型的俄罗斯姓名，试图将警方与安全机构的调查方向引向东欧/俄罗斯勒索软件团伙。</td>
+                </tr>
+                <tr>
+                    <td data-label="取证对象"><strong>📊 Excel 表格元数据</strong></td>
+                    <td data-label="关键技术特征">创建程序属性显示为 <strong>WPS Office</strong>；系统区域语言环境标识为 <strong>简体中文（zh-CN）</strong></td>
+                    <td data-label="研究人员推导结论">制表人使用的是中国金山软件开发的 WPS 办公套件，且工作机操作系统的默认语言环境为中文简体。</td>
+                </tr>
+                <tr>
+                    <td data-label="取证对象"><strong>🖥️ 25 张系统截图特征</strong></td>
+                    <td data-label="关键技术特征">截图边缘暴露桌面右下角存在<strong>未激活 Windows 的水印特征</strong>，窗口字体渲染符合中日双字节环境</td>
+                    <td data-label="研究人员推导结论">攻击者进行渗透与截图操作的工作机使用的是未激活的盗版 Windows 虚拟机。</td>
+                </tr>
+                <tr>
+                    <td data-label="取证对象"><strong>💻 网页 JS 脚本注释</strong></td>
+                    <td data-label="关键技术特征"><code>accounts.js</code> 等文件内部留有<strong>地道、自然的日语开发者注释</strong></td>
+                    <td data-label="研究人员推导结论">前端搭建者精通日语，表明团伙内部极可能有日本人参与，或存在跨国分工（渗透提取 vs 本地化勒索搭建）。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="section-card" id="sec5">
+        <h2>
+            <span>5. 被毁 FX 账户数据（1,260个）审计与造假揭秘</span>
+            <span class="en-sub">Financial Damage Audit &amp; Data Fabrication</span>
+        </h2>
+        <p>攻击者宣称“已控制全部 7,400 个账户，并摧毁了其中 17%（1,260 个），造成约 77 亿日元损失”。研究人员对 Excel 表内的 1,260 条记录进行了逐一核算，证实其严重注水：</p>
+
+        <div class="metrics-row">
+            <div class="metric-card">
+                <div class="metric-label">攻击者网站宣称破坏金额</div>
+                <div class="metric-val val-red">约 77.0 亿日元</div>
+                <div class="metric-label">故意夸大近一倍以制造恐慌</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Excel 表格实际核算总额</div>
+                <div class="metric-val val-amber">约 40.6 亿日元</div>
+                <div class="metric-label">1,260 个账户账面亏损总和</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">混入的 Demo 模拟账户</div>
+                <div class="metric-val val-emerald">至少 69 个 (超3亿)</div>
+                <div class="metric-label">虚拟练习资金被当成真金白银计入</div>
+            </div>
+        </div>
+
+        <ul>
+            <li><strong>恶意爆仓手法还原：</strong>攻击者攻破 GMO 虚拟桌面后，编写自动化脚本批量操控用户挂在桌面上的 <strong>MT4 / MT5（MetaTrader）</strong> 外汇交易终端，故意执行高频、满仓的反向恶意交易，迅速将账户余额亏空清零。</li>
+            <li><strong>无差别脚本洗劫证据：</strong>研究人员核对交易服务器名称时发现，表格中至少混入了 <strong>69 个虚拟资金演示账户（Demo Account，涉及金额超 3 亿日元）</strong>。甚至有数千万日元的虚拟测试账户也被脚本一并“清零”并计入战果，证明攻击者并非人工精准筛选高净值客户，而是通过自动化脚本无差别洗劫。</li>
+        </ul>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="section-card" id="sec6">
+        <h2>
+            <span>6. “被害者 第1号”曝光与安全镜像查阅方案</span>
+            <span class="en-sub">Victim No.1 Exposure &amp; Safe Verification</span>
+        </h2>
+        <p>10 月 27 日中午 12:00 最后期限过后，攻击者发布了<strong>第 13 号声明（⑬）</strong>并上线了<strong>“被害者 第1号”</strong>独立页面：</p>
+
+        <blockquote>
+            「因此，正如预告的那样，我们将公开个人信息。由于个人信息的数量极其庞大，且分析工作需要耗费大量时间，我们将于每天的这个时间（中午12点），从已完成分析的数据开始依次公开。预计将所有信息全部公开完毕需要数年时间。这些信息不仅会向整个互联网公开，还会直接发送给相关当事人的熟人（亲友、同事等）。为什么要进行这样的公开？因为我们向 GMO 要求支付 100 万美元，但遭到了无视……」
+        </blockquote>
+
+        <p><strong>曝光的具体维度：</strong>包括受害者真实姓名、出生年月日、精确住址、电话、配偶子女真名、就职单位、FX 平台明文密码、本地被盗文件列表，以及基于其浏览器历史生成的羞辱性“个人生活画像”。</p>
+
+        <h3 style="margin-top: 20px;">💡 独立开发者的安全脱敏镜像方案（矢野さとる氏）</h3>
+        <p>为防止公众与受害者误入原网站触发 <code>track.php</code> 追踪信标，日本知名独立开发者 <strong>矢野さとる（Satoru Yano）</strong> 搭建了纯文本安全镜像站（可通过搜索引擎查找 <code>GMO不正アクセス犯の情報まとめ (satoru.net)</code> 或 <code>GMO不正アクセス犯の犯行声明文ビュアー</code>）：</p>
+        <ul style="margin-bottom:0;">
+            <li><strong>剥离恶意代码：</strong>彻底清除了 <code>track.php</code> 等一切外部请求与追踪脚本。</li>
+            <li><strong>隐私脱敏处理：</strong>将“被害者 第1号”页面中的真实姓名、住址、电话及密码等敏感个人信息全部打码隐去，仅供安全研究与事件核实使用。</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>本技术档案基于日本公开网络安全情报及独立开发者取证结果整理 | 仅供网络安全研究与防范参考</p>
+    </footer>
+</div>
+
+</body>
+</html>
