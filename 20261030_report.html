@@ -1,0 +1,547 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#0b1120"><meta name="description" content="长期价值、人生复利与信仰实践：基于巴菲特导师手册的三语研究型档案。"><title>巴菲特导师手册 | 长期价值 · 人生复利 · 信仰与实践</title><style>
+        :root {
+            --bg-dark: #0b1120;
+            --card-bg: #151f32;
+            --card-border: #283650;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-red: #f43f5e;
+            --accent-amber: #fbbf24;
+            --accent-emerald: #34d399;
+            --code-bg: #070b14;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans", "Meiryo", sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.65;
+            padding: max(20px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+            overflow-x: hidden;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* Top Bar with Language Switcher & Nav */
+        .top-toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 17, 32, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+            margin: 0 -14px 20px -14px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .quick-nav {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
+            flex-grow: 1;
+        }
+        .quick-nav::-webkit-scrollbar {
+            display: none;
+        }
+        .nav-pill {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            transition: all 0.2s;
+        }
+        .nav-pill:active, .nav-pill:hover {
+            color: #fff;
+            border-color: var(--accent-blue);
+            background: rgba(56, 189, 248, 0.15);
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 999px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-btn.active {
+            background: var(--accent-blue);
+            color: #0b1120;
+        }
+
+        /* Header Styles */
+        header {
+            border-bottom: 2px solid var(--accent-blue);
+            padding-bottom: 18px;
+            margin-bottom: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .badge-row {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .badge-red { background: rgba(244, 63, 94, 0.18); color: var(--accent-red); border: 1px solid rgba(244, 63, 94, 0.5); }
+        .badge-blue { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.5); }
+        .badge-amber { background: rgba(251, 191, 36, 0.15); color: var(--accent-amber); border: 1px solid rgba(251, 191, 36, 0.5); }
+
+        h1 {
+            font-size: clamp(1.35rem, 4.8vw, 1.85rem);
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.35;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        /* Alert Banner */
+        .alert-box {
+            background: rgba(244, 63, 94, 0.1);
+            border: 1px solid rgba(244, 63, 94, 0.35);
+            border-left: 4px solid var(--accent-red);
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            font-size: 0.92rem;
+        }
+
+        .alert-title {
+            color: var(--accent-red);
+            font-weight: 700;
+            font-size: 0.96rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 18px 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+            scroll-margin-top: 60px;
+        }
+
+        @media (min-width: 640px) {
+            body { padding: 30px 24px; }
+            .section-card { padding: 26px 28px; margin-bottom: 26px; }
+            .top-toolbar { margin: 0 0 24px 0; border-radius: 8px; }
+        }
+
+        h2 {
+            font-size: clamp(1.12rem, 3.8vw, 1.3rem);
+            color: var(--accent-blue);
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        @media (min-width: 640px) {
+            h2 {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        h2 span.en-sub {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        h3 {
+            font-size: 1rem;
+            color: var(--accent-amber);
+            margin: 16px 0 8px 0;
+            line-height: 1.4;
+        }
+
+        p {
+            font-size: 0.94rem;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-position: outside;
+            margin-left: 18px;
+            margin-bottom: 12px;
+            font-size: 0.93rem;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: #ffffff;
+        }
+
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            background-color: var(--code-bg);
+            color: var(--accent-emerald);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            border: 1px solid #1e293b;
+            word-break: break-all;
+        }
+
+        .code-block {
+            background-color: var(--code-bg);
+            border: 1px solid var(--card-border);
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 0.82rem;
+            color: var(--accent-emerald);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+            margin: 10px 0 14px 0;
+        }
+
+        /* Responsive Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-top: 12px;
+        }
+
+        @media (min-width: 720px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+                gap: 18px;
+            }
+        }
+
+        .sub-box {
+            background: rgba(11, 17, 32, 0.55);
+            border: 1px solid var(--card-border);
+            padding: 14px 15px;
+            border-radius: 8px;
+        }
+
+        .sub-box h3 {
+            margin-top: 0;
+        }
+
+        /* Responsive Table */
+        .forensic-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            font-size: 0.9rem;
+        }
+
+        .forensic-table th, .forensic-table td {
+            border: 1px solid var(--card-border);
+            padding: 12px 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .forensic-table th {
+            background-color: rgba(11, 17, 32, 0.85);
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        @media (max-width: 680px) {
+            .forensic-table thead {
+                display: none;
+            }
+            .forensic-table, .forensic-table tbody, .forensic-table tr, .forensic-table td {
+                display: block;
+                width: 100%;
+            }
+            .forensic-table tr {
+                background: rgba(11, 17, 32, 0.55);
+                border: 1px solid var(--card-border);
+                border-radius: 8px;
+                margin-bottom: 12px;
+                padding: 12px;
+            }
+            .forensic-table td {
+                border: none;
+                padding: 6px 0;
+            }
+            .forensic-table td::before {
+                content: attr(data-label);
+                display: block;
+                font-size: 0.75rem;
+                font-weight: 700;
+                color: var(--accent-blue);
+                text-transform: uppercase;
+                margin-bottom: 2px;
+            }
+            .forensic-table td:first-child {
+                border-bottom: 1px solid var(--card-border);
+                padding-bottom: 8px;
+                margin-bottom: 6px;
+                font-size: 1rem;
+                color: var(--accent-amber);
+            }
+            .forensic-table td:first-child::before {
+                display: none;
+            }
+        }
+
+        /* Quote Block */
+        blockquote {
+            background: rgba(11, 17, 32, 0.65);
+            border-left: 3px solid var(--accent-amber);
+            padding: 12px 14px;
+            margin: 12px 0;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Metric Cards */
+        .metrics-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 14px 0;
+        }
+
+        @media (min-width: 640px) {
+            .metrics-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .metric-card {
+            background: rgba(11, 17, 32, 0.7);
+            border: 1px solid var(--card-border);
+            padding: 14px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .metric-val {
+            font-size: 1.45rem;
+            font-weight: 800;
+            margin: 4px 0;
+        }
+
+        .val-red { color: var(--accent-red); }
+        .val-amber { color: var(--accent-amber); }
+        .val-emerald { color: var(--accent-emerald); }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Timeline */
+        .timeline {
+            border-left: 2px solid var(--accent-blue);
+            margin-left: 8px;
+            padding-left: 16px;
+            margin-top: 14px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -23px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent-blue);
+            border-radius: 50%;
+            border: 2px solid var(--bg-dark);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--accent-amber);
+            font-size: 0.92rem;
+            margin-bottom: 2px;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 1px solid var(--card-border);
+        }
+    
+/* V7: Progressive-enhancement-free multilingual switching. */
+.lang-choice {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    clip-path: inset(50%);
+    overflow: hidden;
+}
+.lang-switcher label.lang-btn {
+    display: inline-block;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    white-space: nowrap;
+}
+/* Chinese is the default; switching languages is entirely CSS powered. */
+.i18n-zh { display: inline; }
+.i18n-ja, .i18n-en { display: none; }
+#lang-ja:checked ~ .container .i18n-zh,
+#lang-en:checked ~ .container .i18n-zh { display: none; }
+#lang-ja:checked ~ .container .i18n-ja,
+#lang-en:checked ~ .container .i18n-en { display: inline; }
+#lang-zh:checked ~ .container .lang-switcher label[for="lang-zh"],
+#lang-ja:checked ~ .container .lang-switcher label[for="lang-ja"],
+#lang-en:checked ~ .container .lang-switcher label[for="lang-en"] {
+    background: var(--accent-blue);
+    color: #0b1120;
+}
+#lang-zh:focus-visible ~ .container .lang-switcher label[for="lang-zh"],
+#lang-ja:focus-visible ~ .container .lang-switcher label[for="lang-ja"],
+#lang-en:focus-visible ~ .container .lang-switcher label[for="lang-en"] {
+    outline: 2px solid #fff;
+    outline-offset: -2px;
+}
+@media (max-width: 680px) {
+    .forensic-table td::before { content: attr(data-label-zh); }
+    #lang-ja:checked ~ .container .forensic-table td::before { content: attr(data-label-ja); }
+    #lang-en:checked ~ .container .forensic-table td::before { content: attr(data-label-en); }
+}
+
+/* Buffett adaptation: retains the exact V7 visual tokens and component system. */
+.container{max-width:960px}
+.quick-nav{min-width:0}
+.nav-pill{flex:0 0 auto;white-space:nowrap}
+.nav-pill .i18n-zh,.nav-pill .i18n-ja,.nav-pill .i18n-en{white-space:nowrap}
+:root{color-scheme:dark}
+.i18n-zh,.i18n-ja,.i18n-en {white-space:normal}
+.kicker{font-size:.75rem;color:var(--accent-blue);font-weight:800;letter-spacing:.1em;margin-bottom:8px}
+.hero-panel{padding:7px 0 16px}
+.hero-title{font-size:clamp(1.9rem,5.3vw,3rem);line-height:1.23;letter-spacing:-.025em;max-width:800px}
+.hero-intro{font-size:.96rem;max-width:790px;color:#cbd5e1;margin-top:11px}
+.hero-quote{font-size:1rem;border-left:3px solid var(--accent-amber);margin:18px 0 10px;padding:10px 15px;color:#f8fafc;background:rgba(251,191,36,.05);border-radius:0 8px 8px 0}
+.hero-meta{color:var(--text-muted);font-size:.79rem;margin-top:10px}
+.topic-map{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:12px 0 20px}
+.topic-map .step{padding:6px 11px;border-radius:99px;border:1px solid var(--card-border);background:var(--card-bg);color:#dbeafe;font-size:.8rem}
+.topic-map .arr{color:var(--accent-amber);font-size:.8rem}
+.section-card{scroll-margin-top:80px}
+.section-number{color:var(--accent-amber);font-size:.76rem;letter-spacing:.08em;font-weight:800;margin-bottom:4px}
+.section-card h2{gap:9px;align-items:flex-start}
+.section-card h2 .en-sub{line-height:1.5}
+.section-card p{line-height:1.86;margin-bottom:13px}
+.section-card li{line-height:1.76}
+.section-card h3{margin-top:22px;margin-bottom:10px}
+.research-note{background:rgba(56,189,248,.055);border-left:3px solid var(--accent-blue);padding:13px 15px;margin:18px 0;border-radius:0 8px 8px 0}
+.research-note p{margin:0}
+.note-marker{font-size:.66rem;letter-spacing:.12em;color:var(--accent-blue);font-weight:800;margin-bottom:7px}
+blockquote{border-left-color:var(--accent-amber);font-size:.98rem;line-height:1.85;margin:17px 0}
+.report-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0 23px}
+.report-stats .metric-card{min-width:0}
+.report-stats .metric-val{font-size:1.48rem}
+.report-stats .metric-label{font-size:.76rem;line-height:1.5}
+.forensic-table{table-layout:fixed}
+.forensic-table th,.forensic-table td{overflow-wrap:anywhere;word-break:normal}
+.forensic-table td{color:#e2e8f0}
+.forensic-table tr:nth-child(even) td{background:rgba(11,17,32,.22)}
+.references{display:grid;grid-template-columns:1fr;gap:9px;margin-top:18px}
+.ref{border:1px solid var(--card-border);background:rgba(11,17,32,.54);padding:12px 15px;border-radius:8px}
+.ref-num{font-size:.7rem;letter-spacing:.07em;font-weight:800;color:var(--accent-amber)}
+.ref-title{font-size:.87rem;font-weight:650;color:#f1f5f9;margin:3px 0}
+.ref a{font-size:.79rem;overflow-wrap:anywhere;color:var(--accent-blue);text-decoration:underline;text-underline-offset:3px}
+.return-top{display:inline-block;margin-top:10px;color:var(--accent-blue);font-size:.75rem;text-decoration:none}
+a:focus-visible,label:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.mobile-hint{font-size:.71rem;color:var(--text-muted);margin-bottom:12px}
+@media(max-width:680px){
+  .forensic-table{table-layout:auto}
+  .forensic-table tr:nth-child(even) td{background:none}
+  .forensic-table td{padding:6px 0}
+  .forensic-table td::before{display:block;color:var(--accent-blue);font-size:.7rem}
+  .report-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .report-stats .metric-card{padding:9px 6px}
+  .report-stats .metric-val{font-size:1.21rem}
+  .report-stats .metric-label{font-size:.68rem}
+}
+@media(max-width:390px){.report-stats{gap:6px}.nav-pill{padding:5px 9px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.top-toolbar,.lang-switcher,.return-top,.mobile-hint{display:none!important}body{background:#fff;color:#111}.section-card{background:#fff;border:1px solid #ccc;box-shadow:none;break-inside:avoid}h1,.section-card h2,.section-card h3{color:#123249}p,li{color:#222} .forensic-table td,.forensic-table th{color:#222;border-color:#999}}
+</style></head><body><input aria-label="English" class="lang-choice" id="lang-en" name="report-language" type="radio"><input aria-label="日本語" class="lang-choice" id="lang-ja" name="report-language" type="radio"><input aria-label="中文" class="lang-choice" id="lang-zh" name="report-language" type="radio" checked><div class="container" id="top"><div class="top-toolbar"><nav class="quick-nav" aria-label="Chapter navigation"><a class="nav-pill" href="#sec-intro"><span class="i18n-zh" lang="zh-CN">引言</span><span class="i18n-ja" lang="ja">序章</span><span class="i18n-en" lang="en">Intro</span></a><a class="nav-pill" href="#sec01"><span class="i18n-zh" lang="zh-CN">价格与价值</span><span class="i18n-ja" lang="ja">価格と価値</span><span class="i18n-en" lang="en">Price &amp; Value</span></a><a class="nav-pill" href="#sec02"><span class="i18n-zh" lang="zh-CN">证据边界</span><span class="i18n-ja" lang="ja">証拠の限界</span><span class="i18n-en" lang="en">Evidence</span></a><a class="nav-pill" href="#sec03"><span class="i18n-zh" lang="zh-CN">收入的10%</span><span class="i18n-ja" lang="ja">生涯所得10%</span><span class="i18n-en" lang="en">The 10% Test</span></a><a class="nav-pill" href="#sec04"><span class="i18n-zh" lang="zh-CN">隐形资产</span><span class="i18n-ja" lang="ja">見えない資産</span><span class="i18n-en" lang="en">Invisible Assets</span></a><a class="nav-pill" href="#sec05"><span class="i18n-zh" lang="zh-CN">小事复利</span><span class="i18n-ja" lang="ja">小さな行動</span><span class="i18n-en" lang="en">Small Actions</span></a><a class="nav-pill" href="#sec06"><span class="i18n-zh" lang="zh-CN">多领域反馈</span><span class="i18n-ja" lang="ja">領域間の循環</span><span class="i18n-en" lang="en">Life Systems</span></a><a class="nav-pill" href="#sec07"><span class="i18n-zh" lang="zh-CN">长期选择</span><span class="i18n-ja" lang="ja">長期の選択</span><span class="i18n-en" lang="en">Decisions</span></a><a class="nav-pill" href="#sec08"><span class="i18n-zh" lang="zh-CN">耶稣的比喻</span><span class="i18n-ja" lang="ja">イエスのたとえ</span><span class="i18n-en" lang="en">Parables</span></a><a class="nav-pill" href="#sec09"><span class="i18n-zh" lang="zh-CN">交会与区别</span><span class="i18n-ja" lang="ja">共通点と違い</span><span class="i18n-en" lang="en">Comparison</span></a><a class="nav-pill" href="#sec10"><span class="i18n-zh" lang="zh-CN">负复利</span><span class="i18n-ja" lang="ja">負の複利</span><span class="i18n-en" lang="en">Negative Loops</span></a><a class="nav-pill" href="#sec11"><span class="i18n-zh" lang="zh-CN">实践框架</span><span class="i18n-ja" lang="ja">実践モデル</span><span class="i18n-en" lang="en">Framework</span></a><a class="nav-pill" href="#sec-end"><span class="i18n-zh" lang="zh-CN">结语</span><span class="i18n-ja" lang="ja">結び</span><span class="i18n-en" lang="en">Conclusion</span></a><a class="nav-pill" href="#sec-app-a"><span class="i18n-zh" lang="zh-CN">命题辨析</span><span class="i18n-ja" lang="ja">命題の整理</span><span class="i18n-en" lang="en">Claims</span></a><a class="nav-pill" href="#sec-app-b"><span class="i18n-zh" lang="zh-CN">12个问题</span><span class="i18n-ja" lang="ja">12の問い</span><span class="i18n-en" lang="en">12 Questions</span></a><a class="nav-pill" href="#sec-app-c"><span class="i18n-zh" lang="zh-CN">文献来源</span><span class="i18n-ja" lang="ja">出典</span><span class="i18n-en" lang="en">Sources</span></a></nav><div class="lang-switcher" role="group" aria-label="Select content language"><label class="lang-btn" for="lang-zh">中文</label><label class="lang-btn" for="lang-ja">日本語</label><label class="lang-btn" for="lang-en">EN</label></div></div><header class="hero-panel"><div class="badge-row"><span class="badge badge-blue">LONG-TERM VALUE</span><span class="badge badge-amber">RESEARCH NOTE · 2026.10.30</span><span class="badge badge-blue">BUFFETT · LIFE · FAITH</span></div><div class="kicker">WARREN E. BUFFETT / LIFE COMPOUNDING / CHRISTIAN FAITH</div><h1 class="hero-title"><span class="i18n-zh" lang="zh-CN">从一生收入的 10%，到生命的全部</span><span class="i18n-ja" lang="ja">生涯所得の10％から、人生のすべてへ</span><span class="i18n-en" lang="en">From 10% of Lifetime Earnings to the Whole of Life</span></h1><p class="hero-intro"><span class="i18n-zh" lang="zh-CN">巴菲特的长期价值观、正确小事的复利，与主耶稣比喻教导中的生命根基</span><span class="i18n-ja" lang="ja">バフェットの長期的価値観、小さな正しい行動の蓄積、イエス・キリストのたとえと人生の土台</span><span class="i18n-en" lang="en">Buffett’s long-term view of value, the compounding of small right actions, and the foundations revealed in Jesus’ parables</span></p><div class="hero-quote"><span class="i18n-zh" lang="zh-CN">真正值得研究的，不只是时间如何放大财富；而是时间如何揭示价值，并塑造一个人最终成为谁。</span><span class="i18n-ja" lang="ja">本当に探究すべきことは、時間が富をどう増幅するかだけではない。時間が価値をどう明らかにし、人をどう形づくるかだ。</span><span class="i18n-en" lang="en">What deserves study is not merely how time magnifies wealth, but how it reveals value and shapes who we become.</span></div><div class="hero-meta">2026.10.30 · ORIGINAL SOURCE: 《巴菲特导师手册》 · 16 PAGES</div></header><div class="report-stats"><div class="metric-card"><div class="metric-val val-amber">10%</div><div class="metric-label"><span class="i18n-zh" lang="zh-CN">一生收入思想实验</span><span class="i18n-ja" lang="ja">生涯所得の思考実験</span><span class="i18n-en" lang="en">Lifetime earnings experiment</span></div></div><div class="metric-card"><div class="metric-val" style="color:var(--accent-blue)">11</div><div class="metric-label"><span class="i18n-zh" lang="zh-CN">个研究章节</span><span class="i18n-ja" lang="ja">研究章</span><span class="i18n-en" lang="en">Research chapters</span></div></div><div class="metric-card"><div class="metric-val val-emerald">05</div><div class="metric-label"><span class="i18n-zh" lang="zh-CN">每日自省问题</span><span class="i18n-ja" lang="ja">毎日の振り返り</span><span class="i18n-en" lang="en">Daily reflection questions</span></div></div></div><div class="topic-map"><span class="step"><span class="i18n-zh" lang="zh-CN">市场价格与企业价值</span><span class="i18n-ja" lang="ja">市場価格と企業価値</span><span class="i18n-en" lang="en">Market price &amp; business value</span></span><span class="arr">→</span><span class="step"><span class="i18n-zh" lang="zh-CN">投资一个人的未来</span><span class="i18n-ja" lang="ja">人の未来に投資する</span><span class="i18n-en" lang="en">Invest in a person</span></span><span class="arr">→</span><span class="step"><span class="i18n-zh" lang="zh-CN">小事与人生复利</span><span class="i18n-ja" lang="ja">小さな行動と人生の複利</span><span class="i18n-en" lang="en">Small actions &amp; life compounding</span></span><span class="arr">→</span><span class="step"><span class="i18n-zh" lang="zh-CN">比喻、真理与实践</span><span class="i18n-ja" lang="ja">たとえ・真理・実践</span><span class="i18n-en" lang="en">Parables, truth &amp; practice</span></span></div><p class="mobile-hint"><span class="i18n-zh" lang="zh-CN">阅读方式：横向滑动顶端章节导航；点击右上角切换中／日／英全文。此页面采用原始 V7 模板的纯 CSS 切换方案，离线打开亦可使用。</span><span class="i18n-ja" lang="ja">読み方：上部の章ナビを横へスクロールし、右上で中国語・日本語・英語の全文を切り替えられます。V7のCSS式切替を継承し、オフラインでも使えます。</span><span class="i18n-en" lang="en">Reading guide: swipe the chapter navigation horizontally and use the upper-right control to switch the full text between Chinese, Japanese, and English. The V7 CSS-only switch also works offline.</span></p><section class="section-card" id="sec-intro"><div class="section-number">CHAPTER 00 / READING FRAMEWORK</div><h2><span class="i18n-zh" lang="zh-CN">引言｜从一个交易日到一生</span><span class="i18n-ja" lang="ja">序章｜一日の相場から人生全体へ</span><span class="i18n-en" lang="en">Introduction | From One Trading Day to a Lifetime</span></h2><p><span class="i18n-zh" lang="zh-CN">对话始于 2026 年 10 月 29 日的美国科技股抛售。我们先追问谁在卖出、哪些公司跌得更多；随后意识到：价格的一日变化，未必等于企业未来十年、二十年经营能力的同等变化。</span><span class="i18n-ja" lang="ja">議論は2026年10月29日の米国テクノロジー株の売りから始まった。誰が売ったのか、どの企業の下落が大きいのか。しかし一日の株価変動が、今後10年・20年の事業価値の変動と同じとは限らない。</span><span class="i18n-en" lang="en">The discussion began with the October 29, 2026 selloff in US technology stocks. Who was selling, and which companies declined the most? Yet a one-day price movement need not represent a comparable change in a business’s ability to operate over the next ten or twenty years.</span></p><p><span class="i18n-zh" lang="zh-CN">从这里，讨论进入巴菲特关于“拥有一名同学未来全部收入的 10%”的思想实验，再延伸到选择工作、伴侣、家庭生活与日常习惯，最后与主耶稣使用撒种、建房和芥菜种等比喻进行教导的方式形成联系。</span><span class="i18n-ja" lang="ja">そこからバフェットの「同級生一人の将来の生涯所得の10％を得られるなら誰を選ぶか」という思考実験へ進み、仕事、伴侶、家庭、日々の習慣、そしてイエス・キリストの種まき・家・からし種のたとえへと思考が広がった。</span><span class="i18n-en" lang="en">This leads to Buffett’s thought experiment about owning 10% of a classmate’s future lifetime earnings, then to work, marriage, family, habits, and finally to Jesus’ parables of sowing, building on foundations, and the mustard seed.</span></p><blockquote><span class="i18n-zh" lang="zh-CN">真正值得研究的，不只是时间如何放大财富；而是时间如何揭示价值，并塑造一个人最终成为谁。</span><span class="i18n-ja" lang="ja">本当に探究すべきことは、時間が富をどのように増幅するかだけでなく、価値をどう明らかにし、人をどのような存在へと形づくるかである。</span><span class="i18n-en" lang="en">What deserves study is not merely how time magnifies wealth, but how time reveals value and shapes who a person ultimately becomes.</span></blockquote><div class="research-note"><div class="note-marker">RESEARCH NOTE</div><p><span class="i18n-zh" lang="zh-CN">阅读边界：事实与原始文本、对话中的思想推演、实践分析框架应当区分。金融复利可以数学化；人生复利是结构性类比；基督教关于忠心、爱与遵行的教导具有不可化约的属灵意义。</span><span class="i18n-ja" lang="ja">読解上の前提：事実と原資料、対話からの推論、実践モデルを区別する。金融の複利は数学的に記述できるが、人生の複利は構造的な類推であり、忠実さ・愛・実践に関するキリスト教の教えは独自の霊的意味をもつ。</span><span class="i18n-en" lang="en">Reading boundary: distinguish source facts and primary texts from discussion-derived interpretations and practical frameworks. Financial compounding is mathematical; life compounding is an analogy; Christian teaching about faithfulness, love, and obedience has irreducible spiritual meaning.</span></p></div><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><section class="section-card" id="sec01"><div class="section-number">CHAPTER 01 / PRICE · VALUE · MARGIN OF SAFETY</div><h2><span class="i18n-zh" lang="zh-CN">市场波动：价格变了，价值是否改变？</span><span class="i18n-ja" lang="ja">市場の変動：価格が変わると価値も変わるのか</span><span class="i18n-en" lang="en">Market Volatility: Did Value Change with Price?</span></h2><p><span class="i18n-zh" lang="zh-CN">根据本手册引用的路透社与美联社报道，2026 年 10 月 29 日纳斯达克综合指数下跌约 1.4%，标普 500 下跌约 0.3%，Alphabet 下跌约 12.6%，罗素 2000 上涨约 1.0%；亚马逊在常规时段承压，并在盘后受到业绩展望及投入问题影响。[1][2]</span><span class="i18n-ja" lang="ja">本資料が引用するロイター通信とAP通信によると、2026年10月29日のNASDAQ総合指数は約1.4％下落、S&amp;P500は約0.3％下落、Alphabetは約12.6％下落する一方、ラッセル2000は約1.0％上昇した。Amazonは通常取引と時間外で業績見通しや投資支出への懸念を受けた。[1][2]</span><span class="i18n-en" lang="en">According to the Reuters and AP reports cited in the handbook, on October 29, 2026, the Nasdaq Composite fell about 1.4%, the S&amp;P 500 about 0.3%, and Alphabet about 12.6%, while the Russell 2000 rose about 1.0%. Amazon also faced pressure connected to its outlook and spending. [1][2]</span></p><p><span class="i18n-zh" lang="zh-CN">市场的关键追问由“AI 投资多不多”转为“AI 资本开支究竟能够带来多少可持续自由现金流”。股价大跌并不自动意味着企业价值崩塌；但也不能把下跌一概视为错误定价。</span><span class="i18n-ja" lang="ja">市場の焦点は「AIにいくら投資するか」から「巨額のAI設備投資が持続的なフリーキャッシュフローをどれだけ生むか」へ移った。急落は必ずしも企業価値の崩壊ではないが、すべての下落を市場の誤りと決めつけることもできない。</span><span class="i18n-en" lang="en">The market’s question shifted from the size of AI investment to the sustainable free cash flow it might produce. A sharp decline does not necessarily mean the business has collapsed; nor is every decline automatically a mispricing.</span></p><h3><span class="i18n-zh" lang="zh-CN">必须分开的三个概念</span><span class="i18n-ja" lang="ja">区別すべき三つの概念</span><span class="i18n-en" lang="en">Three Concepts That Must Remain Distinct</span></h3><ul><li><span class="i18n-zh" lang="zh-CN">价格：某一时点买卖双方达成交易的结果，受流动性、杠杆、预期和情绪影响。</span><span class="i18n-ja" lang="ja">価格：特定時点で成立する取引価格。流動性、レバレッジ、期待、感情に左右される。</span><span class="i18n-en" lang="en">Price: the trading outcome at a point in time, affected by liquidity, leverage, expectations, and sentiment.</span></li><li><span class="i18n-zh" lang="zh-CN">经营价值：未来可分配现金流及其不确定性所决定的经济价值。</span><span class="i18n-ja" lang="ja">事業価値：将来に所有者へ分配できるキャッシュフローとその不確実性。</span><span class="i18n-en" lang="en">Business value: future distributable cash flows and uncertainty surrounding them.</span></li><li><span class="i18n-zh" lang="zh-CN">购买价值：即使是优秀企业，买入价格也决定安全边际与最终长期收益。</span><span class="i18n-ja" lang="ja">購入価値：優良企業でも取得価格が安全余裕と長期収益を決める。</span><span class="i18n-en" lang="en">Purchase value: even a great company’s entry price determines margin of safety and long-run returns.</span></li></ul><h3><span class="i18n-zh" lang="zh-CN">把观察窗口从一分钟延长到三十年</span><span class="i18n-ja" lang="ja">観察期間を一分から三十年へ延ばす</span><span class="i18n-en" lang="en">Extend the Observation Window from One Minute to Thirty Years</span></h3><p><span class="i18n-zh" lang="zh-CN">真正需要研究的是：护城河能否维持？管理层是否有效分配资本？客户是否持续付费？技术变迁将削弱还是强化竞争优势？自由现金流能否持续增长？长期持有不能代替价值判断，更不能成为无视新事实的借口。</span><span class="i18n-ja" lang="ja">問うべきは、競争上の優位は続くか、経営陣は資本を適切に配分するか、顧客は支払い続けるか、技術変化は優位性を損なうか強めるか、そしてフリーキャッシュフローが持続的に増えるかである。「長期保有」は新事実を無視する口実ではない。</span><span class="i18n-en" lang="en">Ask whether the moat endures, management allocates capital well, customers keep paying, technology strengthens or weakens the advantage, and free cash flow can persistently grow. “Hold for the long term” is not a substitute for valuation or reassessment.</span></p><blockquote><span class="i18n-zh" lang="zh-CN">市场每天给资产报价；但它不会替投资者回答，这项资产在未来几十年究竟能创造什么。</span><span class="i18n-ja" lang="ja">市場は毎日価格を提示する。しかし、その資産が数十年で何を生むかを投資家に代わって答えはしない。</span><span class="i18n-en" lang="en">The market quotes an asset every day; it does not answer what that asset can create over the coming decades.</span></blockquote><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><section class="section-card" id="sec02"><div class="section-number">CHAPTER 02 / EVIDENCE DISCIPLINE</div><h2><span class="i18n-zh" lang="zh-CN">谁在卖出：事实、推断与认知边界</span><span class="i18n-ja" lang="ja">誰が売ったのか：事実・推論・認識の限界</span><span class="i18n-en" lang="en">Who Was Selling? Facts, Inference, and Limits</span></h2><p><span class="i18n-zh" lang="zh-CN">“都是谁在抛售？”是重要的问题，因为成交事实不等于卖方身份。公开市场披露价格、成交量、部分基金申赎和机构定期持仓，但通常不足以还原某一天每一笔成交的最终卖家及其动机。</span><span class="i18n-ja" lang="ja">「誰が売却したのか」は重要な問いだが、約定の事実と最終売り手の身元は別である。価格・出来高・ETFの資金動向・機関投資家の定期報告だけでは、その日の全取引の最終売り手や意図は特定できない。</span><span class="i18n-en" lang="en">“Who was selling?” matters because a trade is not the same as an identified seller. Public prices, volumes, some ETF flows, and quarterly holdings do not generally reveal every ultimate seller or motive on a particular day.</span></p><table class="forensic-table"><thead><tr><th><span class="i18n-zh" lang="zh-CN">可以观察</span><span class="i18n-ja" lang="ja">観察できること</span><span class="i18n-en" lang="en">Observable</span></th><th><span class="i18n-zh" lang="zh-CN">不宜直接推出</span><span class="i18n-ja" lang="ja">直接は推定できないこと</span><span class="i18n-en" lang="en">Cannot Safely Infer</span></th></tr></thead><tbody><tr><td data-label-zh="可以观察" data-label-ja="観察できること" data-label-en="Observable"><span class="i18n-zh" lang="zh-CN">个股跌幅、成交额与成交量</span><span class="i18n-ja" lang="ja">株価下落率・売買代金・出来高</span><span class="i18n-en" lang="en">Share-price moves and volume</span></td><td data-label-zh="不宜直接推出" data-label-ja="直接は推定できないこと" data-label-en="Cannot Safely Infer"><span class="i18n-zh" lang="zh-CN">谁或哪家机构主导抛售</span><span class="i18n-ja" lang="ja">誰・どの機関が売りを主導したか</span><span class="i18n-en" lang="en">Which investor or institution drove selling</span></td></tr><tr><td data-label-zh="可以观察" data-label-ja="観察できること" data-label-en="Observable"><span class="i18n-zh" lang="zh-CN">机构季度末持仓</span><span class="i18n-ja" lang="ja">機関投資家の四半期末保有残高</span><span class="i18n-en" lang="en">Reported quarter-end positions</span></td><td data-label-zh="不宜直接推出" data-label-ja="直接は推定できないこと" data-label-en="Cannot Safely Infer"><span class="i18n-zh" lang="zh-CN">某一交易日的全部买卖动作</span><span class="i18n-ja" lang="ja">特定日の全売買</span><span class="i18n-en" lang="en">Every transaction on a particular day</span></td></tr><tr><td data-label-zh="可以观察" data-label-ja="観察できること" data-label-en="Observable"><span class="i18n-zh" lang="zh-CN">部分 ETF 持仓和申赎变化</span><span class="i18n-ja" lang="ja">一部ETFの保有・設定解約</span><span class="i18n-en" lang="en">Certain ETF positions and flows</span></td><td data-label-zh="不宜直接推出" data-label-ja="直接は推定できないこと" data-label-en="Cannot Safely Infer"><span class="i18n-zh" lang="zh-CN">每位最终投资者的真实意图</span><span class="i18n-ja" lang="ja">すべての最終投資家の真意</span><span class="i18n-en" lang="en">The intent of each end investor</span></td></tr><tr><td data-label-zh="可以观察" data-label-ja="観察できること" data-label-en="Observable"><span class="i18n-zh" lang="zh-CN">市场担忧 AI 资本开支回报</span><span class="i18n-ja" lang="ja">AI設備投資の収益性への市場の懸念</span><span class="i18n-en" lang="en">Concern about AI capex returns</span></td><td data-label-zh="不宜直接推出" data-label-ja="直接は推定できないこと" data-label-en="Cannot Safely Infer"><span class="i18n-zh" lang="zh-CN">企业未来十年的现金流必然恶化</span><span class="i18n-ja" lang="ja">今後十年のキャッシュフロー悪化が確定したこと</span><span class="i18n-en" lang="en">Proof that cash flows must deteriorate for ten years</span></td></tr></tbody></table><p><span class="i18n-zh" lang="zh-CN">当证据不足时，应把“已确认事实”“合理假设”“尚不可知”分别标记。错误的确信可能比暂时的不确定更危险。巴菲特的思想实验也不是预测每个人逐年的收入，而是观察跨越时间的稳定品质。</span><span class="i18n-ja" lang="ja">証拠が不十分なら「確認された事実」「合理的仮説」「現時点では不明」を分ける。根拠の薄い確信は不確実性の自覚より危険なことがある。バフェットの例も各年の収入を予言するのではなく、時間を超えて続く資質を見抜くことを目指す。</span><span class="i18n-en" lang="en">Where evidence is insufficient, separate confirmed facts, reasonable hypotheses, and the unknowable. False certainty can be more dangerous than uncertainty. Buffett’s experiment is about recognizing durable qualities, not predicting each person’s annual income.</span></p><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><section class="section-card" id="sec03"><div class="section-number">CHAPTER 03 / 10% OF LIFETIME EARNINGS</div><h2><span class="i18n-zh" lang="zh-CN">巴菲特的思想实验：投资一个人的未来</span><span class="i18n-ja" lang="ja">バフェットの思考実験：人の未来に投資する</span><span class="i18n-en" lang="en">Buffett’s Thought Experiment: Invest in a Person</span></h2><p><span class="i18n-zh" lang="zh-CN">1998 年 10 月 15 日，沃伦·巴菲特在佛罗里达大学商学院演讲，请学生设想：有权取得班上一位同学此后一生收入的 10%；该同学主要依靠自己的能力而非继承财产创造收入。你会选择谁？[3]</span><span class="i18n-ja" lang="ja">1998年10月15日、ウォーレン・バフェットはフロリダ大学ビジネススクールで「同級生のうち一人について、その人が将来一生で稼ぐ所得の10％を受け取れるなら誰を選ぶか。ただし相続ではなく自身の力で稼ぐものとする」と問いかけた。[3]</span><span class="i18n-en" lang="en">On October 15, 1998, Warren Buffett asked University of Florida business students: if you could receive 10% of one classmate’s future lifetime earnings—earned by the classmate rather than inherited—whom would you choose? [3]</span></p><p><span class="i18n-zh" lang="zh-CN">答案未必是考试最高分、IQ 最高或最善于表现的人。长期可靠性往往取决于诚信、合作、信任、承担责任、分享荣誉、持续学习及适应变化的能力。反向思考也有价值：我们会回避哪些难以长期合作的行为？</span><span class="i18n-ja" lang="ja">試験の最高得点者、IQの最も高い人、最も目立つ人が正解とは限らない。誠実さ、協働、信頼、責任感、功績を分かち合う態度、学習と適応力が重要になる。逆に、長期的に付き合いたくない行動を考えることにも意味がある。</span><span class="i18n-en" lang="en">The choice need not be the best test-taker, highest-IQ student, or most charismatic person. Integrity, cooperation, trust, responsibility, generosity with credit, learning, and adaptability may matter more. The reverse question—who would you avoid and why—is equally revealing.</span></p><h3><span class="i18n-zh" lang="zh-CN">思想实验的四个要素</span><span class="i18n-ja" lang="ja">思考実験の四要素</span><span class="i18n-en" lang="en">Four Elements of the Experiment</span></h3><ul><li><span class="i18n-zh" lang="zh-CN">投资对象：一个人。</span><span class="i18n-ja" lang="ja">対象：一人の人間。</span><span class="i18n-en" lang="en">Investment subject: a person.</span></li><li><span class="i18n-zh" lang="zh-CN">取得标的：不是眼前成绩，而是未来收入的一部分。</span><span class="i18n-ja" lang="ja">対象収益：現在の成績でなく、将来所得の一部。</span><span class="i18n-en" lang="en">Claim: a portion of future income, not present grades.</span></li><li><span class="i18n-zh" lang="zh-CN">持有时间：几乎整个一生。</span><span class="i18n-ja" lang="ja">期間：ほぼ生涯。</span><span class="i18n-en" lang="en">Holding period: almost an entire lifetime.</span></li><li><span class="i18n-zh" lang="zh-CN">决定长期表现的变量：能力、行为与关系的组合。</span><span class="i18n-ja" lang="ja">主要変数：能力・行動・人間関係の組み合わせ。</span><span class="i18n-en" lang="en">Core variables: the interaction of ability, behavior, and relationships.</span></li></ul><h3><span class="i18n-zh" lang="zh-CN">从个人观察映射到企业研究</span><span class="i18n-ja" lang="ja">人間の評価を企業分析へ写像する</span><span class="i18n-en" lang="en">Map Personal Qualities to Business Analysis</span></h3><table class="forensic-table"><thead><tr><th><span class="i18n-zh" lang="zh-CN">选择一个人</span><span class="i18n-ja" lang="ja">人を選ぶ基準</span><span class="i18n-en" lang="en">Choosing a Person</span></th><th><span class="i18n-zh" lang="zh-CN">分析一家企业</span><span class="i18n-ja" lang="ja">企業を分析する基準</span><span class="i18n-en" lang="en">Analyzing a Business</span></th></tr></thead><tbody><tr><td data-label-zh="选择一个人" data-label-ja="人を選ぶ基準" data-label-en="Choosing a Person"><span class="i18n-zh" lang="zh-CN">诚信、可靠、责任</span><span class="i18n-ja" lang="ja">誠実さ・信頼性・責任感</span><span class="i18n-en" lang="en">Honesty, reliability, responsibility</span></td><td data-label-zh="分析一家企业" data-label-ja="企業を分析する基準" data-label-en="Analyzing a Business"><span class="i18n-zh" lang="zh-CN">管理层诚信与治理结构</span><span class="i18n-ja" lang="ja">経営陣の誠実さとガバナンス</span><span class="i18n-en" lang="en">Management integrity and governance</span></td></tr><tr><td data-label-zh="选择一个人" data-label-ja="人を選ぶ基準" data-label-en="Choosing a Person"><span class="i18n-zh" lang="zh-CN">学习能力和适应力</span><span class="i18n-ja" lang="ja">学習・適応能力</span><span class="i18n-en" lang="en">Capacity to learn and adapt</span></td><td data-label-zh="分析一家企业" data-label-ja="企業を分析する基準" data-label-en="Analyzing a Business"><span class="i18n-zh" lang="zh-CN">创新与组织竞争优势</span><span class="i18n-ja" lang="ja">革新・組織能力・競争優位</span><span class="i18n-en" lang="en">Innovation and organizational advantages</span></td></tr><tr><td data-label-zh="选择一个人" data-label-ja="人を選ぶ基準" data-label-en="Choosing a Person"><span class="i18n-zh" lang="zh-CN">长期合作能力</span><span class="i18n-ja" lang="ja">長期的な協働能力</span><span class="i18n-en" lang="en">Ability to cooperate</span></td><td data-label-zh="分析一家企业" data-label-ja="企業を分析する基準" data-label-en="Analyzing a Business"><span class="i18n-zh" lang="zh-CN">客户关系、品牌、分销与生态</span><span class="i18n-ja" lang="ja">顧客関係・ブランド・流通・エコシステム</span><span class="i18n-en" lang="en">Customers, brand, distribution, ecosystems</span></td></tr><tr><td data-label-zh="选择一个人" data-label-ja="人を選ぶ基準" data-label-en="Choosing a Person"><span class="i18n-zh" lang="zh-CN">资源使用纪律</span><span class="i18n-ja" lang="ja">資源配分の規律</span><span class="i18n-en" lang="en">Discipline in allocating resources</span></td><td data-label-zh="分析一家企业" data-label-ja="企業を分析する基準" data-label-en="Analyzing a Business"><span class="i18n-zh" lang="zh-CN">资本配置与再投资回报率</span><span class="i18n-ja" lang="ja">資本配分と再投資収益率</span><span class="i18n-en" lang="en">Capital allocation and reinvestment returns</span></td></tr><tr><td data-label-zh="选择一个人" data-label-ja="人を選ぶ基準" data-label-en="Choosing a Person"><span class="i18n-zh" lang="zh-CN">收入稳定与成长</span><span class="i18n-ja" lang="ja">所得の安定性と成長</span><span class="i18n-en" lang="en">Stability and growth of income</span></td><td data-label-zh="分析一家企业" data-label-ja="企業を分析する基準" data-label-en="Analyzing a Business"><span class="i18n-zh" lang="zh-CN">可持续自由现金流及风险</span><span class="i18n-ja" lang="ja">持続可能なFCFとリスク</span><span class="i18n-en" lang="en">Sustainable free cash flow and risk</span></td></tr></tbody></table><div class="research-note"><div class="note-marker">RESEARCH NOTE</div><p><span class="i18n-zh" lang="zh-CN">这是一种解释性的映射，不代表人能被现金流衡量，更不能把尊严折算为收益率；企业投资还需要考虑买入价格、权利、治理和退出条件。</span><span class="i18n-ja" lang="ja">これは理解を助ける対応関係であり、人間の尊厳をキャッシュフローや利回りに置き換えることではない。企業投資には購入価格、株主権、制度、出口条件も欠かせない。</span><span class="i18n-en" lang="en">This is an explanatory analogy, not permission to reduce human dignity to cash flow. Actual investment also requires attention to price, rights, governance, and exit conditions.</span></p></div><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><section class="section-card" id="sec04"><div class="section-number">CHAPTER 04 / THE INVISIBLE BALANCE SHEET</div><h2><span class="i18n-zh" lang="zh-CN">从选择别人到塑造自己：真正的隐形资产</span><span class="i18n-ja" lang="ja">他人を選ぶことから自分を育てることへ</span><span class="i18n-en" lang="en">From Selecting Others to Building Yourself</span></h2><p><span class="i18n-zh" lang="zh-CN">思想实验最深的转折，是把“我愿意投资谁？”变成“我应当成为怎样的人？”值得欣赏的品质不仅用于评价他人，更应通过反复行动在自己身上练习。</span><span class="i18n-ja" lang="ja">この思考実験の最も深い転換は「誰に投資するか」から「自分はどのような人間になるべきか」へ移ることである。他人に求める資質は、自らも繰り返し行動して身につけることができる。</span><span class="i18n-en" lang="en">The deepest turn is from “Whom would I invest in?” to “Who should I become?” Traits worth recognizing in others can also be practiced deliberately in oneself.</span></p><h3><span class="i18n-zh" lang="zh-CN">两类资产与转换机制</span><span class="i18n-ja" lang="ja">二種類の資産と転換の仕組み</span><span class="i18n-en" lang="en">Two Asset Classes and Their Conversion</span></h3><ul><li><span class="i18n-zh" lang="zh-CN">可见资产：储蓄、股票、房产、资格、项目成果、当前收入。</span><span class="i18n-ja" lang="ja">目に見える資産：預金、株式、不動産、資格、実績、現在所得。</span><span class="i18n-en" lang="en">Visible assets: savings, securities, property, credentials, completed work, income.</span></li><li><span class="i18n-zh" lang="zh-CN">不可见资产：声誉、判断力、健康、专业习惯、稳定关系、抗挫力与他人的合作意愿。</span><span class="i18n-ja" lang="ja">目に見えない資産：評判、判断力、健康、仕事の習慣、安定した関係、逆境耐性、他者の協力意欲。</span><span class="i18n-en" lang="en">Invisible assets: reputation, judgment, health, habits, stable relationships, resilience, willingness of others to work with you.</span></li><li><span class="i18n-zh" lang="zh-CN">转换机制：不可见资产带来新的信任和机会，机会与收入又可能支持下一阶段的学习、健康和家庭投入。</span><span class="i18n-ja" lang="ja">転換機構：見えない資産が信頼と機会を生み、その機会や所得が学習・健康・家族への投資を支える。</span><span class="i18n-en" lang="en">Conversion: invisible assets can produce trust and opportunity, which may fund further learning, health, and family investment.</span></li></ul><p><span class="i18n-zh" lang="zh-CN">一个长期说到做到的人，最初或许不会立即获得额外报酬；随着可靠记录积累，他更可能被委以重要工作，能力和声誉相互增强。但“诚信必然致富”并不是因果保证。</span><span class="i18n-ja" lang="ja">約束を守り続ける人が直ちに報酬を得るとは限らない。しかし履行の実績は重要な仕事への信頼を高め、能力と評判を強め合う可能性がある。もちろん「誠実なら必ず金持ちになる」という保証ではない。</span><span class="i18n-en" lang="en">Someone who consistently keeps promises may not earn an immediate premium. Over time, a record of reliability can lead to important responsibilities, reinforcing both capability and reputation. Yet integrity does not mechanically guarantee wealth.</span></p><blockquote><span class="i18n-zh" lang="zh-CN">值得投资的品质，不只应当被我们识别；更应当被我们练习。</span><span class="i18n-ja" lang="ja">投資に値する資質は、見分けるだけでなく自分でも実践すべきものである。</span><span class="i18n-en" lang="en">Qualities worth investing in should not only be recognized; they should be practiced.</span></blockquote><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><section class="section-card" id="sec05"><div class="section-number">CHAPTER 05 / SMALL ACTIONS · LONG HORIZON</div><h2><span class="i18n-zh" lang="zh-CN">做对的小事，并长期坚持：复利的微观机制</span><span class="i18n-ja" lang="ja">小さな正しい行動を継続する：複利のミクロ構造</span><span class="i18n-en" lang="en">Doing Small Right Things Repeatedly</span></h2><p><span class="i18n-zh" lang="zh-CN">“做对的小事，并且坚持”是本次对话对长期主义的概括，不是本稿已证实的巴菲特逐字原话。关键在于：什么样的小事会形成积累，而不只是重复消耗时间？</span><span class="i18n-ja" lang="ja">「小さな正しいことを行い、続ける」は本対話の長期主義の要約であり、バフェットの逐語的な発言と確認されたものではない。重要なのは、どんな小さな行動なら単なる反復ではなく蓄積を生むのか、という問いである。</span><span class="i18n-en" lang="en">“Do small right things and persist” summarizes our dialogue’s long-term perspective; it is not presented as a verified verbatim Buffett quotation. The real question is which repeated actions accumulate rather than merely consume time.</span></p><h3><span class="i18n-zh" lang="zh-CN">金融复利与人生复利不能混同</span><span class="i18n-ja" lang="ja">金融の複利と人生の複利は別物</span><span class="i18n-en" lang="en">Financial and Life Compounding Are Not the Same</span></h3><p><span class="i18n-zh" lang="zh-CN">金融复利的简化表达为：期末资本 = 期初资本 ×（1 + 回报率）^时间；前提是再投资、足够长的周期，以及避免毁灭性的损失。人生没有固定回报率，技能可能过时、关系需要双方维护、健康受年龄和环境影响。因此“每天进步 1%”并不是严格的人生定律。</span><span class="i18n-ja" lang="ja">金融の複利は「期末資本＝期初資本×（1＋収益率）^期間」と簡略化できる。再投資、長い時間、破滅的損失の回避が前提となる。一方、人生には一定の収益率はなく、技能は陳腐化し、関係には双方の努力が必要で、健康は年齢や環境に左右される。「毎日1％成長」は数学的な人生法則ではない。</span><span class="i18n-en" lang="en">Financial compounding can be expressed as ending capital = starting capital × (1 + rate of return)^time, assuming reinvestment, sufficient time, and survival. Life has no fixed return rate: skills expire, relationships involve other people, and health changes. “Improve 1% daily” is not a literal law of human life.</span></p><h3><span class="i18n-zh" lang="zh-CN">五个具有积累性的条件</span><span class="i18n-ja" lang="ja">蓄積を生む五つの条件</span><span class="i18n-en" lang="en">Five Conditions for Cumulative Progress</span></h3><ul><li><span class="i18n-zh" lang="zh-CN">方向正确：改善真正重要的能力或关系，而非只追求即时刺激。</span><span class="i18n-ja" lang="ja">方向が正しい：目先の刺激ではなく、大切な能力や関係を育てる。</span><span class="i18n-en" lang="en">Right direction: improve something enduring, not momentary stimulation.</span></li><li><span class="i18n-zh" lang="zh-CN">可以重复：行动能纳入生活制度，不只依赖热情。</span><span class="i18n-ja" lang="ja">反復できる：一時的な情熱でなく生活の仕組みに組み込める。</span><span class="i18n-en" lang="en">Repeatability: rely on systems rather than bursts of motivation.</span></li><li><span class="i18n-zh" lang="zh-CN">可以沉淀：行动留下经验、信任、体能或判断力。</span><span class="i18n-ja" lang="ja">蓄積できる：経験、信頼、体力、判断力が次回に残る。</span><span class="i18n-en" lang="en">Retention: each effort leaves skills, trust, capacity, or judgment.</span></li><li><span class="i18n-zh" lang="zh-CN">可被纠错：新事实出现时愿意调整方法。</span><span class="i18n-ja" lang="ja">修正できる：新事実が出たら方法を変える。</span><span class="i18n-en" lang="en">Correctability: adjust the method when evidence changes.</span></li><li><span class="i18n-zh" lang="zh-CN">避免毁灭：不透支健康、信誉和关系换取短期成绩。</span><span class="i18n-ja" lang="ja">破滅を避ける：短期成果のために健康・信用・関係を犠牲にしない。</span><span class="i18n-en" lang="en">Avoid ruin: never burn health, credibility, or relationships for a short-term win.</span></li></ul><p><span class="i18n-zh" lang="zh-CN">微小正确行动 → 积累能力与可信记录 → 获得更好的机会和反馈 → 更有能力做下一次正确行动。这是可能出现的“复利闭环”，但每一步都可能被环境、运气或错误策略打断。</span><span class="i18n-ja" lang="ja">小さな正しい行動 → 能力・信頼の蓄積 → より良い機会とフィードバック → 次の正しい行動を取る力、という循環が考えられる。ただし環境、偶然、戦略の誤りによって途切れることもある。</span><span class="i18n-en" lang="en">Small correct action → accumulated skill and credibility → better opportunities and feedback → greater capacity to act well again. This feedback loop is possible, not guaranteed; environment, chance, and error can interrupt it.</span></p><div class="research-note"><div class="note-marker">RESEARCH NOTE</div><p><span class="i18n-zh" lang="zh-CN">重复不等于机械，坚持不等于固执。真正持续的是原则；方法必须回应新的信息与真实的人。</span><span class="i18n-ja" lang="ja">反復は機械的である必要はなく、継続は頑固さを意味しない。守るべきは原則であり、方法は新たな情報と現実の人々に合わせて修正する。</span><span class="i18n-en" lang="en">Repetition is not mechanical rigidity. Preserve sound principles, but revise methods in light of new evidence and people’s actual needs.</span></p></div><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><section class="section-card" id="sec06"><div class="section-number">CHAPTER 06 / THE MULTI-DOMAIN COMPOUNDING SYSTEM</div><h2><span class="i18n-zh" lang="zh-CN">人生不是单一账户：跨领域的正反馈</span><span class="i18n-ja" lang="ja">人生は一つの口座ではない：領域横断の好循環</span><span class="i18n-en" lang="en">Life Is Not One Account: Cross-Domain Feedback</span></h2><p><span class="i18n-zh" lang="zh-CN">工作、婚姻、育儿、健康、财务与信仰不是彼此隔绝的增长曲线。稳定关系降低不必要的内耗，健康为工作与陪伴提供能力，财务安全边际增加选择余地，信仰则能帮助校正目标与价值排序。</span><span class="i18n-ja" lang="ja">仕事、結婚、子育て、健康、家計、信仰は独立した成長曲線ではない。安定した関係は摩擦を減らし、健康は仕事と家族を支え、資金的な余裕は選択肢を広げ、信仰は価値の優先順位を問い直す助けとなる。</span><span class="i18n-en" lang="en">Work, marriage, parenting, health, finances, and faith are not isolated growth curves. Healthy relationships reduce friction; health supports service and work; financial reserves provide choices; faith can reorder priorities.</span></p><table class="forensic-table"><thead><tr><th><span class="i18n-zh" lang="zh-CN">领域</span><span class="i18n-ja" lang="ja">領域</span><span class="i18n-en" lang="en">Domain</span></th><th><span class="i18n-zh" lang="zh-CN">日常行为</span><span class="i18n-ja" lang="ja">日々の実践</span><span class="i18n-en" lang="en">Repeated Action</span></th><th><span class="i18n-zh" lang="zh-CN">长期积累</span><span class="i18n-ja" lang="ja">長期的な蓄積</span><span class="i18n-en" lang="en">Possible Long-Term Asset</span></th></tr></thead><tbody><tr><td data-label-zh="领域" data-label-ja="領域" data-label-en="Domain"><span class="i18n-zh" lang="zh-CN">工作</span><span class="i18n-ja" lang="ja">仕事</span><span class="i18n-en" lang="en">Work</span></td><td data-label-zh="日常行为" data-label-ja="日々の実践" data-label-en="Repeated Action"><span class="i18n-zh" lang="zh-CN">守约、复盘、主动学习</span><span class="i18n-ja" lang="ja">約束を守る・振り返る・学ぶ</span><span class="i18n-en" lang="en">Reliability, review, learning</span></td><td data-label-zh="长期积累" data-label-ja="長期的な蓄積" data-label-en="Possible Long-Term Asset"><span class="i18n-zh" lang="zh-CN">能力、信任、项目机会</span><span class="i18n-ja" lang="ja">能力・信頼・機会</span><span class="i18n-en" lang="en">Capability, trust, opportunities</span></td></tr><tr><td data-label-zh="领域" data-label-ja="領域" data-label-en="Domain"><span class="i18n-zh" lang="zh-CN">伴侣关系</span><span class="i18n-ja" lang="ja">夫婦・伴侶</span><span class="i18n-en" lang="en">Partnership</span></td><td data-label-zh="日常行为" data-label-ja="日々の実践" data-label-en="Repeated Action"><span class="i18n-zh" lang="zh-CN">尊重、倾听、共同商议</span><span class="i18n-ja" lang="ja">尊重・傾聴・共同の対話</span><span class="i18n-en" lang="en">Respect, listening, deliberation</span></td><td data-label-zh="长期积累" data-label-ja="長期的な蓄積" data-label-en="Possible Long-Term Asset"><span class="i18n-zh" lang="zh-CN">安全感、默契、修复冲突的能力</span><span class="i18n-ja" lang="ja">安心感・協力・衝突修復</span><span class="i18n-en" lang="en">Security, teamwork, conflict repair</span></td></tr><tr><td data-label-zh="领域" data-label-ja="領域" data-label-en="Domain"><span class="i18n-zh" lang="zh-CN">养育与家庭</span><span class="i18n-ja" lang="ja">子育て・家庭</span><span class="i18n-en" lang="en">Parenting &amp; Home</span></td><td data-label-zh="日常行为" data-label-ja="日々の実践" data-label-en="Repeated Action"><span class="i18n-zh" lang="zh-CN">陪伴、稳定回应、共同担当</span><span class="i18n-ja" lang="ja">同席・安定した応答・共同責任</span><span class="i18n-en" lang="en">Presence, reliability, shared duties</span></td><td data-label-zh="长期积累" data-label-ja="長期的な蓄積" data-label-en="Possible Long-Term Asset"><span class="i18n-zh" lang="zh-CN">亲子信任、家庭秩序与责任感</span><span class="i18n-ja" lang="ja">親子の信頼・秩序・責任</span><span class="i18n-en" lang="en">Trust, stability, responsibility</span></td></tr><tr><td data-label-zh="领域" data-label-ja="領域" data-label-en="Domain"><span class="i18n-zh" lang="zh-CN">健康</span><span class="i18n-ja" lang="ja">健康</span><span class="i18n-en" lang="en">Health</span></td><td data-label-zh="日常行为" data-label-ja="日々の実践" data-label-en="Repeated Action"><span class="i18n-zh" lang="zh-CN">睡眠、运动、节律、检查</span><span class="i18n-ja" lang="ja">睡眠・運動・生活リズム・検診</span><span class="i18n-en" lang="en">Sleep, exercise, routines, checkups</span></td><td data-label-zh="长期积累" data-label-ja="長期的な蓄積" data-label-en="Possible Long-Term Asset"><span class="i18n-zh" lang="zh-CN">精力、韧性、持续工作能力</span><span class="i18n-ja" lang="ja">活力・回復力・持続力</span><span class="i18n-en" lang="en">Energy, resilience, sustainability</span></td></tr><tr><td data-label-zh="领域" data-label-ja="領域" data-label-en="Domain"><span class="i18n-zh" lang="zh-CN">财务</span><span class="i18n-ja" lang="ja">家計</span><span class="i18n-en" lang="en">Finances</span></td><td data-label-zh="日常行为" data-label-ja="日々の実践" data-label-en="Repeated Action"><span class="i18n-zh" lang="zh-CN">节制、储蓄、管理风险</span><span class="i18n-ja" lang="ja">節度・貯蓄・リスク管理</span><span class="i18n-en" lang="en">Restraint, saving, risk control</span></td><td data-label-zh="长期积累" data-label-ja="長期的な蓄積" data-label-en="Possible Long-Term Asset"><span class="i18n-zh" lang="zh-CN">安全边际、长期选择权</span><span class="i18n-ja" lang="ja">安全余裕・将来の選択肢</span><span class="i18n-en" lang="en">Margin of safety, choices</span></td></tr><tr><td data-label-zh="领域" data-label-ja="領域" data-label-en="Domain"><span class="i18n-zh" lang="zh-CN">信仰生活</span><span class="i18n-ja" lang="ja">信仰生活</span><span class="i18n-en" lang="en">Faith</span></td><td data-label-zh="日常行为" data-label-ja="日々の実践" data-label-en="Repeated Action"><span class="i18n-zh" lang="zh-CN">祷告、读经、团契、实践爱</span><span class="i18n-ja" lang="ja">祈り・聖書・交わり・愛の実践</span><span class="i18n-en" lang="en">Prayer, Scripture, fellowship, love</span></td><td data-label-zh="长期积累" data-label-ja="長期的な蓄積" data-label-en="Possible Long-Term Asset"><span class="i18n-zh" lang="zh-CN">理解、悔改、服事的操练</span><span class="i18n-ja" lang="ja">理解・悔い改め・奉仕</span><span class="i18n-en" lang="en">Understanding, repentance, service</span></td></tr></tbody></table><p><span class="i18n-zh" lang="zh-CN">更深的一层是：过去的积累不仅继续产生结果，还可能改变未来创造结果的条件。过去靠意志力完成的动作可能变成习惯；过去寻找机会的状态可能变成因可靠而被邀请合作。</span><span class="i18n-ja" lang="ja">より深い点は、過去の蓄積が成果を生むだけでなく、将来成果を生み出す条件自体を変え得ることだ。努力で行っていたことが習慣になり、自分から探していた協力機会が信頼によって届くようになることもある。</span><span class="i18n-en" lang="en">The deeper insight: prior accumulation can change not only the result but the conditions under which future results are created. What once required willpower may become a habit; opportunities once pursued may arise because others trust your record.</span></p><div class="research-note"><div class="note-marker">RESEARCH NOTE</div><p><span class="i18n-zh" lang="zh-CN">任何领域都不应沦为其他领域的工具。家庭不是事业生产线，健康不是增加工时的机器，信仰也不是获取财富的秘方。</span><span class="i18n-ja" lang="ja">各領域にはそれ自体の価値がある。家庭は仕事のための生産装置ではなく、健康は労働時間を増やす道具ではなく、信仰は金もうけの秘訣ではない。</span><span class="i18n-en" lang="en">Every domain has intrinsic worth. Family is not an input to business, health is not a machine for more work hours, and faith is not a technique for getting rich.</span></p></div><blockquote><span class="i18n-zh" lang="zh-CN">复利不仅是过去的积累继续产生收益；也是过去的积累改变了未来能够创造收益的条件。</span><span class="i18n-ja" lang="ja">複利とは過去の蓄積が結果を生み続けることだけではない。将来結果を生み出す条件そのものを変えることでもある。</span><span class="i18n-en" lang="en">Compounding is not only past accumulation generating more returns; it is past accumulation changing the conditions for future returns.</span></blockquote><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><section class="section-card" id="sec07"><div class="section-number">CHAPTER 07 / LONG-HORIZON DECISION QUALITY</div><h2><span class="i18n-zh" lang="zh-CN">选择工作、伴侣、家庭与生活方式</span><span class="i18n-ja" lang="ja">仕事・伴侶・家族・生活様式を選ぶ</span><span class="i18n-en" lang="en">Choosing Work, Marriage, Family, and Lifestyle</span></h2><h3><span class="i18n-zh" lang="zh-CN">工作：选择能长期成长并有意义的事</span><span class="i18n-ja" lang="ja">仕事：成長と意味を長期に保てるものを選ぶ</span><span class="i18n-en" lang="en">Work: Choose Growth and Meaning</span></h3><p><span class="i18n-zh" lang="zh-CN">一份工作的价值不止第一年的工资，还包括技能是否可迁移、合作对象是否可信、组织是否支持学习、工作节奏能否与健康和家庭共存，以及能否长期服务他人。</span><span class="i18n-ja" lang="ja">仕事の価値は初年度の給料だけでは測れない。スキルの移転可能性、同僚の信頼性、学べる職場か、健康と家庭を両立できるペースか、人の役に立つ意味があるかも重要だ。</span><span class="i18n-en" lang="en">A job’s value includes more than first-year pay: portable skills, trustworthy colleagues, room to learn, compatibility with health and family, and sustained usefulness to others.</span></p><h3><span class="i18n-zh" lang="zh-CN">婚姻：不是购买对方的未来，而是共同承担未来</span><span class="i18n-ja" lang="ja">結婚：相手の未来を買うのではなく、共に担う</span><span class="i18n-en" lang="en">Marriage: Share the Future, Do Not Buy It</span></h3><p><span class="i18n-zh" lang="zh-CN">婚姻建立在彼此尊重、自愿承诺、忠实和共同担当之上，而不是挑选“收益最大的伴侣”。疲惫时仍愿倾听，冲突时不伤害尊严，犯错后愿意道歉，困难时继续承担责任，这些看似小的行为塑造长期安全感。</span><span class="i18n-ja" lang="ja">結婚は「最も収益性の高い配偶者選び」ではない。互いの尊厳、自発的な約束、誠実さと共同責任が基盤だ。疲れていても聞く、衝突時も尊厳を守る、謝罪する、苦境でも責任を分かち合う――小さなことが安心と信頼を育てる。</span><span class="i18n-en" lang="en">Marriage is not choosing the partner with the highest “return.” It rests on mutual respect, voluntary commitment, fidelity, and shared responsibility. Listening when tired, preserving dignity in conflict, apologizing, and carrying burdens together create long-term trust.</span></p><h3><span class="i18n-zh" lang="zh-CN">养育：把时间投入一个真实的人</span><span class="i18n-ja" lang="ja">子育て：実在する一人の人間に時間を注ぐ</span><span class="i18n-en" lang="en">Parenting: Give Time to a Real Person</span></h3><p><span class="i18n-zh" lang="zh-CN">孩子不能用未来会给父母多少回报来衡量。陪伴、稳定回应、尊重和以身作则，传递的不仅是资源，更是理解世界、应对失败和对待他人的方式。</span><span class="i18n-ja" lang="ja">子どもの価値は将来親に返す金額で決まらない。そばにいること、安定した応答、尊重、模範は、資源だけでなく、世界の理解や失敗・他者との向き合い方を伝える。</span><span class="i18n-en" lang="en">Children cannot be evaluated by what they may someday repay their parents. Presence, steady responses, respect, and example transmit not just resources, but ways to understand the world and respond to failure and others.</span></p><h3><span class="i18n-zh" lang="zh-CN">生活方式：为长期创造保留基础能力</span><span class="i18n-ja" lang="ja">生活様式：長く続けるための基礎能力を守る</span><span class="i18n-en" lang="en">Lifestyle: Preserve the Capacity to Continue</span></h3><p><span class="i18n-zh" lang="zh-CN">睡眠、运动、饮食、信息摄入、时间管理与财务纪律是长期决策的基础设施。正确生活并不意味着每一分钟都要产出；休息、喜乐与关系也有自身价值。</span><span class="i18n-ja" lang="ja">睡眠、運動、食事、情報との接し方、時間管理、家計の規律は長期的な判断のインフラである。しかしすべての時間を成果に変える必要はない。休息、喜び、人間関係にも固有の価値がある。</span><span class="i18n-en" lang="en">Sleep, movement, food, information habits, time management, and financial discipline are infrastructure for long-term decisions. A good life is not a demand that every minute produce something; rest, joy, and relationships matter in themselves.</span></p><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><section class="section-card" id="sec08"><div class="section-number">CHAPTER 08 / PARABLES · ROOTS · PRACTICE</div><h2><span class="i18n-zh" lang="zh-CN">主耶稣的比喻：熟悉的事物与深层真理</span><span class="i18n-ja" lang="ja">イエスのたとえ：身近な物事から深い真理へ</span><span class="i18n-en" lang="en">Jesus’ Parables: Familiar Images, Deeper Truth</span></h2><p><span class="i18n-zh" lang="zh-CN">在《马可福音》4:33—34 中，耶稣按照众人“所能听的”用比喻教导，并对门徒进一步解释。[4] 比喻不仅是让道理浅显，还使听众面对理解、回应与不理解之间的张力。</span><span class="i18n-ja" lang="ja">マルコ4:33–34では、イエスは人々の理解に応じてたとえで教え、弟子たちにはさらに説明された。[4] たとえは単なる分かりやすい例示ではなく、理解と応答、なお理解しないことの緊張を含む。</span><span class="i18n-en" lang="en">In Mark 4:33–34, Jesus teaches in parables according to what people can hear and explains further to the disciples. [4] A parable is more than a simplified illustration: it engages understanding, response, and the possibility of not understanding.</span></p><h3><span class="i18n-zh" lang="zh-CN">撒种：同一种子，不同的回应</span><span class="i18n-ja" lang="ja">種まき：同じ種でも異なる応答</span><span class="i18n-en" lang="en">The Sower: One Seed, Different Responses</span></h3><p><span class="i18n-zh" lang="zh-CN">《马可福音》第 4 章的重点是人怎样听道、接受、持守与结果子，而不是投资收益。延伸到生活中的提醒是：知道正确的道理，不等于具备让它生根的环境。</span><span class="i18n-ja" lang="ja">マルコ4章の中心はみことばを聞き、受け入れ、保ち、実を結ぶことであり、投資利回りの話ではない。日常への示唆は、正しいことを知るだけでは根づく環境が備わったことにはならない、という点だ。</span><span class="i18n-en" lang="en">Mark 4 concerns hearing, receiving, persevering in, and bearing fruit from the word—not investment returns. The life-level application is that knowing a truth does not mean creating the conditions in which it can take root.</span></p><h3><span class="i18n-zh" lang="zh-CN">磐石与沙土：风浪显露真正的根基</span><span class="i18n-ja" lang="ja">岩と砂：嵐が土台を明らかにする</span><span class="i18n-en" lang="en">Rock and Sand: Storms Reveal Foundations</span></h3><p><span class="i18n-zh" lang="zh-CN">《马太福音》7:24—27 中，两座房子平时可能看起来一样；风雨和洪水暴露根基的差异。经文的直接意义是听见主的话并且遵行，不是“做好风控就必然世俗成功”。[5]</span><span class="i18n-ja" lang="ja">マタイ7:24–27では、普段は同じに見える二つの家も、雨風と洪水のとき土台の違いが明らかになる。中心は主の言葉を聞いて実行することであり、「リスク管理をすれば必ず世俗的に成功する」という意味ではない。[5]</span><span class="i18n-en" lang="en">In Matthew 7:24–27, two houses may look similar in fair weather, but storms reveal their foundations. The primary meaning is hearing and doing Jesus’ words—not a promise that prudent risk management guarantees worldly success. [5]</span></p><h3><span class="i18n-zh" lang="zh-CN">芥菜种：微小与成长的反差</span><span class="i18n-ja" lang="ja">からし種：小さな始まりと成長</span><span class="i18n-en" lang="en">Mustard Seed: Small Beginnings and Growth</span></h3><p><span class="i18n-zh" lang="zh-CN">《马可福音》4:30—32 的芥菜种比喻指向神国，而不是把一切个人项目都描述为必然增长的财富投资。我们可以借由其微小起点与成长的对比反思长期行动，但不应替换经文本义。[4]</span><span class="i18n-ja" lang="ja">マルコ4:30–32のからし種は神の国についてのたとえであり、あらゆる個人計画が必ず増大する投資だという意味ではない。小さな始まりと成長の対比から学べても、聖書本来の意味と混同してはならない。[4]</span><span class="i18n-en" lang="en">The mustard seed in Mark 4:30–32 concerns the kingdom of God, not a guarantee that every personal project compounds indefinitely. Its contrast between small beginnings and growth may inspire reflection, but must not displace the passage’s meaning. [4]</span></p><h3><span class="i18n-zh" lang="zh-CN">小事上的忠心与行善不丧志</span><span class="i18n-ja" lang="ja">小さなことの忠実さと善を行い続けること</span><span class="i18n-en" lang="en">Faithfulness in Small Things and Not Growing Weary</span></h3><p><span class="i18n-zh" lang="zh-CN">《路加福音》16:10—13 谈小事上的忠心，同时警惕人侍奉金钱；《加拉太书》6:7—10 鼓励人在行善中不丧志。[6][7] 忠心与善行的价值不能被改写成保证致富的契约。</span><span class="i18n-ja" lang="ja">ルカ16:10–13は小事に忠実であることと富を主人にしないことを教え、ガラテヤ6:7–10は善を行うことに疲れないよう勧める。[6][7] 忠実さや善行を「必ず金銭的報酬が得られる契約」に変えてはならない。</span><span class="i18n-en" lang="en">Luke 16:10–13 speaks of faithfulness in little things and warns against serving money; Galatians 6:7–10 exhorts believers not to grow weary of doing good. [6][7] Neither passage turns virtue into a contract guaranteeing financial gain.</span></p><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><section class="section-card" id="sec09"><div class="section-number">CHAPTER 09 / ANALOGY WITHOUT REDUCTION</div><h2><span class="i18n-zh" lang="zh-CN">两种教导的交会点，以及不可跨越的区别</span><span class="i18n-ja" lang="ja">二つの教えの共通点と同一視できない違い</span><span class="i18n-en" lang="en">Shared Teaching Mechanisms, Different Truth Claims</span></h2><p><span class="i18n-zh" lang="zh-CN">巴菲特让学生想象拥有同学未来收入的 10%；主耶稣借田地、种子、房屋与根基教导。两者都从听众熟悉、可以参与的具体情境出发，使抽象问题变得可思考。这体现的是“从经验中提炼结构，再用比喻启发判断”的认知机制。</span><span class="i18n-ja" lang="ja">バフェットは同級生の将来所得10％を選ぶ状況を提示し、イエスは畑、種、家、土台を用いて教えられた。どちらも身近な経験から具体的な問いを示し、抽象的な問題への思考を促す。共通するのは「経験から構造を抽出し、たとえによって判断を呼び起こす」方法だ。</span><span class="i18n-en" lang="en">Buffett asks students whom they would back for 10% of lifetime earnings; Jesus speaks of fields, seeds, houses, and foundations. Both begin with concrete experiences familiar to listeners and invite active judgment, using analogies to reveal deeper structures.</span></p><table class="forensic-table"><thead><tr><th><span class="i18n-zh" lang="zh-CN">巴菲特的投资思想实验</span><span class="i18n-ja" lang="ja">バフェットの思考実験</span><span class="i18n-en" lang="en">Buffett’s Thought Experiment</span></th><th><span class="i18n-zh" lang="zh-CN">主耶稣的比喻教导</span><span class="i18n-ja" lang="ja">イエスのたとえ</span><span class="i18n-en" lang="en">Jesus’ Parables</span></th></tr></thead><tbody><tr><td data-label-zh="巴菲特的投资思想实验" data-label-ja="バフェットの思考実験" data-label-en="Buffett’s Thought Experiment"><span class="i18n-zh" lang="zh-CN">识别人的长期品质与价值</span><span class="i18n-ja" lang="ja">人の長期的資質と価値を見極める</span><span class="i18n-en" lang="en">Recognizing durable human qualities</span></td><td data-label-zh="主耶稣的比喻教导" data-label-ja="イエスのたとえ" data-label-en="Jesus’ Parables"><span class="i18n-zh" lang="zh-CN">神国、信心、人的回应与顺服</span><span class="i18n-ja" lang="ja">神の国・信仰・応答・従順</span><span class="i18n-en" lang="en">Kingdom, faith, human response, obedience</span></td></tr><tr><td data-label-zh="巴菲特的投资思想实验" data-label-ja="バフェットの思考実験" data-label-en="Buffett’s Thought Experiment"><span class="i18n-zh" lang="zh-CN">经营投资与人性观察</span><span class="i18n-ja" lang="ja">経営・投資・人間観察の経験</span><span class="i18n-en" lang="en">Business, investing, observation</span></td><td data-label-zh="主耶稣的比喻教导" data-label-ja="イエスのたとえ" data-label-en="Jesus’ Parables"><span class="i18n-zh" lang="zh-CN">基督教信仰中的身份、权柄与启示</span><span class="i18n-ja" lang="ja">キリスト教信仰における身分・権威・啓示</span><span class="i18n-en" lang="en">Identity, authority, and revelation in Christian faith</span></td></tr><tr><td data-label-zh="巴菲特的投资思想实验" data-label-ja="バフェットの思考実験" data-label-en="Buffett’s Thought Experiment"><span class="i18n-zh" lang="zh-CN">长期结果、价值与风险</span><span class="i18n-ja" lang="ja">長期の成果・価値・リスク</span><span class="i18n-en" lang="en">Long-run outcomes, value, risk</span></td><td data-label-zh="主耶稣的比喻教导" data-label-ja="イエスのたとえ" data-label-en="Jesus’ Parables"><span class="i18n-zh" lang="zh-CN">听道与遵行、悔改与结果子</span><span class="i18n-ja" lang="ja">聞いて行うこと・悔い改め・実を結ぶこと</span><span class="i18n-en" lang="en">Hearing, doing, repentance, fruit</span></td></tr><tr><td data-label-zh="巴菲特的投资思想实验" data-label-ja="バフェットの思考実験" data-label-en="Buffett’s Thought Experiment"><span class="i18n-zh" lang="zh-CN">理性选择与创造价值</span><span class="i18n-ja" lang="ja">合理的判断と価値創造</span><span class="i18n-en" lang="en">Reasoned choice and value creation</span></td><td data-label-zh="主耶稣的比喻教导" data-label-ja="イエスのたとえ" data-label-en="Jesus’ Parables"><span class="i18n-zh" lang="zh-CN">恩典、爱与不可交易的尊严</span><span class="i18n-ja" lang="ja">恵み・愛・売買できない尊厳</span><span class="i18n-en" lang="en">Grace, love, non-transactional dignity</span></td></tr></tbody></table><p><span class="i18n-zh" lang="zh-CN">从基督教信仰内部理解，耶稣不只是经验丰富的老师；基督徒相信祂的身份与权威具有独特性。因此，不能把两者说成“本质完全一样”。同时，从修辞的精妙不能直接证明讲述者必然亲历过完全相同的事件。</span><span class="i18n-ja" lang="ja">キリスト教信仰では、イエスは単に経験豊かな教師ではなく、その身分と権威は独自であると信じられている。したがって両者を本質的に同一とすることはできない。また、巧みなたとえだけで語り手が同一の出来事を経験したと証明することもできない。</span><span class="i18n-en" lang="en">Within Christian belief, Jesus is not merely a highly experienced teacher: his identity and authority carry unique theological meaning. The two teachers should not be treated as essentially identical. Nor can a compelling metaphor itself prove that the speaker personally lived through an identical event.</span></p><div class="research-note"><div class="note-marker">RESEARCH NOTE</div><p><span class="i18n-zh" lang="zh-CN">可以比较“如何教人理解”，但不能混淆“所教导的终极目的是什么”。</span><span class="i18n-ja" lang="ja">「どう理解を促すか」は比較できるが、「何を究極の目的として教えるか」は同一視してはならない。</span><span class="i18n-en" lang="en">The method of helping people understand may be compared; the ultimate purpose and authority of the teachings must remain distinct.</span></p></div><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><section class="section-card" id="sec10"><div class="section-number">CHAPTER 10 / NEGATIVE FEEDBACK · RISK DISCIPLINE</div><h2><span class="i18n-zh" lang="zh-CN">复利的阴影：错误、损耗与不可逆风险</span><span class="i18n-ja" lang="ja">複利の影：誤り・摩耗・取り返しのつかない損失</span><span class="i18n-en" lang="en">The Dark Side of Compounding: Errors and Ruin</span></h2><p><span class="i18n-zh" lang="zh-CN">时间不是自动站在正确的一边。错误商业模式会持续消耗资本，反复伤害关系的行为会侵蚀信任，忽视健康问题可能造成难以修复的损伤。长期主义若缺乏方向与纠错，也能把小错误积累为重大损失。</span><span class="i18n-ja" lang="ja">時間は自動的に正しい側の味方をするわけではない。誤った事業モデルは資本を消耗し、関係を傷つける習慣は信頼を失わせ、健康上のサインを無視すると回復困難な損傷につながる。方向と修正のない長期主義は、小さな誤りを巨大な損失へ育てる。</span><span class="i18n-en" lang="en">Time does not automatically reward what is right. A flawed business model destroys capital, repeated harm erodes trust, and neglecting health can cause lasting damage. Without direction and correction, long-term persistence can compound mistakes.</span></p><h3><span class="i18n-zh" lang="zh-CN">四个经常被浪漫化的错误</span><span class="i18n-ja" lang="ja">美化されがちな四つの誤り</span><span class="i18n-en" lang="en">Four Errors That Are Too Easily Romanticized</span></h3><ul><li><span class="i18n-zh" lang="zh-CN">把坚持当正确：投入很多时间并不能证明起点正确。</span><span class="i18n-ja" lang="ja">継続を正しさと混同する：長く続けただけでは判断は正しくならない。</span><span class="i18n-en" lang="en">Equating persistence with correctness: time invested does not validate the original decision.</span></li><li><span class="i18n-zh" lang="zh-CN">把顺利当能力：成功有运气成分，失败也不全由个人品质造成。</span><span class="i18n-ja" lang="ja">順調さを能力だけで説明する：運も働き、失敗も性格だけでは決まらない。</span><span class="i18n-en" lang="en">Attributing all success to skill: luck matters, and failure is not always a personal flaw.</span></li><li><span class="i18n-zh" lang="zh-CN">把关系当收益资产：这会伤害人的尊严、信任与爱。</span><span class="i18n-ja" lang="ja">人間関係を利益を抜き取る資産とみなす：尊厳・信頼・愛を傷つける。</span><span class="i18n-en" lang="en">Treating relationships as extractive assets: this undermines dignity, trust, and love.</span></li><li><span class="i18n-zh" lang="zh-CN">把善行当奖赏契约：信仰不能化为交易。</span><span class="i18n-ja" lang="ja">善行を報酬契約にする：信仰を取引へ変質させる。</span><span class="i18n-en" lang="en">Treating goodness as a reward contract: faith is not a transaction.</span></li></ul><h3><span class="i18n-zh" lang="zh-CN">跨领域的风险管理</span><span class="i18n-ja" lang="ja">領域横断のリスク管理</span><span class="i18n-en" lang="en">Risk Management Across Domains</span></h3><p><span class="i18n-zh" lang="zh-CN">金融上需要安全边际、控制杠杆与保留流动性；人生中也不能把家庭、健康、诚信全部押在短期目标上。重大决策除了“最好会怎样”，还要问“最坏情况下，我可能永久失去什么”。</span><span class="i18n-ja" lang="ja">金融では安全余裕、レバレッジ制御、流動性確保が重要である。人生でも家庭、健康、誠実さを短期目標にすべて賭けてはならない。大きな選択では最良の結果だけでなく、最悪の場合に永久に失うものを問うべきだ。</span><span class="i18n-en" lang="en">Finance requires margins of safety, restraint with leverage, and liquidity. Life likewise requires refusing to wager family, health, and integrity on a short-term goal. Ask not only what the best case looks like, but what you might lose permanently in the worst case.</span></p><p><span class="i18n-zh" lang="zh-CN">仍要保留谦逊：正确行动未必带来财富或幸福；痛苦不全是错误选择造成的。疾病、意外、不公平、环境与他人的自由意志都可能改变结果。</span><span class="i18n-ja" lang="ja">同時に謙虚さが必要である。正しい行動が必ず富や幸福を生むわけではなく、苦しみがすべて誤った選択の結果でもない。病気、事故、不公平、環境、他者の自由意志が結果を変えることがある。</span><span class="i18n-en" lang="en">Humility remains essential: good choices do not guarantee wealth or happiness, and suffering is not always caused by bad choices. Illness, accidents, injustice, circumstances, and other people’s free will all influence outcomes.</span></p><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><section class="section-card" id="sec11"><div class="section-number">CHAPTER 11 / EXECUTION · REVIEW · STOP CONDITIONS</div><h2><span class="i18n-zh" lang="zh-CN">一套可执行的长期选择与复盘框架</span><span class="i18n-ja" lang="ja">実行できる長期選択・振り返りの仕組み</span><span class="i18n-en" lang="en">An Actionable Framework for Long-Term Decisions</span></h2><h3><span class="i18n-zh" lang="zh-CN">第一步：定义真正要积累的对象</span><span class="i18n-ja" lang="ja">第一段階：蓄積すべきものを定義する</span><span class="i18n-en" lang="en">Step 1: Define What You Are Accumulating</span></h3><p><span class="i18n-zh" lang="zh-CN">把重要投入分为能力、关系、健康、资本、信仰与价值等领域。逐一问：十年后希望它处于什么状态？不仅写收益目标，也写责任、边界和不能牺牲的东西。</span><span class="i18n-ja" lang="ja">重要な投入を能力、人間関係、健康、資本、信仰と価値に分ける。十年後、各領域をどのような状態にしたいか。成果だけでなく責任、限界、譲れないものを書き出す。</span><span class="i18n-en" lang="en">Consider capabilities, relationships, health, capital, faith, and values. Ask what each should look like in ten years, including responsibilities, boundaries, and non-negotiables—not just performance targets.</span></p><h3><span class="i18n-zh" lang="zh-CN">第二步：从十年后的自己倒推今天</span><span class="i18n-ja" lang="ja">第二段階：十年後から今日へ逆算する</span><span class="i18n-en" lang="en">Step 2: Work Backward from Your Future Self</span></h3><p><span class="i18n-zh" lang="zh-CN">优先寻找值得重复一千天的小行动：每天二十分钟专注学习；每周与伴侣认真沟通；每天不看设备陪伴孩子；规律运动；安排祷告、省察与关怀。</span><span class="i18n-ja" lang="ja">千日続ける価値のある小さな行動を探す。毎日20分の集中学習、週一度の夫婦の対話、端末なしで子どもと過ごす時間、定期的な運動、祈りと省察、他者への配慮など。</span><span class="i18n-en" lang="en">Find actions worth repeating for a thousand days: twenty minutes of focused study, a weekly conversation with your partner, screen-free time with children, regular exercise, and moments of prayer, reflection, and care.</span></p><h3><span class="i18n-zh" lang="zh-CN">第三步：设计环境，而不是依赖意志力</span><span class="i18n-ja" lang="ja">第三段階：意志力より環境を設計する</span><span class="i18n-en" lang="en">Step 3: Design Your Environment</span></h3><p><span class="i18n-zh" lang="zh-CN">为重要行为固定时间、设置简洁触发条件并减少阻碍。尤其在家庭和健康领域，不应为追求执行率而失去弹性或忽略他人的真实需要。</span><span class="i18n-ja" lang="ja">大事な行動の時間を決め、簡単なきっかけを作り、障害を減らす。家庭と健康では達成率のために柔軟さや相手の実際の必要を犠牲にしない。</span><span class="i18n-en" lang="en">Give important habits predictable times and triggers while removing friction. In family and health, do not optimize a completion percentage at the expense of flexibility or people’s real needs.</span></p><h3><span class="i18n-zh" lang="zh-CN">第四步：按不同周期观察，而非只看一个数字</span><span class="i18n-ja" lang="ja">第四段階：単一指標ではなく周期ごとに観察する</span><span class="i18n-en" lang="en">Step 4: Review Several Dimensions on Several Timeframes</span></h3><table class="forensic-table"><thead><tr><th><span class="i18n-zh" lang="zh-CN">复盘周期</span><span class="i18n-ja" lang="ja">振り返りの周期</span><span class="i18n-en" lang="en">Cadence</span></th><th><span class="i18n-zh" lang="zh-CN">核心问题</span><span class="i18n-ja" lang="ja">中心となる問い</span><span class="i18n-en" lang="en">Question</span></th><th><span class="i18n-zh" lang="zh-CN">参考证据</span><span class="i18n-ja" lang="ja">確認する材料</span><span class="i18n-en" lang="en">Evidence</span></th></tr></thead><tbody><tr><td data-label-zh="复盘周期" data-label-ja="振り返りの周期" data-label-en="Cadence"><span class="i18n-zh" lang="zh-CN">每日</span><span class="i18n-ja" lang="ja">毎日</span><span class="i18n-en" lang="en">Daily</span></td><td data-label-zh="核心问题" data-label-ja="中心となる問い" data-label-en="Question"><span class="i18n-zh" lang="zh-CN">是否做了今天值得做的小事？</span><span class="i18n-ja" lang="ja">今日やる価値のある小事を行ったか？</span><span class="i18n-en" lang="en">Did I do something worth doing today?</span></td><td data-label-zh="参考证据" data-label-ja="確認する材料" data-label-en="Evidence"><span class="i18n-zh" lang="zh-CN">完成情况与原因</span><span class="i18n-ja" lang="ja">実施・未実施と理由</span><span class="i18n-en" lang="en">Completion and reasons</span></td></tr><tr><td data-label-zh="复盘周期" data-label-ja="振り返りの周期" data-label-en="Cadence"><span class="i18n-zh" lang="zh-CN">每周</span><span class="i18n-ja" lang="ja">毎週</span><span class="i18n-en" lang="en">Weekly</span></td><td data-label-zh="核心问题" data-label-ja="中心となる問い" data-label-en="Question"><span class="i18n-zh" lang="zh-CN">是否忽略重要的人或领域？</span><span class="i18n-ja" lang="ja">大切な人や領域を見落としたか？</span><span class="i18n-en" lang="en">Did I neglect someone or something important?</span></td><td data-label-zh="参考证据" data-label-ja="確認する材料" data-label-en="Evidence"><span class="i18n-zh" lang="zh-CN">家人反馈、休息与学习记录</span><span class="i18n-ja" lang="ja">家族の反応・休息・学習</span><span class="i18n-en" lang="en">Family feedback, rest, learning</span></td></tr><tr><td data-label-zh="复盘周期" data-label-ja="振り返りの周期" data-label-en="Cadence"><span class="i18n-zh" lang="zh-CN">每季度</span><span class="i18n-ja" lang="ja">四半期ごと</span><span class="i18n-en" lang="en">Quarterly</span></td><td data-label-zh="核心问题" data-label-ja="中心となる問い" data-label-en="Question"><span class="i18n-zh" lang="zh-CN">能力与信任是否在沉淀？</span><span class="i18n-ja" lang="ja">能力や信頼は蓄積したか？</span><span class="i18n-en" lang="en">Are capability and trust accumulating?</span></td><td data-label-zh="参考证据" data-label-ja="確認する材料" data-label-en="Evidence"><span class="i18n-zh" lang="zh-CN">技能成果与冲突修复</span><span class="i18n-ja" lang="ja">技能の成果・関係の修復</span><span class="i18n-en" lang="en">Skill gains, conflict repair</span></td></tr><tr><td data-label-zh="复盘周期" data-label-ja="振り返りの周期" data-label-en="Cadence"><span class="i18n-zh" lang="zh-CN">每年</span><span class="i18n-ja" lang="ja">毎年</span><span class="i18n-en" lang="en">Yearly</span></td><td data-label-zh="核心问题" data-label-ja="中心となる問い" data-label-en="Question"><span class="i18n-zh" lang="zh-CN">方向是否仍然正确？</span><span class="i18n-ja" lang="ja">方向は今も正しいか？</span><span class="i18n-en" lang="en">Is this path still right?</span></td><td data-label-zh="参考证据" data-label-ja="確認する材料" data-label-en="Evidence"><span class="i18n-zh" lang="zh-CN">价值排序、重大风险与身体关系状态</span><span class="i18n-ja" lang="ja">価値の優先順位・リスク・健康と関係</span><span class="i18n-en" lang="en">Priorities, major risks, health and relationships</span></td></tr></tbody></table><h3><span class="i18n-zh" lang="zh-CN">第五步：制定停止条件</span><span class="i18n-ja" lang="ja">第五段階：撤退・停止条件を定める</span><span class="i18n-en" lang="en">Step 5: Set Stop Conditions</span></h3><p><span class="i18n-zh" lang="zh-CN">不能持续伤害家庭关系换取业绩；不能长期失眠透支来追增长；不能为了回本无限加码；也不能以“我一向如此”拒绝纠正和悔改。</span><span class="i18n-ja" lang="ja">成果のために家族との関係を継続的に傷つけない。成長のために睡眠を削り続けない。損失回復のために無限に追加投入しない。「昔からこうだ」と修正や悔い改めを拒まない。</span><span class="i18n-en" lang="en">Do not continually damage family relationships for career results; sacrifice sleep for growth; double down endlessly to recover losses; or refuse correction and repentance because “this is how I have always been.”</span></p><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><section class="section-card" id="sec-end"><div class="section-number">CHAPTER 12 / THE LIFETIME QUESTION</div><h2><span class="i18n-zh" lang="zh-CN">结语｜从拥有更多，到成为怎样的人</span><span class="i18n-ja" lang="ja">結び｜より多く持つことから、どんな人になるかへ</span><span class="i18n-en" lang="en">Conclusion: Who You Become Matters More</span></h2><p><span class="i18n-zh" lang="zh-CN">这场对话从市场价格走向企业价值，再进入人的品格与习惯；由重复行动的积累，看到工作、家庭、健康与信仰之间的联系。最后，主耶稣的比喻提醒我们：知道正确的道理与真正遵行之间，隔着每一天的选择。</span><span class="i18n-ja" lang="ja">対話は市場価格から企業価値、人の人格と習慣へ進み、仕事・家庭・健康・信仰のつながりを見つめた。最後にイエスのたとえが示すのは、正しいことを知ることと実際に行うことの間には、毎日の選択があるという点だ。</span><span class="i18n-en" lang="en">The conversation moved from market price to business value, from character and habits to work, family, health, and faith. Finally, Jesus’ parables point to the distance between knowing what is right and actually doing it—the distance filled by daily choices.</span></p><p><span class="i18n-zh" lang="zh-CN">更完整的次序是：先识别真正值得追求的目标，理解它怎样在现实中生成，再选择相符的行动，耐心持续，并在考验与新事实面前不断校正。爱并非因为有利可图才值得付出，忠心也不因回报不确定而失去意义。</span><span class="i18n-ja" lang="ja">よりよい順序は、まず何が本当に大切かを知り、それがどう育まれるか理解し、ふさわしい行動を選び、忍耐をもって続け、試練や新事実のもとで修正することだ。愛は利益を生むから価値があるのではなく、忠実さは報酬が不確かでも意味を失わない。</span><span class="i18n-en" lang="en">A more complete sequence is to identify what truly matters, understand how it develops, choose aligned actions, persist patiently, and correct course as evidence changes. Love matters independently of profit; faithfulness does not lose its meaning when rewards are uncertain.</span></p><blockquote><span class="i18n-zh" lang="zh-CN">一个人的一生，不只是他赚到了多少；也是他在无数次微小选择中，逐渐成为了怎样的人。</span><span class="i18n-ja" lang="ja">人の一生は、いくら稼いだかだけではない。無数の小さな選択を通して、どんな人間になっていったかでもある。</span><span class="i18n-en" lang="en">A lifetime is not only how much someone earned, but who they became through countless small choices.</span></blockquote><h3><span class="i18n-zh" lang="zh-CN">每天可以使用的五问</span><span class="i18n-ja" lang="ja">毎日使える五つの問い</span><span class="i18n-en" lang="en">Five Questions for Every Day</span></h3><ul><li><span class="i18n-zh" lang="zh-CN">我今天做的事，是在建设根基还是透支根基？</span><span class="i18n-ja" lang="ja">今日の行動は土台を築いたか、それとも取り崩したか。</span><span class="i18n-en" lang="en">Did today’s actions build my foundation or consume it?</span></li><li><span class="i18n-zh" lang="zh-CN">它会留下什么可以积累的资产？</span><span class="i18n-ja" lang="ja">そこから何が将来に残るだろうか。</span><span class="i18n-en" lang="en">What enduring asset will it leave?</span></li><li><span class="i18n-zh" lang="zh-CN">我是否以爱与尊重对待身边的人？</span><span class="i18n-ja" lang="ja">身近な人を愛と尊重をもって扱ったか。</span><span class="i18n-en" lang="en">Did I treat people with love and respect?</span></li><li><span class="i18n-zh" lang="zh-CN">有什么新的事实提示我应该改变方法？</span><span class="i18n-ja" lang="ja">どの新事実が方法の修正を求めているか。</span><span class="i18n-en" lang="en">What new evidence suggests I should change methods?</span></li><li><span class="i18n-zh" lang="zh-CN">如果我持续十年，我会成为怎样的人？</span><span class="i18n-ja" lang="ja">十年間続けたなら、私はどんな人になるだろうか。</span><span class="i18n-en" lang="en">If I continue for ten years, who will I become?</span></li></ul><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><section class="section-card" id="sec-app-a"><div class="section-number">CHAPTER A / CONCEPTUAL PRECISION</div><h2><span class="i18n-zh" lang="zh-CN">附录 A｜核心命题与辨析</span><span class="i18n-ja" lang="ja">付録A｜主要命題と注意点</span><span class="i18n-en" lang="en">Appendix A | Claims and Qualifications</span></h2><table class="forensic-table"><thead><tr><th><span class="i18n-zh" lang="zh-CN">核心命题</span><span class="i18n-ja" lang="ja">主要命題</span><span class="i18n-en" lang="en">Claim</span></th><th><span class="i18n-zh" lang="zh-CN">应当怎样理解</span><span class="i18n-ja" lang="ja">正確な読み方</span><span class="i18n-en" lang="en">Careful Interpretation</span></th></tr></thead><tbody><tr><td data-label-zh="核心命题" data-label-ja="主要命題" data-label-en="Claim"><span class="i18n-zh" lang="zh-CN">长期价值比短期价格重要</span><span class="i18n-ja" lang="ja">長期価値は短期価格より重要</span><span class="i18n-en" lang="en">Long-term value matters more than short-term price</span></td><td data-label-zh="应当怎样理解" data-label-ja="正確な読み方" data-label-en="Careful Interpretation"><span class="i18n-zh" lang="zh-CN">综合未来创造力和购买价格；不能无视新事实</span><span class="i18n-ja" lang="ja">将来の創造力と購入価格を共に判断し、新事実を無視しない</span><span class="i18n-en" lang="en">Assess future capacity and purchase price; update with evidence</span></td></tr><tr><td data-label-zh="核心命题" data-label-ja="主要命題" data-label-en="Claim"><span class="i18n-zh" lang="zh-CN">品质值得投资</span><span class="i18n-ja" lang="ja">優れた資質は重要</span><span class="i18n-en" lang="en">Good qualities matter</span></td><td data-label-zh="应当怎样理解" data-label-ja="正確な読み方" data-label-en="Careful Interpretation"><span class="i18n-zh" lang="zh-CN">品格可解释长期表现，但不能保证经济成功</span><span class="i18n-ja" lang="ja">人格は重要だが経済的成功を保証しない</span><span class="i18n-en" lang="en">Character matters but does not guarantee wealth</span></td></tr><tr><td data-label-zh="核心命题" data-label-ja="主要命題" data-label-en="Claim"><span class="i18n-zh" lang="zh-CN">小事产生复利</span><span class="i18n-ja" lang="ja">小事の複利</span><span class="i18n-en" lang="en">Small actions compound</span></td><td data-label-zh="应当怎样理解" data-label-ja="正確な読み方" data-label-en="Careful Interpretation"><span class="i18n-zh" lang="zh-CN">是一种正反馈的可能性，不是数学定律</span><span class="i18n-ja" lang="ja">好循環の可能性であり数学的法則ではない</span><span class="i18n-en" lang="en">A possible feedback structure, not a mathematical guarantee</span></td></tr><tr><td data-label-zh="核心命题" data-label-ja="主要命題" data-label-en="Claim"><span class="i18n-zh" lang="zh-CN">时间放大结果</span><span class="i18n-ja" lang="ja">時間は結果を増幅する</span><span class="i18n-en" lang="en">Time amplifies outcomes</span></td><td data-label-zh="应当怎样理解" data-label-ja="正確な読み方" data-label-en="Careful Interpretation"><span class="i18n-zh" lang="zh-CN">优势和错误、损耗都有可能被放大</span><span class="i18n-ja" lang="ja">良いものだけでなく誤りや摩耗も増幅する</span><span class="i18n-en" lang="en">Both strengths and errors may grow</span></td></tr><tr><td data-label-zh="核心命题" data-label-ja="主要命題" data-label-en="Claim"><span class="i18n-zh" lang="zh-CN">生活领域相互影响</span><span class="i18n-ja" lang="ja">人生の領域は相互に影響する</span><span class="i18n-en" lang="en">Life domains interact</span></td><td data-label-zh="应当怎样理解" data-label-ja="正確な読み方" data-label-en="Careful Interpretation"><span class="i18n-zh" lang="zh-CN">相互支持，但各有独立价值</span><span class="i18n-ja" lang="ja">互いに支えつつ独自の価値をもつ</span><span class="i18n-en" lang="en">They interact but retain intrinsic value</span></td></tr><tr><td data-label-zh="核心命题" data-label-ja="主要命題" data-label-en="Claim"><span class="i18n-zh" lang="zh-CN">好的比喻体现洞察</span><span class="i18n-ja" lang="ja">優れたたとえは洞察を表す</span><span class="i18n-en" lang="en">A good analogy can show insight</span></td><td data-label-zh="应当怎样理解" data-label-ja="正確な読み方" data-label-en="Careful Interpretation"><span class="i18n-zh" lang="zh-CN">可能源于经验，但不是历史证据本身</span><span class="i18n-ja" lang="ja">経験を示唆しても史実の証明ではない</span><span class="i18n-en" lang="en">Insight does not independently prove a historical claim</span></td></tr><tr><td data-label-zh="核心命题" data-label-ja="主要命題" data-label-en="Claim"><span class="i18n-zh" lang="zh-CN">福音可以启发长期主义</span><span class="i18n-ja" lang="ja">福音は長期的視野を照らす</span><span class="i18n-en" lang="en">The gospel can inform long-term thinking</span></td><td data-label-zh="应当怎样理解" data-label-ja="正確な読み方" data-label-en="Careful Interpretation"><span class="i18n-zh" lang="zh-CN">不可把主耶稣的教导化约为致富术</span><span class="i18n-ja" lang="ja">イエスの教えを金もうけの技術に還元しない</span><span class="i18n-en" lang="en">Do not reduce Jesus’ teachings to a wealth tactic</span></td></tr></tbody></table><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><section class="section-card" id="sec-app-b"><div class="section-number">CHAPTER B / LONG-TERM JOURNAL PROMPTS</div><h2><span class="i18n-zh" lang="zh-CN">附录 B｜可以反复思考的十二个问题</span><span class="i18n-ja" lang="ja">付録B｜繰り返し考える十二の問い</span><span class="i18n-en" lang="en">Appendix B | Twelve Reflection Questions</span></h2><ul><li><span class="i18n-zh" lang="zh-CN">如果能拥有身边一个人未来收入的 10%，我会选择谁？真正的理由是什么？</span><span class="i18n-ja" lang="ja">身近な人の将来所得の10％を得られるなら誰を選ぶか。その本当の理由は？</span><span class="i18n-en" lang="en">If I could own 10% of someone’s future earnings, whom would I select and why?</span></li><li><span class="i18n-zh" lang="zh-CN">那些我欣赏的特质，哪些是我自己还没有稳定实践的？</span><span class="i18n-ja" lang="ja">私が尊敬する資質のうち、まだ自分が実践できていないものは？</span><span class="i18n-en" lang="en">Which admired qualities do I not consistently practice?</span></li><li><span class="i18n-zh" lang="zh-CN">今天的某个习惯如果持续十年，会使我更自由，还是更受束缚？</span><span class="i18n-ja" lang="ja">今の習慣を十年続けたら、より自由になるか、縛られるか？</span><span class="i18n-en" lang="en">Would this habit make me freer or more constrained after ten years?</span></li><li><span class="i18n-zh" lang="zh-CN">我有没有把暂时的市场价格波动，当成了长期价值已经变化的证据？</span><span class="i18n-ja" lang="ja">短期の相場変動を長期価値の変化の証拠だと決めつけていないか？</span><span class="i18n-en" lang="en">Am I treating temporary price changes as proof of changed long-term value?</span></li><li><span class="i18n-zh" lang="zh-CN">我在哪个领域最依赖意志力，却还没有建设支持长期执行的环境？</span><span class="i18n-ja" lang="ja">意志力に頼りすぎて、環境を整えていない領域はどこか？</span><span class="i18n-en" lang="en">Where am I relying on willpower instead of designing an environment?</span></li><li><span class="i18n-zh" lang="zh-CN">如果我的工作收入增加，却牺牲了家庭信任，这仍是良好的回报吗？</span><span class="i18n-ja" lang="ja">収入が増えても家族の信頼を失うなら、それは良い成果か？</span><span class="i18n-en" lang="en">Is higher pay a good return if it costs family trust?</span></li><li><span class="i18n-zh" lang="zh-CN">我有没有把伴侣、孩子或朋友误当成完成个人目标的工具？</span><span class="i18n-ja" lang="ja">伴侶、子ども、友人を自分の目標達成の道具として扱っていないか？</span><span class="i18n-en" lang="en">Am I treating my partner, children, or friends as means to my goals?</span></li><li><span class="i18n-zh" lang="zh-CN">我怎样辨别坚持原则与拒绝纠错之间的界限？</span><span class="i18n-ja" lang="ja">原則への忠実さと修正拒否をどう見分けるか？</span><span class="i18n-en" lang="en">How do I distinguish principled persistence from refusal to correct?</span></li><li><span class="i18n-zh" lang="zh-CN">在人生风浪来临时，我真正依靠的根基是什么？</span><span class="i18n-ja" lang="ja">人生の嵐のとき、私は何を土台として頼るのか？</span><span class="i18n-en" lang="en">What foundation will I truly rely on when life’s storms arrive?</span></li><li><span class="i18n-zh" lang="zh-CN">我知道哪些正确的教导，却始终停留在“知道”而没有“去行”？</span><span class="i18n-ja" lang="ja">正しいと知りながら、実行していない教えは何か？</span><span class="i18n-en" lang="en">Which truths do I know but have not put into practice?</span></li><li><span class="i18n-zh" lang="zh-CN">面对没有即时回报的善行，我能否仍然坚持？原因是什么？</span><span class="i18n-ja" lang="ja">すぐ報われない善行を続けられるか。その理由は？</span><span class="i18n-en" lang="en">Can I continue doing good without immediate reward, and why?</span></li><li><span class="i18n-zh" lang="zh-CN">如果十年后的自己回望今天，最希望我现在开始的那一件小事是什么？</span><span class="i18n-ja" lang="ja">十年後の自分が今の私に始めてほしい、たった一つの小さなことは？</span><span class="i18n-en" lang="en">What one small action would my future self most want me to start today?</span></li></ul><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><section class="section-card" id="sec-app-c"><div class="section-number">CHAPTER C / SOURCE ATTRIBUTION & BOUNDARIES</div><h2><span class="i18n-zh" lang="zh-CN">附录 C｜史料、经文、精确性说明</span><span class="i18n-ja" lang="ja">付録C｜出典・聖書箇所・正確性に関する注記</span><span class="i18n-en" lang="en">Appendix C | Sources and Precision Notes</span></h2><p><span class="i18n-zh" lang="zh-CN">以下资料用于核对市场报道、巴菲特思想实验与经文出处。关于“人生复利”和跨领域正反馈的模型，是对话中的解释性推演，不是所有原始资料的逐字观点。</span><span class="i18n-ja" lang="ja">以下は市場報道、バフェットの講演、聖書箇所を確認するための出典である。「人生の複利」や領域横断の好循環のモデルは、本対話からの解釈であり、原資料の逐語的な主張とは限らない。</span><span class="i18n-en" lang="en">The references below identify the cited market reports, Buffett speech, and Bible passages. The life-compounding and cross-domain feedback models are interpretations developed in the discussion, not verbatim claims from the sources.</span></p><div class="research-note"><div class="note-marker">RESEARCH NOTE</div><p><span class="i18n-zh" lang="zh-CN">精确性：10% 思想实验有 1998 年演讲文字整理作为根据，中文采用意译；“做对的小事，并且坚持”未被证实为巴菲特原话；特定交易日的数据不能证明卖方身份；经文应用不代替专业释经；本文不构成投资建议，也不以回报率衡量家庭或信仰。</span><span class="i18n-ja" lang="ja">精度上の注記：10％の思考実験は1998年の講演記録に基づく意訳。「小さな正しい行動を続ける」はバフェットの逐語録として未確認。特定日の市場データから売り手は断定できない。聖書の応用は専門的釈義の代わりにならず、本資料は投資助言でもない。家庭や信仰は利回りで測れない。</span><span class="i18n-en" lang="en">Precision notes: the 10% thought experiment rests on a transcript of the 1998 lecture and is paraphrased; the “small right things” phrase is not verified as a Buffett quotation; daily market data does not identify sellers; life applications do not replace biblical exegesis; this is not investment advice, nor a valuation of family or faith.</span></p></div><div class="references"><div class="ref"><div class="ref-num">REFERENCE 01</div><div class="ref-title">Reuters — 2026-10-29</div><p style="font-size:.81rem;color:var(--text-muted);margin:0 0 5px">Wall Street ends lower as Alphabet revenue miss revives AI capex jitters</p><a href="https://www.reuters.com/business/nasdaq-futures-slide-mixed-big-tech-results-test-ai-trade-2026-10-29/" target="_blank" rel="noopener noreferrer">https://www.reuters.com/business/nasdaq-futures-slide-mixed-big-tech-results-test-ai-trade-2026-10-29/</a></div><div class="ref"><div class="ref-num">REFERENCE 02</div><div class="ref-title">Associated Press — 2026-10-29</div><p style="font-size:.81rem;color:var(--text-muted);margin:0 0 5px">A historic drop for Alphabet’s stock drags the US market lower</p><a href="https://apnews.com/article/1b5c71d31b4ce1e46b0db47b33141f6b" target="_blank" rel="noopener noreferrer">https://apnews.com/article/1b5c71d31b4ce1e46b0db47b33141f6b</a></div><div class="ref"><div class="ref-num">REFERENCE 03</div><div class="ref-title">Warren E. Buffett — 1998-10-15</div><p style="font-size:.81rem;color:var(--text-muted);margin:0 0 5px">Lecture at the University of Florida School of Business (transcript)</p><a href="https://expydoc.com/doc/176585/buffett_lecture_fla_univ_sch_of_business_1998" target="_blank" rel="noopener noreferrer">https://expydoc.com/doc/176585/buffett_lecture_fla_univ_sch_of_business_1998</a></div><div class="ref"><div class="ref-num">REFERENCE 04</div><div class="ref-title">《马可福音》 / マルコ / Mark 4</div><p style="font-size:.81rem;color:var(--text-muted);margin:0 0 5px">撒种、芥菜种及比喻教导</p><a href="https://zh.wikisource.org/zh-hans/圣经_(和合本)/马可福音" target="_blank" rel="noopener noreferrer">https://zh.wikisource.org/zh-hans/圣经_(和合本)/马可福音</a></div><div class="ref"><div class="ref-num">REFERENCE 05</div><div class="ref-title">《马太福音》 / マタイ / Matthew 7:24–27</div><p style="font-size:.81rem;color:var(--text-muted);margin:0 0 5px">磐石与沙土</p><a href="https://rcuv.hkbs.org.hk/RCUV1s/MAT/7/" target="_blank" rel="noopener noreferrer">https://rcuv.hkbs.org.hk/RCUV1s/MAT/7/</a></div><div class="ref"><div class="ref-num">REFERENCE 06</div><div class="ref-title">《路加福音》 / ルカ / Luke 16:10–13</div><p style="font-size:.81rem;color:var(--text-muted);margin:0 0 5px">忠心、金钱与服事</p><a href="https://www.sl-pc.org.tw/bible/1/LUK/16" target="_blank" rel="noopener noreferrer">https://www.sl-pc.org.tw/bible/1/LUK/16</a></div><div class="ref"><div class="ref-num">REFERENCE 07</div><div class="ref-title">《加拉太书》 / ガラテヤ / Galatians 6:7–10</div><p style="font-size:.81rem;color:var(--text-muted);margin:0 0 5px">行善不可丧志</p><a href="https://www.sl-pc.org.tw/bible/1/GAL/6" target="_blank" rel="noopener noreferrer">https://www.sl-pc.org.tw/bible/1/GAL/6</a></div></div><a class="return-top" href="#top"><span class="i18n-zh" lang="zh-CN">↑ 返回顶部 / 章节导航</span><span class="i18n-ja" lang="ja">↑ 上部へ戻る / 章ナビ</span><span class="i18n-en" lang="en">↑ Back to chapter navigation</span></a></section><footer><span class="i18n-zh" lang="zh-CN">依据《巴菲特导师手册》（2026.10.30）编制 · 研究与反思用途 · 非投资建议</span><span class="i18n-ja" lang="ja">『バフェット指導手帳』（2026.10.30）を基に構成 · 研究と省察のため · 投資助言ではありません</span><span class="i18n-en" lang="en">Based on Buffett Mentor Handbook (2026.10.30) · For research and reflection · Not investment advice</span><p style="margin-top:6px">ORIGINAL V7 DARK FORENSIC REPORT DESIGN · CSS-ONLY MULTILINGUAL</p></footer></div></body></html>
