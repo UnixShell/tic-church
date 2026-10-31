@@ -1,1072 +1,340 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>2026年教会退修会报名登记（已截止）</title>
-<style>
-body{margin:0;background:#f5f3ed;color:#292b27;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif}
-.wrap{max-width:760px;margin:auto;padding:18px 15px 50px}.hero{background:linear-gradient(145deg,#52684d,#83937a);color:#fff;border-radius:22px;padding:30px 22px}
-.hero h1{font-size:27px;margin:12px 0 4px}.card{background:#fff;border-radius:17px;padding:21px 18px;margin:14px 0;box-shadow:0 4px 18px #00000008}
-.registration-summary{margin-top:18px;padding-top:16px;border-top:1px solid #ffffff59}.registration-summary h2{font-size:16px;margin:0 0 10px}.count-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.count-item{padding:9px 5px;border-radius:10px;background:#ffffff1c;text-align:center}.count-item span{display:block;font-size:12px;opacity:.9}.count-item strong{display:inline-block;font-size:24px;line-height:1.25;margin-top:3px}.count-item small{font-size:12px;margin-left:2px}.payment-count-row{display:flex;justify-content:center;flex-wrap:wrap;gap:5px 13px;margin-top:11px;font-size:11px;line-height:1.45}.payment-count-row strong{font-size:16px;margin:0 1px}.count-status{min-height:16px;margin:9px 0 0;font-size:12px;opacity:.86}
-.registration-closed{border:2px solid #a65353;background:#fff5f2;color:#8d3f3f;text-align:center;padding:25px 18px}.registration-closed p{font-size:21px;font-weight:750;line-height:1.6;margin:0}
-.admin-entry{text-align:center;padding:16px}.admin-entry p{margin:0 0 10px;color:#666;font-size:13px}.admin-entry .btn{max-width:250px}.payment-family{border:2px solid #d8e2d4;background:#fbfdf9}.payment-family h3{margin:0 0 8px;color:#43543f}.payment-status{display:inline-block;border-radius:999px;background:#edf2ea;color:#43543f;padding:3px 9px;font-size:13px;font-weight:700}.payment-status.paid{background:#dfeee2;color:#2d6338}.payment-status.pending{background:#fff0d4;color:#915d11}.payment-amount{margin:14px 0;padding:12px;background:#fff;border-radius:10px;text-align:right}.payment-amount strong{font-size:24px;color:#43543f}.half-price-option{display:flex;align-items:center;gap:8px;border:1px solid #d7decf;border-radius:10px;padding:11px;margin:12px 0;cursor:pointer}.payment-methods{display:flex;gap:9px;margin-top:12px}.payment-methods .btn{width:auto;flex:1}.payment-methods .cash{background:#7e6746}.payment-note{font-size:13px;color:#666;line-height:1.6;margin:10px 0 0}.modal-overlay{position:fixed;inset:0;z-index:20;background:#20282099;display:flex;align-items:center;justify-content:center;padding:16px}.modal{width:min(100%,520px);max-height:calc(100vh - 32px);overflow:auto;background:#fff;border-radius:18px;padding:22px;box-shadow:0 20px 55px #0005}.modal h2{margin:0 0 10px;color:#365747}.modal p{line-height:1.65}.modal-close{float:right;border:0;background:none;color:#666;font-size:24px;line-height:1;cursor:pointer}.modal-actions{display:flex;gap:9px;margin-top:18px}.modal-actions .btn{flex:1}.modal-actions .secondary{background:#e7ebe5;color:#43543f}.modal-actions .btn:disabled{opacity:.45;cursor:not-allowed}.payment-code{margin:16px 0;padding:18px 12px;border:2px dashed #5b6f55;border-radius:13px;background:#f7fbf5;text-align:center}.payment-code span{display:block;font-size:13px;color:#52684d}.payment-code strong{display:block;letter-spacing:.16em;font-size:36px;line-height:1.3;color:#274b38}.copy-code{border:1px solid #5b6f55;background:#fff;color:#43543f;border-radius:8px;padding:7px 12px;font:inherit;font-weight:700;margin-top:9px;cursor:pointer}.important-note{border-left:4px solid #b26a38;background:#fff6e9;padding:11px 12px;border-radius:8px;color:#74420f;font-weight:650}.admin-page[hidden],.modal-overlay[hidden]{display:none}.admin-header{display:flex;align-items:center;gap:12px}.admin-header h1{flex:1}.back-link{border:1px solid #fff9;background:#ffffff22;color:#fff;border-radius:8px;padding:7px 10px;font:inherit;cursor:pointer}.admin-payment{border-left:5px solid #d39a3e}.admin-payment .query-meta{margin-bottom:6px}
-h2{font-size:18px}.title{display:block;font-weight:700;margin:14px 0 7px}.required{color:#a65353}
-input[type=text],input[type=password],textarea{box-sizing:border-box;width:100%;padding:11px;border:1px solid #dddcd4;border-radius:10px;font:inherit;font-size:15px}textarea{resize:vertical}
-.options{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.option{position:relative}.option input{position:absolute;opacity:0}
-.option span{display:block;border:1px solid #dddcd4;border-radius:10px;padding:9px;text-align:center;cursor:pointer}
-.option input:checked+span{background:#edf2ea;border-color:#5b6f55;font-weight:700}
-.people{border:1px solid #dddcd4;background:#fafaf7;border-radius:13px;padding:15px;margin:11px 0}
-.people-head{display:flex;justify-content:space-between}.remove{border:0;background:none;color:#a65353}.add,.btn{width:100%;padding:13px;border-radius:11px;font-size:16px}
-.add{border:1px dashed #5b6f55;background:#f8faf6;color:#43543f}.btn{border:0;background:#5b6f55;color:#fff;font-weight:700}
-.notice{background:#f4f0df;border-left:4px solid #a08a50;padding:12px;border-radius:8px}.fee-list{list-style:none;padding:0;margin:10px 0}.fee-list li{padding:8px 0;border-bottom:1px solid #ece9df}.fee-list li:last-child{border-bottom:0}.fee-list strong{color:#43543f}.address{line-height:1.7}
-.result{display:none;background:#edf4ea;border-radius:12px;padding:14px;margin-top:13px}.result.error{background:#faece9}
-.small{font-size:12px;color:#777}
-.query-row{display:flex;gap:9px}.query-row input{flex:1}.query-row .btn{width:auto;min-width:92px;padding-left:20px;padding-right:20px}
-.query-results{margin-top:14px}.query-family{border:1px solid #dddcd4;border-radius:13px;padding:15px;margin-top:12px;background:#fafaf7}
-.query-meta{font-size:13px;color:#666;line-height:1.7;margin-bottom:10px}.member{border-top:1px solid #e5e3dc;padding:10px 0;line-height:1.7}.member:first-of-type{border-top:0}
-.member-fee{color:#43543f;font-weight:700}.discount{color:#a06d25;font-size:13px}.family-total{text-align:right;border-top:2px solid #d8d8cf;padding-top:11px;font-size:18px;font-weight:700;color:#43543f}
-@media(max-width:480px){.count-grid{grid-template-columns:repeat(2,1fr)}.query-row{display:block}.query-row .btn{width:100%;margin-top:9px}.payment-methods,.modal-actions{display:block}.payment-methods .btn,.modal-actions .btn{width:100%;margin-top:9px}.payment-code strong{font-size:31px}}
-.admin-manager-name{margin:18px 0 0;padding:11px 14px;border:1px solid #ffffff63;border-radius:12px;background:#ffffff20;color:#fff;font-size:clamp(1.35rem,6vw,1.7rem);font-weight:800;line-height:1.35;letter-spacing:.02em}.admin-responsibility-note{margin:12px 0 0;padding:11px 13px;border-left:4px solid #f7cf7f;border-radius:9px;background:#31462f8c;color:#fff;font-size:15px;font-weight:650;line-height:1.65}
-.admin-payment .confirm-payment:disabled{background:#c5cbc3;color:#596058;cursor:not-allowed;opacity:1}.admin-restricted-note{margin:12px 0 0;padding:10px 12px;border-radius:8px;background:#f2f0ec;color:#626860;font-size:14px;line-height:1.55}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1120">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="一生为复利忙碌。把时间投入真正值得的事情。一个关于长期价值、独立思考、市场、技术、信仰与人生的个人思想档案。">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>一生为复利忙碌 · 把时间投入真正值得的事情</title>
+  <style>
+:root{--bg-dark:#0b1120;--card-bg:#151f32;--card-border:#283650;--text-main:#f1f5f9;--text-muted:#94a3b8;--accent-blue:#38bdf8;--accent-red:#f43f5e;--accent-amber:#fbbf24;--accent-emerald:#34d399;--code-bg:#070b14;--header-h:83px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:110px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg-dark);color:var(--text-main);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','PingFang SC','Hiragino Sans','Meiryo',system-ui,sans-serif;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:#38bdf8;color:#0b1120}
+a{color:inherit;text-decoration:none}
+a:focus-visible,summary:focus-visible,label:focus-visible{outline:2px solid var(--accent-blue);outline-offset:4px}
+button,input,textarea{font:inherit}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.locale-radio{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.t{display:none!important}
+#lang-zh:checked ~ .site .t-zh,#lang-ja:checked ~ .site .t-ja,#lang-en:checked ~ .site .t-en{display:inline!important}
+#lang-zh:checked ~ .site label[for="lang-zh"],#lang-ja:checked ~ .site label[for="lang-ja"],#lang-en:checked ~ .site label[for="lang-en"]{background:var(--accent-blue);color:#07111e;box-shadow:0 0 20px #38bdf827}
+#lang-zh:focus-visible ~ .site label[for="lang-zh"],#lang-ja:focus-visible ~ .site label[for="lang-ja"],#lang-en:focus-visible ~ .site label[for="lang-en"]{outline:2px solid white;outline-offset:3px}
+.site{position:relative;min-height:100vh;isolation:isolate}
+.site:before{content:"";pointer-events:none;position:absolute;inset:0 0 auto;height:900px;z-index:-1;background:radial-gradient(ellipse at 72% 22%,#38bdf810 0,transparent 54%),radial-gradient(ellipse at 18% 44%,#5277bb0d 0,transparent 55%)}
+.container{width:min(1200px,calc(100% - 80px));margin-inline:auto}
+/* Original V7 dark forensic toolbar, adapted into an editorial identity. */
+.header{position:sticky;top:0;z-index:40;background:rgba(11,17,32,.86);border-bottom:1px solid #283650a8;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.header-inner{min-height:var(--header-h);display:flex;align-items:center;gap:24px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.brand-symbol{display:grid;place-items:center;width:40px;height:40px;border:1px solid #38bdf885;border-radius:50%;font-size:21px;font-weight:500;letter-spacing:-.12em;color:var(--accent-blue);font-family:Georgia,serif;transform:rotate(-18deg)}
+.brand-copy{display:flex;flex-direction:column;line-height:1.2;gap:4px}
+.brand-name{font-size:.91rem;font-weight:760;letter-spacing:.055em}
+.brand-caption{font-size:.59rem;color:var(--text-muted);letter-spacing:.17em}
+.nav{display:flex;align-items:center;gap:5px;min-width:0}
+.nav-pill{font-size:.78rem;font-weight:550;color:#9eafc6;padding:8px 10px;border-radius:999px;white-space:nowrap;transition:background .18s,color .18s}
+.nav-pill:hover,.nav-pill:focus-visible{color:white;background:#1e3048}
+.language-toggle{display:flex;align-items:center;flex-shrink:0;border:1px solid var(--card-border);background:#111a2b;border-radius:999px;padding:3px;gap:2px}
+.language-toggle label{display:inline-grid;place-items:center;min-width:38px;min-height:31px;padding:0 6px;border-radius:999px;color:#93a5bc;cursor:pointer;user-select:none;font-weight:760;font-size:.69rem;transition:all .15s}
+.language-toggle label:hover{color:#fff}
+/* Hero */
+.hero{position:relative;min-height:min(780px,calc(100svh - var(--header-h)));display:grid;grid-template-columns:minmax(0,1.14fr) minmax(320px,.86fr);align-items:center;gap:30px;padding-block:92px 86px;border-bottom:1px solid var(--card-border)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(#7285a00b 1px,transparent 1px),linear-gradient(90deg,#7285a00b 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(90deg,transparent,black 40%,black 85%,transparent);z-index:-1}
+.hero-content{position:relative;z-index:2}
+.eyebrow{display:flex;align-items:center;gap:12px;color:var(--accent-blue);font-weight:720;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase}
+.eyebrow:before{content:"";width:24px;height:2px;background:var(--accent-blue)}
+.hero-title{font-weight:820;letter-spacing:-.065em;line-height:1.13;font-size:clamp(3.65rem,6.9vw,7.25rem);margin:35px 0 28px;max-width:850px;text-wrap:balance}
+.hero-title em{font-style:normal;color:#38bdf8;position:relative;text-shadow:0 7px 45px #38bdf81c}
+.hero-title .t-ja{letter-spacing:-.09em;font-size:.83em}
+.hero-title .t-en{letter-spacing:-.07em;font-size:.79em;line-height:1.1}
+.hero-tagline{color:#e7edf6;font-size:clamp(1.22rem,2.05vw,1.8rem);font-weight:560;letter-spacing:-.025em;line-height:1.55;margin:0 0 24px}
+.hero-tagline:before{content:"";display:inline-block;vertical-align:middle;width:16px;height:16px;margin-right:11px;border-radius:100%;border:3px solid var(--accent-amber);box-shadow:0 0 28px #fbbf2440}
+.hero-desc{color:#a9b7ca;font-size:1.01rem;max-width:510px;line-height:1.93;margin:0}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:35px}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:19px;padding:13px 19px;min-height:49px;border-radius:9px;font-size:.83rem;font-weight:740;transition:transform .18s,background .18s,border-color .18s}
+.cta:hover{transform:translateY(-2px)}
+.cta-primary{background:var(--accent-blue);color:#07111d;box-shadow:0 10px 34px #38bdf824}
+.cta-primary:hover{background:#7dd3fc}
+.cta-outline{border:1px solid #3b4e67;color:#e0e9f5;background:#111c2b99}
+.cta-outline:hover{background:#1a2b41;border-color:#7d91ad}
+.arrow{font-size:1.12rem;line-height:1}
+.hero-caption{display:flex;gap:17px;align-items:center;margin-top:47px;color:#7b8da7;font-size:.66rem;letter-spacing:.13em;font-weight:700}
+.caption-line{height:1px;width:38px;background:#44546d}
+/* An original CSS vector time/value instrument, not a stock illustration */
+.hero-art{position:relative;display:grid;place-items:center;min-width:0;aspect-ratio:1 / 1;max-width:520px;width:100%;margin:auto;filter:drop-shadow(0 24px 66px #0307106b)}
+.hero-art::before{content:"";position:absolute;inset:11%;background:radial-gradient(circle,#38bdf815 0,#38bdf807 27%,transparent 66%);border-radius:50%;filter:blur(10px)}
+.orbit-svg{width:100%;height:100%;overflow:visible;animation:float 12s ease-in-out infinite}
+.orbit-outer{transform-origin:center;animation:spin 75s linear infinite}
+.orbit-inner{transform-origin:center;animation:spinrev 60s linear infinite}
+.orbit-core{position:absolute;inset:30%;border-radius:50%;border:1px solid #38bdf851;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 38% 22%,#1f3952,#111b2c 68%,#101a29);box-shadow:inset 0 0 60px #38bdf80e,0 0 54px #00000070;text-align:center;gap:9px}
+.orbit-caption{font-size:clamp(.45rem,.9vw,.68rem);letter-spacing:.20em;color:#85c7e8;font-weight:700;line-height:1.8}
+.orbit-big{font-family:Georgia,'Times New Roman',serif;font-size:clamp(4rem,9vw,7.2rem);line-height:.95;color:#f0f5fa;font-weight:400;text-shadow:0 0 28px #38bdf837}
+.orbit-mini{font-size:.58rem;letter-spacing:.18em;color:#caa967;font-weight:740}
+.orbit-label{position:absolute;color:#a6c1d9;font-size:.58rem;letter-spacing:.14em;font-weight:790;background:#111b2de3;border:1px solid #3a5270;padding:8px 12px;border-radius:5px;box-shadow:0 15px 30px #0004;white-space:nowrap}
+.orbit-label.l1{top:14%;left:-2%}
+.orbit-label.l2{right:-1%;top:32%}
+.orbit-label.l3{bottom:12%;left:10%}
+.orbit-dot{fill:#fbbf24;filter:drop-shadow(0 0 8px #fbbf24)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinrev{to{transform:rotate(-360deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+/* Brand strip */
+.values-strip{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--card-border);padding-block:28px 30px;gap:22px}
+.value{display:flex;align-items:baseline;gap:13px}
+.value .number{font-family:Georgia,serif;color:#65778c;font-size:1.55rem;font-style:italic}
+.value p{margin:0;font-size:.77rem;font-weight:710;letter-spacing:.04em;color:#b5c0cf}
+/* editorial sections */
+.section{padding-block:125px;scroll-margin-top:95px}
+.section-heading{font-size:clamp(2.2rem,4.1vw,4.2rem);letter-spacing:-.052em;line-height:1.24;margin:21px 0 23px;font-weight:790}
+.section-kicker{display:flex;gap:12px;align-items:center;color:#90a2b8;letter-spacing:.16em;font-size:.69rem;font-weight:790}
+.section-index{color:var(--accent-blue)}
+.kicker-line{width:31px;height:1px;background:#51657e}
+.section-lead{max-width:700px;color:#a9b9cc;font-size:1.06rem;line-height:1.95;margin:0}
+.question-section{padding-block:135px 115px;position:relative}
+.question-section:after{content:'“';position:absolute;right:0;top:0;color:#38bdf80a;font-family:Georgia,serif;font-size:24rem;line-height:1;pointer-events:none}
+.question-title{font-size:clamp(2.65rem,6.8vw,6.7rem);line-height:1.32;font-weight:760;letter-spacing:-.058em;max-width:1050px;margin:40px 0 31px}
+.question-title strong{font-weight:800;color:var(--accent-amber)}
+.question-lead{font-size:1.08rem;line-height:2;color:#a8b8cd;max-width:820px}
+.manifesto-head{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:42px}
+.manifesto-head .section-lead{margin:0 0 4px}
+.principle-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.principle{background:var(--card-bg);border:1px solid var(--card-border);border-radius:13px;padding:28px 26px;min-height:238px;grid-column:span 2;transition:transform .22s,border-color .22s,background .22s}
+.principle:nth-child(4),.principle:nth-child(5){grid-column:span 3;min-height:200px}
+.principle:hover{transform:translateY(-4px);border-color:#436886;background:#19283e}
+.principle-top{display:flex;justify-content:space-between;align-items:baseline;gap:9px;margin-bottom:25px}
+.principle-no{font-family:Georgia,serif;font-size:2rem;color:var(--accent-blue);line-height:1}
+.principle-en{font-size:.6rem;letter-spacing:.09em;color:#708ba5;font-weight:800;text-align:right}
+.principle h3{font-size:1.24rem;letter-spacing:-.025em;margin:0 0 10px}
+.principle p{font-size:.84rem;line-height:1.88;color:#a1b1c6;margin:0}
+.about-section{border-top:1px solid var(--card-border);display:grid;grid-template-columns:.86fr 1.14fr;gap:85px}
+.about-side{position:relative}
+.about-side .section-heading{max-width:340px}
+.about-symbol{font:italic 17rem/.9 Georgia,serif;color:#38bdf80b;position:absolute;top:95px;left:-15px;pointer-events:none}
+.about-main{padding-top:5px}
+.about-main p{font-size:1.04rem;color:#b4c3d3;line-height:2.1;margin:0 0 24px}
+.about-main p:first-child{font-size:1.25rem;color:#edf3fa;line-height:1.9}
+.about-facts{border-top:1px solid #283650;border-bottom:1px solid #283650;display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:33px;padding:27px 0}
+.about-fact .tiny{display:block;color:#6685a0;font-size:.64rem;letter-spacing:.12em;font-weight:750;margin-bottom:7px}
+.about-fact strong{font-size:.87rem;color:#d4deea;font-weight:600}
+/* Research */
+.research-section{position:relative;background:#101a2a;border-block:1px solid var(--card-border);box-shadow:0 0 0 100vmax #101a2a;clip-path:inset(0 -100vmax)}
+.research-header{display:flex;align-items:end;justify-content:space-between;gap:60px;margin-bottom:44px}
+.research-header .section-lead{max-width:430px}
+.research-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.research-card{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:390px;background:#151f32;border:1px solid #2b3b54;border-radius:13px;padding:28px;overflow:hidden;transition:border-color .2s,transform .2s}
+.research-card:hover{border-color:#497394;transform:translateY(-3px)}
+.research-card:after{content:"";position:absolute;inset:auto -15% -45% 10%;height:60%;border-radius:100%;filter:blur(70px);background:#38bdf80b;pointer-events:none}
+.research-card:nth-child(2):after{background:#34d39912}
+.research-card:nth-child(3):after{background:#fbbf240b}
+.research-card-head{display:flex;align-items:flex-start;justify-content:space-between}
+.research-num{font-size:.63rem;letter-spacing:.2em;color:#8398b1;font-weight:790}
+.research-symbol{width:82px;height:82px;color:var(--accent-blue)}
+.research-card:nth-child(2) .research-symbol{color:var(--accent-emerald)}
+.research-card:nth-child(3) .research-symbol{color:var(--accent-amber)}
+.research-symbol svg{display:block;width:100%;height:100%}
+.overline{font-size:.58rem;font-weight:820;letter-spacing:.16em;color:#778da7}
+.research-card h3{font-size:1.52rem;margin:9px 0 13px;line-height:1.35}
+.research-card p{color:#a4b5c7;margin:0;font-size:.9rem;line-height:1.96}
+.research-bottom{padding:33px 34px;margin-top:17px;background:#0b1120;border:1px solid #283650;border-left:3px solid var(--accent-amber);border-radius:10px;display:flex;gap:24px;align-items:center}
+.research-bottom .marker{font-size:1.8rem;font-family:Georgia,serif;color:var(--accent-amber)}
+.research-bottom p{margin:0;font-size:1.01rem;color:#c2cedd;line-height:1.8}
+/* Faith section */
+.faith-section{display:grid;grid-template-columns:1.07fr .93fr;gap:100px;align-items:center}
+.faith-section .section-lead{max-width:none}
+.faith-title{font-size:clamp(2.5rem,5vw,5rem);line-height:1.38;letter-spacing:-.053em;margin:28px 0 24px}
+.faith-title em{font-style:normal;color:var(--accent-amber)}
+.faith-paragraph{font-size:1.01rem;line-height:2.05;color:#acbed0;margin:0 0 18px}
+.faith-art{display:flex;align-items:center;justify-content:center;min-height:410px;position:relative}
+.faith-ring{width:min(340px,100%);aspect-ratio:1;display:grid;place-items:center;border-radius:50%;border:1px solid #7087a126;box-shadow:0 0 0 48px #38bdf807,0 0 0 96px #38bdf805,0 0 0 130px #38bdf803}
+.faith-ring-inner{width:75%;height:75%;border:1px solid #c9a75d59;border-radius:50%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:17px;text-align:center;padding:32px;background:radial-gradient(circle at 50% 50%,#1a2837,#101827)}
+.faith-ring-inner .small{font-size:.62rem;color:#b89a61;letter-spacing:.13em;font-weight:720}
+.faith-ring-inner .large{font-family:Georgia,serif;color:#e6d5a9;font-style:italic;font-size:clamp(1.42rem,2.4vw,2rem);line-height:1.32}
+.faith-ring-inner .line{height:1px;width:38px;background:#b89a61}
+/* Notebook */
+.journal-section{border-top:1px solid var(--card-border)}
+.journal-header{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:44px}
+.journal-caption{max-width:450px;color:#8b9eb5;font-size:.91rem;line-height:1.85}
+.note-list{display:grid;gap:12px}
+.note-card{border:1px solid #293950;background:#141e30;border-radius:12px;overflow:hidden;transition:border-color .2s}
+.note-card:hover,.note-card[open]{border-color:#45647f}
+.note-card summary{position:relative;list-style:none;display:grid;grid-template-columns:190px 1fr 1fr 25px;gap:22px;padding:29px 30px;align-items:center;cursor:pointer}
+.note-card summary::-webkit-details-marker{display:none}
+.note-index{color:#6b90ad;font-size:.65rem;letter-spacing:.08em;font-weight:750}
+.note-headline{color:#f0f6fb;font-size:1.13rem;font-weight:740}
+.note-description{color:#8fa2b9;font-size:.83rem;line-height:1.7}
+.note-open{color:var(--accent-blue);font-size:1.55rem;font-weight:300;text-align:right;transition:transform .2s}
+.note-card[open] .note-open{transform:rotate(45deg)}
+.note-body{border-top:1px solid var(--card-border);padding:22px 30px 28px 242px}
+.note-body p{margin:0;max-width:730px;color:#bccbda;font-size:.95rem;line-height:1.97}
+/* Closing */
+.closing{position:relative;border-top:1px solid var(--card-border);padding:130px 0 105px;text-align:center;overflow:hidden}
+.closing:before{content:'∞';position:absolute;top:30px;left:50%;transform:translateX(-50%);font-family:Georgia,serif;font-size:24rem;line-height:1;color:#38bdf809;pointer-events:none}
+.closing-inner{position:relative;z-index:1}
+.closing-kicker{color:#88a3bb;letter-spacing:.22em;font-size:.69rem;font-weight:820}
+.closing-title{font-size:clamp(2.3rem,5vw,5rem);line-height:1.3;letter-spacing:-.052em;max-width:940px;margin:23px auto;color:#fff}
+.closing-title strong{color:var(--accent-blue)}
+.closing-text{max-width:680px;margin:0 auto;color:#9bafc4;line-height:2.05;font-size:.99rem}
+.back-top{display:inline-flex;align-items:center;gap:10px;border-bottom:1px solid var(--accent-blue);color:var(--accent-blue);margin-top:42px;font-size:.84rem;font-weight:710;padding-bottom:7px}
+.footer{border-top:1px solid var(--card-border);padding:27px 0 39px;color:#7f93aa}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:25px}
+.footer small{font-size:.72rem}
+.footer-mark{font:italic 1.55rem Georgia,serif;color:var(--accent-blue)}
+/* Responsive and accessibility */
+@media(max-width:1140px){.container{width:min(100% - 54px,1200px)}.header-inner{gap:13px}.brand-caption{display:none}.nav-pill{padding:8px}.hero{grid-template-columns:1.12fr .88fr}.hero-title{font-size:clamp(3.5rem,6.7vw,6rem)}.orbit-label.l1{left:0}.orbit-label.l2{right:0}.faith-section{gap:55px}.about-section{gap:45px}}
+@media(max-width:920px){:root{--header-h:108px}.header-inner{min-height:108px;display:grid;grid-template-columns:1fr auto;grid-template-rows:52px 42px;gap:2px 12px;padding:8px 0 5px}.brand{grid-column:1}.language-toggle{grid-column:2;grid-row:1}.nav{grid-column:1 / -1;grid-row:2;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.nav::-webkit-scrollbar{display:none}.nav-pill:first-child{padding-left:0}.hero{grid-template-columns:1fr;min-height:0;padding-block:79px 65px}.hero-title{font-size:clamp(4.4rem,9vw,6.9rem)}.hero-desc{max-width:680px}.hero-art{max-width:420px;margin:8px auto 0;justify-self:center}.manifesto-head{gap:20px}.about-section{grid-template-columns:1fr;gap:15px}.about-symbol{top:20px;left:auto;right:5%}.about-main{max-width:760px}.faith-section{grid-template-columns:1fr;gap:20px}.faith-art{min-height:350px}.research-card{padding:23px;min-height:360px}.research-card h3{font-size:1.32rem}.note-card summary{grid-template-columns:125px 1fr 22px;gap:10px}.note-description{grid-column:2;grid-row:2}.note-open{grid-column:3;grid-row:1/3}.note-body{padding-left:157px}}
+@media(max-width:640px){:root{--header-h:106px}.container{width:calc(100% - 36px)}.brand-symbol{width:33px;height:33px;font-size:17px}.brand-name{font-size:.84rem}.language-toggle label{min-width:34px;min-height:29px}.nav-pill{font-size:.75rem;padding:7px 11px}.hero{padding-top:61px;padding-bottom:55px;gap:17px}.eyebrow{font-size:.61rem;letter-spacing:.1em}.hero-title{font-size:clamp(3.1rem,11.2vw,5rem);margin:28px 0 23px}.hero-title .t-ja{font-size:.76em}.hero-title .t-en{font-size:.73em}.hero-tagline{font-size:1.09rem}.hero-desc{font-size:.89rem;line-height:1.9}.hero-cta{margin-top:25px;gap:9px}.cta{padding:11px 13px;font-size:.76rem;gap:10px;min-height:44px}.hero-caption{margin-top:29px;font-size:.55rem;gap:10px}.caption-line{width:18px}.hero-art{max-width:350px}.orbit-label{font-size:.48rem;padding:5px 8px}.orbit-label.l1{left:3%}.orbit-label.l2{right:1%}.orbit-big{font-size:5.5rem}.values-strip{padding:23px 0;grid-template-columns:1fr 1fr 1fr;gap:8px}.value{display:block}.value .number{font-size:1.1rem}.value p{font-size:.63rem;line-height:1.55}.section{padding-block:80px}.section-heading{font-size:2.24rem}.section-lead{font-size:.93rem}.question-section{padding-block:91px 70px}.question-section:after{font-size:12rem;top:30px}.question-title{font-size:clamp(2.5rem,9vw,4rem);margin:29px 0 25px}.question-lead{font-size:.93rem}.manifesto-head{display:block;margin-bottom:30px}.principle-grid{grid-template-columns:1fr;gap:11px}.principle,.principle:nth-child(4),.principle:nth-child(5){grid-column:auto;min-height:0;padding:24px 22px}.principle-top{margin-bottom:17px}.principle-no{font-size:1.6rem}.principle h3{font-size:1.16rem}.principle p{font-size:.84rem}.about-symbol{font-size:10rem;top:15px}.about-main p{font-size:.94rem;line-height:1.95}.about-main p:first-child{font-size:1.09rem}.about-facts{gap:12px}.about-fact strong{font-size:.79rem}.research-header,.journal-header{display:block}.research-grid{grid-template-columns:1fr;gap:11px}.research-card{min-height:280px;padding:23px}.research-symbol{width:72px;height:72px}.research-bottom{padding:20px 18px;gap:12px}.research-bottom p{font-size:.88rem}.faith-title{font-size:2.55rem}.faith-paragraph{font-size:.94rem}.faith-art{min-height:300px;overflow:hidden}.faith-ring{width:235px;box-shadow:0 0 0 31px #38bdf807,0 0 0 63px #38bdf805,0 0 0 92px #38bdf803}.faith-ring-inner{padding:16px}.faith-ring-inner .large{font-size:1.4rem}.note-card summary{padding:20px 17px;grid-template-columns:1fr 20px;row-gap:7px}.note-index{grid-column:1;grid-row:1}.note-headline{grid-column:1;grid-row:2;font-size:1.06rem}.note-description{grid-column:1;grid-row:3;font-size:.79rem}.note-open{grid-column:2;grid-row:1/4}.note-body{padding:19px 17px 23px}.note-body p{font-size:.89rem}.closing{padding-block:85px 70px}.closing:before{font-size:15rem;top:25px}.closing-title{font-size:2.45rem}.closing-text{font-size:.9rem}.footer-inner{align-items:flex-start}.footer small{font-size:.63rem}}
+@media(max-width:390px){.container{width:calc(100% - 28px)}.hero-title{font-size:3.05rem}.hero-title .t-ja{font-size:.72em}.hero-title .t-en{font-size:.67em}.hero-art{max-width:300px}.orbit-label{font-size:.43rem}.hero-cta{flex-direction:column;align-items:stretch}.cta{width:100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+@media print{.header,.hero-art,.hero-cta,.back-top{display:none!important}.site:before,.hero:before{display:none}body{background:white!important;color:#101828!important}.container{width:100%}.section{padding:25px 0}.principle,.research-card,.note-card{break-inside:avoid;background:white;color:#101828;border:1px solid #bbb}.t{color:inherit}}
+  </style>
 </head>
-<body>
-<div class="wrap" id="public-page">
-<section class="hero"><h1>2026年教会退修会报名登记（已截止）</h1><p>10月10日（六）～10月12日（一）</p>
-<section class="registration-summary" aria-labelledby="registration-count-title">
-<h2 id="registration-count-title">报名人数</h2>
-<div class="count-grid" aria-live="polite">
-<div class="count-item"><span>大人</span><strong id="count-adult">—</strong><small>人</small></div>
-<div class="count-item"><span>3岁～中学生</span><strong id="count-children">—</strong><small>人</small></div>
-<div class="count-item"><span>3岁未满</span><strong id="count-under3">—</strong><small>人</small></div>
-<div class="count-item"><span>合计</span><strong id="count-total">—</strong><small>人</small></div>
-</div>
-<div class="payment-count-row" aria-live="polite">
-<span>待付款：<strong id="count-unpaid">—</strong>人</span>
-<span>已付款待确认：<strong id="count-pending">—</strong>人</span>
-<span>已付款：<strong id="count-paid">—</strong>人</span>
-</div>
-<p id="count-status" class="count-status">正在读取报名人数……</p>
-</section></section>
-
-<div class="card">
-<h2>查询报名资料／缴纳费用</h2>
-<p class="small">输入报名者姓名，可查询同一报名编号下的全部家庭成员、所需费用与缴费状态，也可办理缴费。</p>
-<form id="queryForm">
-<div class="query-row">
-<input type="text" id="queryName" placeholder="请输入报名者姓名" required>
-<button class="btn" type="submit">查询</button>
-<button class="btn" id="payment-button" type="button">缴费</button>
-</div>
-</form>
-<div id="queryResult" class="query-results" aria-live="polite"></div>
-</div>
-
-<div class="card registration-closed" role="status">
-<p>【报名已截止，详情请咨询相关负责人】</p>
-</div>
-
-<div class="card admin-entry">
-<p>收款管理人员专用</p>
-<button class="btn" id="admin-entry-button" type="button">管理者入口</button>
-</div>
-
-<div class="card">
-<h2>关于退修会</h2>
-<p>邀请弟兄姊妹暂时放下日常生活的忙碌，在敬拜、祷告、信息与团契中亲近神，也彼此建立。盼望每一位参加者都能重新得力。</p>
-</div>
-
-<div class="card">
-<h2>退修会费用</h2>
-<p>三天两夜，含六餐：</p>
-<ul class="fee-list">
-<li>大人（高中生以上）：<strong>9,200円</strong></li>
-<li>3岁～中学生：<strong>6,700円</strong></li>
-<li>3岁未满：<strong>1,200円</strong></li>
-</ul>
-<div class="notice">9月10日 17:00 前完成报名，每人可享 <strong>500円</strong> 折扣。报名后如需变更或取消，请于10月2日前提出；10月2日后取消，费用为100%。</div>
-</div>
-
-<div class="card">
-<h2>退修会地址</h2>
-<p class="address">千葉市少年自然の家<br>〒297-0217 千葉県長生郡長柄町針ヶ谷字中野1591-40<br><a href="https://www.chiba-shizen.jp/movies/orientation.mp4" target="_blank" rel="noopener">查看设施使用指南（视频）</a></p>
-</div>
-
-<form id="form" hidden aria-hidden="true">
-<div class="card">
-<h2>① 申请人情报</h2>
-<label class="title">所属教会 <span class="required">*</span></label>
-<div class="options">
-<label class="option"><input type="radio" name="church" value="户田教会" required><span>户田教会</span></label>
-<label class="option"><input type="radio" name="church" value="池袋教会"><span>池袋教会</span></label>
-</div>
-<label class="title">姓名 <span class="required">*</span></label><input type="text" name="name" required>
-<label class="title">性别 <span class="required">*</span></label>
-<div class="options"><label class="option"><input type="radio" name="gender" value="男" required><span>男</span></label><label class="option"><input type="radio" name="gender" value="女"><span>女</span></label></div>
-<label class="title">邮编号码 <span class="required">*</span></label>
-<input type="text" name="postalCode" inputmode="numeric" pattern="[0-9]{3}-?[0-9]{4}" placeholder="例如：123-4567" required>
-<label class="title">住址 <span class="required">*</span></label>
-<textarea name="address" rows="2" placeholder="请输入具体住址" required></textarea>
-<label class="title">类别 <span class="required">*</span></label>
-<div class="options">
-<label class="option"><input type="radio" name="category" value="大人（高中生以上）" required><span>大人（高中生以上）</span></label>
-<label class="option"><input type="radio" name="category" value="3岁～中学生"><span>3岁～中学生</span></label>
-<label class="option"><input type="radio" name="category" value="3岁未满"><span>3岁未满</span></label>
-</div>
-</div>
-
-<div class="card">
-<h2>② 家庭／同行者情报</h2>
-<p class="small">每点击一次按钮，就增加一组姓名、性别、类别。</p>
-<div id="companions"></div>
-<button type="button" class="add" onclick="addCompanion()">＋ 添加同行者</button>
-</div>
-
-<div class="card">
-<h2>③ 参加安排</h2>
-<p>本次报名原则上为<strong>全程参加</strong>：10月10日～12日（三天两夜），含六餐。若有特殊情况，请在备注中说明。</p>
-</div>
-
-<div class="card">
-<h2>④ 新朋友</h2>
-<div class="options">
-<label class="option"><input type="radio" name="newfriend" value="是"><span>邀请了新朋友</span></label>
-<label class="option"><input type="radio" name="newfriend" value="否"><span>没有</span></label>
-</div>
-<label class="title">新朋友姓名</label><input type="text" name="newfriendName">
-</div>
-
-<div class="card">
-<h2>⑤ 备注</h2>
-<input type="text" name="note" placeholder="特殊需求、食物过敏、住宿、儿童等需要相谈的情况请填写">
-</div>
-
-<div class="card">
-<h2>⑥ 前往退修会场地的交通方式</h2>
-<p class="small">请选择您计划如何前往退修会场地。</p>
-<div class="options">
-<label class="option"><input type="radio" name="transport" value="自驾车" required><span>自驾车</span></label>
-<label class="option"><input type="radio" name="transport" value="电车"><span>电车</span></label>
-<label class="option"><input type="radio" name="transport" value="不知道，希望教会协助安排"><span>不知道，希望教会协助安排</span></label>
-</div>
-</div>
-
-<div class="card">
-<button class="btn" type="submit">提交报名</button>
-<div id="result" class="result" aria-live="polite"></div>
-</div>
-</form>
-
-</div>
-
-<div class="wrap admin-page" id="admin-page" hidden>
-<section class="hero">
-<div class="admin-header"><button class="back-link" id="admin-back-button" type="button">← 返回</button><h1>收款确认</h1></div>
-<p>请核对实际收款后，再将缴费状态更新为「已缴纳」。</p>
-<p id="admin-manager-name" class="admin-manager-name" aria-live="polite">管理者：—</p>
-<p id="admin-responsibility-note" class="admin-responsibility-note">请务必核对：仅确认自己负责教会成员的实际收款。若不是自己负责教会的成员，请不要进行确认。</p>
-</section>
-<section class="card">
-<p id="admin-page-status" class="small" aria-live="polite">正在读取待确认缴费资料……</p>
-<div id="admin-payment-list" aria-live="polite"></div>
-</section>
-</div>
-
-<div class="modal-overlay" id="modal-overlay" hidden>
-<section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-<button class="modal-close" id="modal-close-button" type="button" aria-label="关闭">×</button>
-<div id="modal-content"></div>
-</section>
-</div>
-
-<script>
-/* ====== 只需要修改这里 ====== */
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwpBbg_jVyoTluKPMDABY_VOdTp1Wrxn30jiLtZmRbtoIh7xoyThdf0Ccidi9sA-kbW/exec';
-/* ============================= */
-
-let companionCount = 0;
-const PAYPAY_URL = 'https://qr.paypay.ne.jp/p2p01_0cW1bLdSWSMAucfa';
-const PAYMENT_STATUS = {
-  UNPAID: '未缴纳',
-  PENDING: '已缴纳待确认',
-  PAID: '已缴纳'
-};
-let latestPaymentSearch = null;
-let latestPaymentSearchName = '';
-let latestPaymentSearchAt = 0;
-let queryInProgress = false;
-let paymentEntryInProgress = false;
-let pendingPaymentsLoadInProgress = false;
-let adminToken = sessionStorage.getItem('retreat2026AdminToken') || '';
-let adminManagerName = sessionStorage.getItem('retreat2026AdminManagerName') || '';
-let adminManagerChurch = sessionStorage.getItem('retreat2026AdminManagerChurch') || '';
-const JSONP_TIMEOUT_MS = 20000;
-const PAYMENT_POLL_TIMEOUT_MS = 10000;
-const ADMIN_SESSION_POLL_TIMEOUT_MS = 10000;
-const RECENT_QUERY_REUSE_MS = 30000;
-const PAYMENT_RESULT_DELAYS_MS = [0, 1000, 2500, 5000];
-const ADMIN_SESSION_DELAYS_MS = [0, 1000, 2500, 5000];
-
-function loadRegistrationSummary() {
-  const status = document.getElementById('count-status');
-  if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('请粘贴')) {
-    status.textContent = '报名人数尚未连线。';
-    return;
-  }
-  status.textContent = '正在读取报名人数……';
-  getRegistrationSummaryByJsonp()
-    .then(function(data) {
-      if (!data || !data.ok || !data.counts) throw new Error((data && data.error) || '未能读取报名人数。');
-      const counts = data.counts;
-      document.getElementById('count-adult').textContent = Number(counts.adult) || 0;
-      document.getElementById('count-children').textContent = Number(counts.children) || 0;
-      document.getElementById('count-under3').textContent = Number(counts.under3) || 0;
-      document.getElementById('count-total').textContent = Number(counts.total) || 0;
-      const paymentCounts = data.paymentCounts;
-      document.getElementById('count-unpaid').textContent = paymentCounts ? (Number(paymentCounts.unpaid) || 0) : '—';
-      document.getElementById('count-pending').textContent = paymentCounts ? (Number(paymentCounts.pending) || 0) : '—';
-      document.getElementById('count-paid').textContent = paymentCounts ? (Number(paymentCounts.paid) || 0) : '—';
-      status.textContent = '确定报名人数。';
-    })
-    .catch(function() {
-      status.textContent = '暂时无法读取报名人数。';
-    });
-}
-
-function getRegistrationSummaryByJsonp() {
-  return new Promise(function(resolve, reject) {
-    const callback = '__registrationSummary' + Date.now() + Math.floor(Math.random() * 10000);
-    const script = document.createElement('script');
-    let finished = false;
-    const cleanup = function() {
-      delete window[callback];
-      script.remove();
-    };
-    const timer = setTimeout(function() {
-      if (finished) return;
-      finished = true;
-      cleanup();
-      reject(new Error('读取报名人数逾时。'));
-    }, JSONP_TIMEOUT_MS);
-    window[callback] = function(data) {
-      if (finished) return;
-      finished = true;
-      clearTimeout(timer);
-      cleanup();
-      resolve(data);
-    };
-    script.onerror = function() {
-      if (finished) return;
-      finished = true;
-      clearTimeout(timer);
-      cleanup();
-      reject(new Error('无法连接报名资料服务。'));
-    };
-    script.src = GOOGLE_SCRIPT_URL + '?action=summary&callback=' + encodeURIComponent(callback) + '&_=' + Date.now();
-    document.body.appendChild(script);
-  });
-}
-
-const FULL_RETREAT = {
-  days: ['10月10日', '10月11日', '10月12日'],
-  nights: ['10月10日晚', '10月11日晚'],
-  meals: ['10/10晚餐', '10/11早餐', '10/11午餐', '10/11晚餐', '10/12早餐', '10/12午餐']
-};
-
-function fullRetreatDetails() {
-  return {
-    days: [...FULL_RETREAT.days],
-    nights: [...FULL_RETREAT.nights],
-    meals: [...FULL_RETREAT.meals]
-  };
-}
-
-function addCompanion() {
-  companionCount++;
-  const id = companionCount;
-
-  const companion = document.createElement('div');
-  companion.className = 'people';
-  companion.id = 'companion-' + id;
-  companion.innerHTML = `
-  <div class="people-head"><strong>同行者 ${id}</strong>
-  <button type="button" class="remove" onclick="removeCompanion(${id})">删除</button></div>
-  <label class="title">姓名 <span class="required">*</span></label>
-  <input type="text" name="companion_name[]" required>
-  <label class="title">性别 <span class="required">*</span></label>
-  <div class="options">
-  <label class="option"><input type="radio" name="companion_gender_${id}" value="男" required><span>男</span></label>
-  <label class="option"><input type="radio" name="companion_gender_${id}" value="女"><span>女</span></label>
+<body id="top">
+  <!-- Switches work without JavaScript, including inside an offline HTML file. -->
+  <input type="radio" name="language" class="locale-radio" id="lang-zh" aria-label="中文" checked>
+  <input type="radio" name="language" class="locale-radio" id="lang-ja" aria-label="日本語">
+  <input type="radio" name="language" class="locale-radio" id="lang-en" aria-label="English">
+  <div class="site">
+    <header class="header">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="Back to top">
+          <span class="brand-symbol" aria-hidden="true">∞</span><span class="brand-copy"><span class="brand-name"><span class="t t-zh" lang="zh-CN">一生为复利忙碌</span><span class="t t-ja" lang="ja">価値を積み重ねる</span><span class="t t-en" lang="en">WHAT ENDURES</span></span><span class="brand-caption">A PERSONAL PHILOSOPHY JOURNAL</span></span>
+        </a>
+        <nav class="nav" aria-label="Main navigation"><a class="nav-pill" href="#philosophy"><span class="t t-zh" lang="zh-CN">思想</span><span class="t t-ja" lang="ja">思想</span><span class="t t-en" lang="en">Philosophy</span></a><a class="nav-pill" href="#about"><span class="t t-zh" lang="zh-CN">关于</span><span class="t t-ja" lang="ja">私について</span><span class="t t-en" lang="en">About</span></a><a class="nav-pill" href="#research"><span class="t t-zh" lang="zh-CN">研究</span><span class="t t-ja" lang="ja">研究</span><span class="t t-en" lang="en">Research</span></a><a class="nav-pill" href="#faith"><span class="t t-zh" lang="zh-CN">信仰与人生</span><span class="t t-ja" lang="ja">信仰と人生</span><span class="t t-en" lang="en">Faith & Life</span></a><a class="nav-pill" href="#journal"><span class="t t-zh" lang="zh-CN">思想档案</span><span class="t t-ja" lang="ja">思索の記録</span><span class="t t-en" lang="en">Journal</span></a></nav>
+        <div class="language-toggle" role="group" aria-label="Language / 语言 / 言語">
+          <label for="lang-zh" title="中文">中</label><label for="lang-ja" title="日本語">日</label><label for="lang-en" title="English">EN</label>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="hero container" id="home" aria-label="Introduction">
+        <div class="hero-content">
+          <div class="eyebrow"><span class="t t-zh" lang="zh-CN">个人思想档案 / 从 2026 年开始</span><span class="t t-ja" lang="ja">個人の思索ノート / 2026年より</span><span class="t t-en" lang="en">PERSONAL JOURNAL / SINCE 2026</span></div>
+          <h1 class="hero-title"><span class="t t-zh" lang="zh-CN">一生为<br><em>复利忙碌。</em></span><span class="t t-ja" lang="ja">人生をかけて、<br><em>価値を積み重ねる。</em></span><span class="t t-en" lang="en">A life devoted<br><em>to what endures.</em></span></h1>
+          <p class="hero-tagline"><span class="t t-zh" lang="zh-CN">把时间投入真正值得的事情。</span><span class="t t-ja" lang="ja">本当に価値あることに、時間を注ぐ。</span><span class="t t-en" lang="en">Devote time to what truly matters.</span></p>
+          <p class="hero-desc"><span class="t t-zh" lang="zh-CN">研究长期价值、投资、技术与人类行为；在不确定的世界中寻找规律，也在信仰与日常生活中学习如何实践。</span><span class="t t-ja" lang="ja">長期的な価値、投資、技術、人間の行動を探究する。不確実な世界の仕組みを学び、信仰と日常生活の中で実践していく。</span><span class="t t-en" lang="en">Exploring long-term value, investing, technology, and human behavior—seeking clarity in an uncertain world, and learning to live by what matters.</span></p>
+          <div class="hero-cta">
+            <a href="#philosophy" class="cta cta-primary"><span class="t t-zh" lang="zh-CN">探索我的思想</span><span class="t t-ja" lang="ja">私の考え方を読む</span><span class="t t-en" lang="en">Explore the philosophy</span> <span class="arrow" aria-hidden="true">↗</span></a>
+            <a href="#journal" class="cta cta-outline"><span class="t t-zh" lang="zh-CN">阅读思想手记</span><span class="t t-ja" lang="ja">思索の記録を読む</span><span class="t t-en" lang="en">Read the journal</span> <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-caption"><span>VALUE</span><span class="caption-line"></span><span>TIME</span><span class="caption-line"></span><span>PRACTICE</span></div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <svg class="orbit-svg" viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="ring" x1="60" y1="25" x2="480" y2="500"><stop stop-color="#38bdf8" stop-opacity=".65"/><stop offset=".5" stop-color="#38bdf8" stop-opacity=".15"/><stop offset="1" stop-color="#fbbf24" stop-opacity=".7"/></linearGradient></defs>
+            <circle cx="260" cy="260" r="222" stroke="#577492" stroke-opacity=".30" stroke-width="1"/>
+            <circle cx="260" cy="260" r="194" stroke="url(#ring)" stroke-width="1.5"/>
+            <circle cx="260" cy="260" r="168" stroke="#496681" stroke-opacity=".31" stroke-width="1" stroke-dasharray="2 8"/>
+            <circle cx="260" cy="260" r="143" stroke="#47627e" stroke-opacity=".35" stroke-width="1"/>
+            <circle cx="260" cy="260" r="112" stroke="#d1b072" stroke-opacity=".19" stroke-width="1"/>
+            <g class="orbit-outer"><path d="M260 38A222 222 0 0 1 482 260" stroke="#38bdf8" stroke-opacity=".85" stroke-width="2"/><circle class="orbit-dot" cx="482" cy="260" r="4"/><circle cx="260" cy="38" r="4" fill="#38bdf8"/></g>
+            <g class="orbit-inner"><path d="M260 66 A194 194 0 0 0 66 260" stroke="#fbbf24" stroke-opacity=".75" stroke-width="2"/><circle cx="66" cy="260" r="3.8" fill="#fbbf24"/></g>
+            <path d="M260 7V66M260 454V513M7 260H66M454 260H513" stroke="#506887" stroke-opacity=".35" stroke-width="1"/>
+            <circle cx="260" cy="260" r="252" stroke="#3c526c" stroke-opacity=".15"/>
+          </svg>
+          <div class="orbit-core"><span class="orbit-caption">THE LONG VIEW<br>OF LIFE</span><span class="orbit-big">∞</span><span class="orbit-mini">WHAT MATTERS</span></div>
+          <span class="orbit-label l1">01 / VALUE</span><span class="orbit-label l2">02 / TIME</span><span class="orbit-label l3">03 / PRACTICE</span>
+        </div>
+      </section>
+      <div class="container values-strip" aria-label="Guiding principles">
+        <div class="value"><span class="number">01</span><p><span class="t t-zh" lang="zh-CN">理解规律</span><span class="t t-ja" lang="ja">原理を理解する</span><span class="t t-en" lang="en">UNDERSTAND</span></p></div>
+        <div class="value"><span class="number">02</span><p><span class="t t-zh" lang="zh-CN">尊重时间</span><span class="t t-ja" lang="ja">時間を尊重する</span><span class="t t-en" lang="en">RESPECT TIME</span></p></div>
+        <div class="value"><span class="number">03</span><p><span class="t t-zh" lang="zh-CN">持续实践</span><span class="t t-ja" lang="ja">実践し続ける</span><span class="t t-en" lang="en">KEEP PRACTICING</span></p></div>
+      </div>
+      <section class="question-section container section" id="philosophy">
+        <div class="section-kicker"><span class="section-index">00</span><span class="kicker-line"></span><span>THE CENTRAL QUESTION</span></div>
+        <h2 class="question-title"><span class="t t-zh" lang="zh-CN">什么值得我们<br><strong>用一生去坚持？</strong></span><span class="t t-ja" lang="ja">何に、<br><strong>人生をかける価値があるのか。</strong></span><span class="t t-en" lang="en">What is worth<br><strong>a lifetime of commitment?</strong></span></h2>
+        <p class="question-lead"><span class="t t-zh" lang="zh-CN">这个问题，把我的投资研究、技术探索、家庭责任与信仰生活联系在一起。我并不认为自己已经找到了所有答案；但我希望不断理解、验证、反思，并在每一天真实的选择中靠近它。</span><span class="t t-ja" lang="ja">この問いは、投資の研究、技術への探究、家族への責任、信仰生活を結びつけています。すべての答えを持っているわけではありません。理解し、確かめ、考え直し、日々の選択に生かしていきたいと思っています。</span><span class="t t-en" lang="en">This question connects my research, technical work, responsibility to family, and faith. I do not claim to have all the answers. I want to keep questioning, testing, reflecting, and bringing what I learn into everyday choices.</span></p>
+      </section>
+      <section class="section container" aria-labelledby="principles-title">
+        <div class="manifesto-head"><div><div class="section-kicker"><span class="section-index">01</span><span class="kicker-line"></span><span>THE WAY I THINK</span></div><h2 class="section-heading"><span class="t t-zh" lang="zh-CN">我的五条思考原则</span><span class="t t-ja" lang="ja">私の五つの原則</span><span class="t t-en" lang="en">Five Principles</span></h2></div>
+        <p class="section-lead"><span class="t t-zh" lang="zh-CN">不把思考当成答案的收藏，而把它当成一种需要反复检验、不断修正的实践。</span><span class="t t-ja" lang="ja">思考を答えの収集で終わらせず、繰り返し検証し、見直し続ける実践と捉えています。</span><span class="t t-en" lang="en">Thinking is not about collecting answers. It is a practice of examining and revising them.</span></p></div>
+        <div class="principle-grid"><article class="principle" aria-label="01">
+  <div class="principle-top"><span class="principle-no">01</span><span class="principle-en">LOOK DEEPER</span></div>
+  <h3><span class="t t-zh" lang="zh-CN">理解结构</span><span class="t t-ja" lang="ja">構造を理解する</span><span class="t t-en" lang="en">Understand the structure</span></h3><p><span class="t t-zh" lang="zh-CN">不满足于描述现象，继续追问它的组成、约束，以及真正驱动变化的因素。</span><span class="t t-ja" lang="ja">現象を説明するだけで終わらず、構成要素や制約、変化を生む本質的な要因を問い続けます。</span><span class="t t-en" lang="en">Look beyond events to the systems, constraints, and forces that shape them.</span></p></article><article class="principle" aria-label="02">
+  <div class="principle-top"><span class="principle-no">02</span><span class="principle-en">THINK IN DECADES</span></div>
+  <h3><span class="t t-zh" lang="zh-CN">尊重时间</span><span class="t t-ja" lang="ja">時間を味方につける</span><span class="t t-en" lang="en">Think in decades</span></h3><p><span class="t t-zh" lang="zh-CN">短期结果会受偶然性影响。真正值得研究的是，一项价值能否跨越周期。</span><span class="t t-ja" lang="ja">短期的な結果には偶然が含まれます。価値が長い時間に耐えられるかを考えます。</span><span class="t t-en" lang="en">Short-term results contain chance. Ask what can remain valuable across cycles.</span></p></article><article class="principle" aria-label="03">
+  <div class="principle-top"><span class="principle-no">03</span><span class="principle-en">PROTECT THE DOWNSIDE</span></div>
+  <h3><span class="t t-zh" lang="zh-CN">先管理风险</span><span class="t t-ja" lang="ja">まずリスクを管理する</span><span class="t t-en" lang="en">Protect the downside</span></h3><p><span class="t t-zh" lang="zh-CN">不是先问最好能得到什么，而是先确认最坏的情况会永久失去什么。</span><span class="t t-ja" lang="ja">最良の結果を想像する前に、最悪の場合に何を取り返しのつかない形で失うのかを考えます。</span><span class="t t-en" lang="en">Before chasing upside, ask what could be lost permanently.</span></p></article><article class="principle" aria-label="04">
+  <div class="principle-top"><span class="principle-no">04</span><span class="principle-en">KEEP LEARNING</span></div>
+  <h3><span class="t t-zh" lang="zh-CN">保持可纠错</span><span class="t t-ja" lang="ja">間違いを修正し続ける</span><span class="t t-en" lang="en">Stay open to correction</span></h3><p><span class="t t-zh" lang="zh-CN">原则可以长期坚持，方法却必须允许被事实修正。承认错误是进步的一部分。</span><span class="t t-ja" lang="ja">原則を大切にしながら、方法は事実に照らして見直します。誤りを認めることも成長の一部です。</span><span class="t t-en" lang="en">Hold to principles, but let evidence change your methods.</span></p></article><article class="principle" aria-label="05">
+  <div class="principle-top"><span class="principle-no">05</span><span class="principle-en">LIVE WHAT MATTERS</span></div>
+  <h3><span class="t t-zh" lang="zh-CN">把认识化为行动</span><span class="t t-ja" lang="ja">理解を行動に変える</span><span class="t t-en" lang="en">Turn thought into practice</span></h3><p><span class="t t-zh" lang="zh-CN">真正的长期价值，不只存在于思想中，也体现于每天如何对待工作、家人与他人。</span><span class="t t-ja" lang="ja">本当に大切な価値は、考えの中だけでなく、仕事や家族、人との関わり方に表れます。</span><span class="t t-en" lang="en">The deepest values are revealed in the way we work, care, and live each day.</span></p></article></div>
+      </section>
+      <section class="section about-section container" id="about">
+        <div class="about-side"><div class="section-kicker"><span class="section-index">02</span><span class="kicker-line"></span><span>THE PERSON BEHIND THE NOTES</span></div><h2 class="section-heading"><span class="t t-zh" lang="zh-CN">关于我</span><span class="t t-ja" lang="ja">私について</span><span class="t t-en" lang="en">About Me</span></h2><div class="about-symbol" aria-hidden="true">&</div>
+          <p class="section-lead"><span class="t t-zh" lang="zh-CN">保持好奇，也承认自己的有限。</span><span class="t t-ja" lang="ja">好奇心を持ちながら、自分の限界も忘れない。</span><span class="t t-en" lang="en">Staying curious, while knowing my limits.</span></p>
+        </div>
+        <div class="about-main">
+          <p class=""><span class="t t-zh" lang="zh-CN">我从事与金融市场相关的软件开发工作，也长期关注投资、宏观经济、金融交易、人工智能和人类行为。</span><span class="t t-ja" lang="ja">私は金融市場に関わるソフトウェア開発に携わりながら、投資、マクロ経済、金融取引、人工知能、人間の行動について学び続けています。</span><span class="t t-en" lang="en">I work in software development connected to financial markets, while pursuing a long-standing interest in investing, macroeconomics, financial trading, AI, and human behavior.</span></p>
+          <p class=""><span class="t t-zh" lang="zh-CN">面对复杂问题，我习惯先弄清楚它是什么、由什么构成、受到什么约束，再去理解现象背后的原因。比起快速得出结论，我更想知道它为什么成立，又在什么情况下可能失效。</span><span class="t t-ja" lang="ja">複雑な問題に向き合うときは、まず何を扱っているのか、何から成り、どのような制約があるのかを考えます。結論を急ぐより、なぜ成り立ち、どの条件で成り立たなくなるかを理解したいのです。</span><span class="t t-en" lang="en">When faced with complexity, I try to define the object, understand its components and constraints, and then examine the mechanisms behind the outcome. I care not only about why a conclusion holds, but also when it may fail.</span></p>
+          <p class=""><span class="t t-zh" lang="zh-CN">对我来说，学习不只是增加知识，而是让自己具备更好的判断力，以及修正错误的能力。</span><span class="t t-ja" lang="ja">私にとって学ぶとは、知識を増やすだけではなく、判断力と間違いを修正する力を育てることです。</span><span class="t t-en" lang="en">To me, learning is not simply adding knowledge. It is improving judgment and the willingness to correct mistakes.</span></p>
+          <div class="about-facts">
+            <div class="about-fact"><span class="tiny">WORK / <span class="t t-zh" lang="zh-CN">工作</span><span class="t t-ja" lang="ja">仕事</span><span class="t t-en" lang="en">WORK</span></span><strong><span class="t t-zh" lang="zh-CN">金融市场相关的软件开发</span><span class="t t-ja" lang="ja">金融市場関連のソフトウェア開発</span><span class="t t-en" lang="en">Financial software development</span></strong></div>
+            <div class="about-fact"><span class="tiny">FOCUS / <span class="t t-zh" lang="zh-CN">关注</span><span class="t t-ja" lang="ja">関心</span><span class="t t-en" lang="en">FOCUS</span></span><strong><span class="t t-zh" lang="zh-CN">价值 · 系统 · 长期规律</span><span class="t t-ja" lang="ja">価値 · システム · 長期的な原理</span><span class="t t-en" lang="en">Value · Systems · Long-term principles</span></strong></div>
+          </div>
+        </div>
+      </section>
+      <section class="section research-section" id="research"><div class="container">
+        <div class="research-header"><div><div class="section-kicker"><span class="section-index">03</span><span class="kicker-line"></span><span>RESEARCH / OBSERVE / TEST</span></div><h2 class="section-heading"><span class="t t-zh" lang="zh-CN">我的研究领域</span><span class="t t-ja" lang="ja">探究している領域</span><span class="t t-en" lang="en">Areas of Inquiry</span></h2></div>
+         <p class="section-lead"><span class="t t-zh" lang="zh-CN">不同领域，不同工具，但始终追问相似的问题：什么决定长期结果？</span><span class="t t-ja" lang="ja">領域も道具も異なりますが、問いは共通しています。長期的な結果を決めるのは何か。</span><span class="t t-en" lang="en">Different fields and tools, but a shared question: what ultimately shapes long-term outcomes?</span></p></div>
+        <div class="research-grid"><article class="research-card research-1">
+  <div class="research-card-head"><span class="research-num">01 / 03</span><span class="research-symbol"><svg viewBox="0 0 80 70" fill="none" aria-hidden="true"><path d="M4 60H76M4 60V8" stroke="currentColor" stroke-opacity=".28"/><path d="M8 51L24 43L35 49L51 23L66 31L76 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="51" cy="23" r="4" fill="#0b1120" stroke="currentColor" stroke-width="2"/></svg></span></div>
+  <div><span class="overline">MARKETS & VALUE</span><h3><span class="t t-zh" lang="zh-CN">市场与价值</span><span class="t t-ja" lang="ja">市場と価値</span><span class="t t-en" lang="en">Markets & Value</span></h3>
+  <p><span class="t t-zh" lang="zh-CN">投资、宏观经济与交易，让我持续研究价格背后的价值、概率、激励和风险。</span><span class="t t-ja" lang="ja">投資、マクロ経済、金融取引を通して、価格の背後にある価値、確率、インセンティブ、リスクを考えます。</span><span class="t t-en" lang="en">Investing, macroeconomics, and trading are ways to study value, probability, incentives, and risk.</span></p></div>
+</article><article class="research-card research-2">
+  <div class="research-card-head"><span class="research-num">02 / 03</span><span class="research-symbol"><svg viewBox="0 0 80 70" fill="none" aria-hidden="true"><rect x="6" y="12" width="28" height="22" rx="3" stroke="currentColor"/><rect x="46" y="12" width="28" height="22" rx="3" stroke="currentColor"/><rect x="26" y="46" width="28" height="18" rx="3" stroke="currentColor"/><path d="M34 23H46M40 23V41M40 41V46" stroke="currentColor" stroke-width="2"/><circle cx="40" cy="41" r="3" fill="currentColor"/></svg></span></div>
+  <div><span class="overline">SYSTEMS & TECHNOLOGY</span><h3><span class="t t-zh" lang="zh-CN">系统与技术</span><span class="t t-ja" lang="ja">システムと技術</span><span class="t t-en" lang="en">Systems & Technology</span></h3>
+  <p><span class="t t-zh" lang="zh-CN">软件开发和人工智能让我认识到：复杂结果往往来自结构、反馈与约束之间的相互作用。</span><span class="t t-ja" lang="ja">ソフトウェア開発とAIから、複雑な結果は構造、フィードバック、制約の相互作用で生まれると学びます。</span><span class="t t-en" lang="en">Software and AI reveal how complex outcomes emerge from structure, feedback, and constraints.</span></p></div>
+</article><article class="research-card research-3">
+  <div class="research-card-head"><span class="research-num">03 / 03</span><span class="research-symbol"><svg viewBox="0 0 80 70" fill="none" aria-hidden="true"><circle cx="40" cy="35" r="26" stroke="currentColor" stroke-opacity=".45"/><circle cx="40" cy="35" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M40 9V25M40 45V61M14 35H30M50 35H66M21 16L33 28M47 42L59 54M21 54L33 42M47 28L59 16" stroke="currentColor" stroke-opacity=".7"/><circle cx="40" cy="35" r="3" fill="currentColor"/></svg></span></div>
+  <div><span class="overline">HUMANS & DECISIONS</span><h3><span class="t t-zh" lang="zh-CN">人性与决策</span><span class="t t-ja" lang="ja">人間と意思決定</span><span class="t t-en" lang="en">People & Decisions</span></h3>
+  <p><span class="t t-zh" lang="zh-CN">研究市场，也是在研究人。恐惧、信任、习惯与判断，常常决定长期结果的方向。</span><span class="t t-ja" lang="ja">市場を学ぶことは人を学ぶことでもあります。恐れ、信頼、習慣、判断が長期的な結果を左右します。</span><span class="t t-en" lang="en">Studying markets also means studying people: fear, trust, habits, and judgment.</span></p></div>
+</article></div>
+        <div class="research-bottom"><span class="marker">!</span><p><span class="t t-zh" lang="zh-CN">我相信，真正成熟的判断，必须同时看到机会和风险，也必须区分已确认的事实、合理的推断与尚不可知的部分。</span><span class="t t-ja" lang="ja">成熟した判断には、機会とリスクの両方を見ること、確認された事実と推論、まだ分からないことを区別する姿勢が欠かせません。</span><span class="t t-en" lang="en">Sound judgment sees both opportunity and risk—and separates established facts, reasonable inference, and the unknown.</span></p></div>
+      </div></section>
+      <section class="section faith-section container" id="faith">
+        <div>
+          <div class="section-kicker"><span class="section-index">04</span><span class="kicker-line"></span><span>FAITH / FAMILY / LIFE</span></div>
+          <h2 class="faith-title"><span class="t t-zh" lang="zh-CN">财富是工具，<br><em>不是生命的终点。</em></span><span class="t t-ja" lang="ja">富は手段。<br><em>人生の最終目的ではない。</em></span><span class="t t-en" lang="en">Wealth is a tool,<br><em>not the purpose of life.</em></span></h2>
+          <p class="faith-paragraph"><span class="t t-zh" lang="zh-CN">家人的爱、彼此的信任、一个人的品格，以及面对困难时愿意承担的责任，都不能用收益率衡量。</span><span class="t t-ja" lang="ja">家族への愛、人と人との信頼、誠実さ、困難の中で責任を果たすこと。それらは利回りでは測れません。</span><span class="t t-en" lang="en">Love within a family, trust between people, character, and responsibility in difficult moments cannot be measured by rates of return.</span></p>
+          <p class="faith-paragraph"><span class="t t-zh" lang="zh-CN">基督信仰是我理解生命价值的重要根基。主耶稣基督的教导，让我学习谦卑、诚实、忠心、饶恕与爱，也提醒我：知道正确的道理，与真正去行之间，还有每天真实的选择。</span><span class="t t-ja" lang="ja">キリスト教信仰は、私が人生の価値を考えるうえで大切な土台です。イエス・キリストの教えから謙遜、誠実、忠実、赦し、愛を学びます。正しいことを知るだけでなく、それを日々行うことが問われます。</span><span class="t t-en" lang="en">Christian faith is an important foundation for how I understand the value of life. Through the teachings of Jesus Christ, I seek humility, honesty, faithfulness, forgiveness, and love—and I am reminded that knowing what is right is not the same as living it.</span></p>
+        </div>
+        <div class="faith-art" aria-hidden="true"><div class="faith-ring"><div class="faith-ring-inner"><span class="small">BEYOND THE NUMBERS</span><span class="large"><span class="t t-zh" lang="zh-CN">爱 · 忠心<br>与真实的生命</span><span class="t t-ja" lang="ja">愛 · 忠実<br>そして人生</span><span class="t t-en" lang="en">Love · Faithfulness<br>Life</span></span><span class="line"></span></div></div></div>
+      </section>
+      <section class="section journal-section container" id="journal">
+        <div class="journal-header"><div><div class="section-kicker"><span class="section-index">05</span><span class="kicker-line"></span><span>THINK / WRITE / REVISE</span></div><h2 class="section-heading"><span class="t t-zh" lang="zh-CN">思想档案</span><span class="t t-ja" lang="ja">思索の記録</span><span class="t t-en" lang="en">Notes for the Long Run</span></h2></div>
+         <p class="journal-caption"><span class="t t-zh" lang="zh-CN">这些是网站的第一组思想片段。点击即可展开阅读；它们并非不可改变的结论，而是继续研究的起点。</span><span class="t t-ja" lang="ja">これはサイト最初の思索メモです。押すと内容を読めます。完成した結論ではなく、これから考え続けるための出発点です。</span><span class="t t-en" lang="en">These opening reflections are starting points, not final conclusions. Select a note to read more.</span></p></div>
+        <div class="note-list"><details class="note-card"><summary><span class="note-index">01 / VALUE & PRICE</span><span class="note-headline"><span class="t t-zh" lang="zh-CN">价格与价值</span><span class="t t-ja" lang="ja">価格と価値</span><span class="t t-en" lang="en">Price & Value</span></span><span class="note-description"><span class="t t-zh" lang="zh-CN">市场每天都会给出价格，却不会替我们回答资产未来能够创造什么。</span><span class="t t-ja" lang="ja">市場は毎日価格を示しますが、その資産が将来何を生み出すかまでは教えてくれません。</span><span class="t t-en" lang="en">Markets quote prices every day, but they do not tell us what an asset may create over time.</span></span><span class="note-open" aria-hidden="true">+</span></summary><div class="note-body"><p><span class="t t-zh" lang="zh-CN">判断长期价值，需要观察现金流、竞争优势、资本配置，以及购买时付出的代价。价格下跌不自动意味着机会，价格上涨也不自动意味着价值改善。</span><span class="t t-ja" lang="ja">長期的な価値を考えるには、キャッシュフロー、競争優位、資本配分、そして購入価格を見ます。値下がりが必ず好機になるわけでも、値上がりが価値の向上を意味するわけでもありません。</span><span class="t t-en" lang="en">Long-term value calls for examining cash flow, competitive advantage, capital allocation, and the price paid. A falling price is not automatically an opportunity; a rising price does not necessarily mean improved value.</span></p></div></details><details class="note-card"><summary><span class="note-index">02 / COMPOUNDING & RISK</span><span class="note-headline"><span class="t t-zh" lang="zh-CN">时间也会放大错误</span><span class="t t-ja" lang="ja">時間は誤りも大きくする</span><span class="t t-en" lang="en">Time Amplifies Mistakes Too</span></span><span class="note-description"><span class="t t-zh" lang="zh-CN">复利并非“只要坚持就会成功”。方向、反馈和避免毁灭性损失都同样重要。</span><span class="t t-ja" lang="ja">複利は「続ければ必ず成功する」という意味ではありません。方向、フィードバック、致命的な損失の回避が欠かせません。</span><span class="t t-en" lang="en">Compounding is not a promise that persistence always wins. Direction, feedback, and survival matter.</span></span><span class="note-open" aria-hidden="true">+</span></summary><div class="note-body"><p><span class="t t-zh" lang="zh-CN">有些行动会留下能力、信任与新的选择空间；另一些行动则可能反复消耗健康、关系和资源。时间只会让这些后果更加明显，因此必须及时纠错。</span><span class="t t-ja" lang="ja">ある行動は能力、信頼、新しい選択肢を育てますが、健康、人間関係、資源を消耗し続ける行動もあります。時間はその違いを明らかにするため、修正が必要です。</span><span class="t t-en" lang="en">Some actions build skill, trust, and options. Others steadily deplete health, relationships, and resources. Time makes the difference more visible, which is why correction matters.</span></p></div></details><details class="note-card"><summary><span class="note-index">03 / KNOWING & DOING</span><span class="note-headline"><span class="t t-zh" lang="zh-CN">知道与去行之间</span><span class="t t-ja" lang="ja">知ることと行うことの間</span><span class="t t-en" lang="en">Between Knowing and Doing</span></span><span class="note-description"><span class="t t-zh" lang="zh-CN">真正理解一条原则，不仅是能够解释它，更是在日常生活中愿意按照它行动。</span><span class="t t-ja" lang="ja">原則を本当に理解するとは、説明できるだけでなく、日々の生活でそれに沿って行動することでもあります。</span><span class="t t-en" lang="en">Understanding a principle is more than explaining it. It means living by it.</span></span><span class="note-open" aria-hidden="true">+</span></summary><div class="note-body"><p><span class="t t-zh" lang="zh-CN">我可以讨论长期主义、诚信与爱，但真正的检验发生在面对压力、疲惫和冲突的时候。信仰不断提醒我：听见与遵行之间，还有每天真实的选择。</span><span class="t t-ja" lang="ja">長期主義、誠実さ、愛について語れても、その真価はストレスや疲れ、衝突の中で問われます。信仰は、聞くことと行うことの間に、日々の選択があると教えてくれます。</span><span class="t t-en" lang="en">I may speak about patience, integrity, and love. Their real test comes in fatigue, pressure, and conflict. Faith reminds me that between hearing and doing lie our daily choices.</span></p></div></details></div>
+      </section>
+      <section class="closing"><div class="container closing-inner">
+        <div class="closing-kicker">A LIFE IN PROGRESS</div>
+        <h2 class="closing-title"><span class="t t-zh" lang="zh-CN">把时间投入<br><strong>真正值得的事情。</strong></span><span class="t t-ja" lang="ja">本当に価値あることに、<br><strong>時間を注ぐ。</strong></span><span class="t t-en" lang="en">Devote time to<br><strong>what truly matters.</strong></span></h2>
+        <p class="closing-text"><span class="t t-zh" lang="zh-CN">我不希望用一生证明自己永远正确，而希望在有限的岁月里，不断理解真正的价值，珍惜身边的人，并努力把所认识的道理活出来。</span><span class="t t-ja" lang="ja">一生をかけて自分の正しさを証明したいのではありません。限られた時間の中で、本当に大切なものを学び、人を大切にし、学んだことを生き方に変えていきたいと思います。</span><span class="t t-en" lang="en">I do not want to spend a lifetime proving I was always right. I want to keep learning what matters, caring for those around me, and turning understanding into a way of life.</span></p>
+        <a class="back-top" href="#top"><span class="t t-zh" lang="zh-CN">返回首页</span><span class="t t-ja" lang="ja">ページの先頭へ</span><span class="t t-en" lang="en">Back to the beginning</span> <span aria-hidden="true">↑</span></a>
+      </div></section>
+    </main>
+    <footer class="footer"><div class="container footer-inner"><small>© 2026 · <span class="t t-zh" lang="zh-CN">一生为复利忙碌 · 一份持续写作的个人思想档案</span><span class="t t-ja" lang="ja">価値を積み重ねる · 書き続ける個人の思索ノート</span><span class="t t-en" lang="en">A Life Devoted to What Endures · A personal journal in progress</span></small><span class="footer-mark" aria-hidden="true">∞</span></div></footer>
   </div>
-  <label class="title">人员类型 <span class="required">*</span></label>
-  <div class="options">
-  <label class="option"><input type="radio" name="companion_type_${id}" value="大人（高中生以上）" required><span>大人（高中生以上）</span></label>
-  <label class="option"><input type="radio" name="companion_type_${id}" value="3岁～中学生"><span>3岁～中学生</span></label>
-  <label class="option"><input type="radio" name="companion_type_${id}" value="3岁未满"><span>3岁未满</span></label>
-  </div>`;
-  document.getElementById('companions').appendChild(companion);
-}
-
-function removeCompanion(id) {
-  document.getElementById('companion-' + id)?.remove();
-}
-
-document.getElementById('form').addEventListener('submit', async function (event) {
-  event.preventDefault();
-
-  if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('请粘贴')) {
-    alert('请先把 Google Apps Script 的 Web App URL 填入 HTML 顶部的 GOOGLE_SCRIPT_URL。');
-    return;
-  }
-
-  const formData = new FormData(this);
-  const applicant = {
-    name: formData.get('name'),
-    gender: formData.get('gender'),
-    category: formData.get('category'),
-    ...fullRetreatDetails()
-  };
-
-  const companions = [];
-  for (const block of document.querySelectorAll('#companions .people')) {
-    const id = block.id.replace('companion-', '');
-    const name = block.querySelector('input[name="companion_name[]"]').value.trim();
-    const gender = block.querySelector(`input[name="companion_gender_${id}"]:checked`)?.value || '';
-    const category = block.querySelector(`input[name="companion_type_${id}"]:checked`)?.value || '';
-    if (!name || !gender || !category) {
-      alert(`请完整填写同行者 ${id} 的资料。`);
-      return;
+  <script>
+  /* Optional enhancement only: switching works with CSS when scripts are blocked. */
+  (function () {
+    const radios = document.querySelectorAll('input[name="language"]');
+    const langs = {zh:'zh-CN',ja:'ja',en:'en'};
+    const titles = {zh:'一生为复利忙碌 · 把时间投入真正值得的事情',ja:'人生をかけて、価値を積み重ねる · 個人の思索ノート',en:'A Life Devoted to What Endures · Personal Journal'};
+    function apply(radio) {
+      if (!radio || !radio.checked) return;
+      const id = radio.id.slice(5);
+      document.documentElement.lang = langs[id] || 'zh-CN';
+      document.title = titles[id] || titles.zh;
+      try { localStorage.setItem('personal-home-lang',id); } catch (_) {}
     }
-    companions.push({ name, gender, category, ...fullRetreatDetails() });
-  }
-
-  const data = {
-    church: formData.get('church'),
-    postalCode: formData.get('postalCode'),
-    address: formData.get('address'),
-    familyId: '',
-    applicant,
-    companions,
-    newfriend: formData.get('newfriend') || '',
-    newfriendName: formData.get('newfriendName') || '',
-    note: formData.get('note') || '',
-    transport: formData.get('transport')
-  };
-
-  const result = document.getElementById('result');
-  result.classList.remove('error');
-  result.style.display = 'block';
-  result.textContent = '正在提交报名资料……';
-
-  try {
-    await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(data)
-    });
-    result.innerHTML = '<b>报名资料已送出！</b><br>感谢您的报名。教会同工会根据报名资料进行后续安排。';
-    this.reset();
-    document.getElementById('companions').innerHTML = '';
-    companionCount = 0;
-    window.setTimeout(loadRegistrationSummary, 1000);
-  } catch (error) {
-    result.classList.add('error');
-    result.innerHTML = '<b>提交失败</b><br>请检查网络连接，或联系教会同工。';
-  }
-});
-
-document.getElementById('queryForm').addEventListener('submit', async function (event) {
-  event.preventDefault();
-  if (queryInProgress || paymentEntryInProgress) return;
-  const name = document.getElementById('queryName').value.trim();
-  const output = document.getElementById('queryResult');
-  if (!name) return;
-  const submitButton = this.querySelector('button[type="submit"]');
-  const paymentButton = document.getElementById('payment-button');
-
-  queryInProgress = true;
-  submitButton.disabled = true;
-  paymentButton.disabled = true;
-  output.innerHTML = '<div class="result" style="display:block">正在查询报名资料……</div>';
-  try {
-    const data = await queryByJsonp(name);
-    rememberPaymentSearch(name, data);
-    renderQueryResult(data);
-  } catch (error) {
-    output.innerHTML = '<div class="result error" style="display:block"><b>查询失败</b><br>' + escapeHtml(error.message || '请稍后再试。') + '</div>';
-  } finally {
-    queryInProgress = false;
-    submitButton.disabled = false;
-    paymentButton.disabled = false;
-  }
-});
-
-document.getElementById('payment-button').addEventListener('click', async function () {
-  if (paymentEntryInProgress || queryInProgress) return;
-  const name = document.getElementById('queryName').value.trim();
-  const output = document.getElementById('queryResult');
-  if (!name) {
-    alert('请先输入报名者姓名。');
-    return;
-  }
-  const paymentButton = this;
-  const querySubmitButton = document.querySelector('#queryForm button[type="submit"]');
-  paymentEntryInProgress = true;
-  paymentButton.disabled = true;
-  querySubmitButton.disabled = true;
-  output.innerHTML = '<div class="result" style="display:block">正在读取家庭费用资料……</div>';
-  try {
-    const data = canReuseRecentPaymentSearch(name)
-      ? latestPaymentSearch
-      : await queryByJsonp(name);
-    rememberPaymentSearch(name, data);
-    renderPaymentOptions(data);
-  } catch (error) {
-    output.innerHTML = '<div class="result error" style="display:block"><b>读取失败</b><br>' + escapeHtml(error.message || '请稍后再试。') + '</div>';
-  } finally {
-    paymentEntryInProgress = false;
-    paymentButton.disabled = false;
-    querySubmitButton.disabled = false;
-  }
-});
-
-function normalizeSearchName(value) {
-  return String(value || '').replace(/[\s\u3000]+/g, '').toLowerCase();
-}
-
-function rememberPaymentSearch(name, data) {
-  latestPaymentSearch = data;
-  latestPaymentSearchName = normalizeSearchName(name);
-  latestPaymentSearchAt = Date.now();
-}
-
-function canReuseRecentPaymentSearch(name) {
-  return Boolean(latestPaymentSearch) &&
-    latestPaymentSearchName === normalizeSearchName(name) &&
-    Date.now() - latestPaymentSearchAt < RECENT_QUERY_REUSE_MS;
-}
-
-function queryByJsonp(name) {
-  return new Promise(function (resolve, reject) {
-    const callback = '__registrationQuery' + Date.now() + Math.floor(Math.random() * 10000);
-    const script = document.createElement('script');
-    let finished = false;
-    const cleanup = function () {
-      delete window[callback];
-      script.remove();
-    };
-    const timer = setTimeout(function () {
-      if (finished) return;
-      finished = true;
-      cleanup();
-      reject(new Error('查询超时，请检查网络后重试。'));
-    }, JSONP_TIMEOUT_MS);
-
-    window[callback] = function (data) {
-      if (finished) return;
-      finished = true;
-      clearTimeout(timer);
-      cleanup();
-      if (!data || !data.ok) reject(new Error((data && data.error) || '未能读取报名资料。'));
-      else resolve(data);
-    };
-    script.onerror = function () {
-      if (finished) return;
-      finished = true;
-      clearTimeout(timer);
-      cleanup();
-      reject(new Error('无法连接报名资料服务。'));
-    };
-    script.src = GOOGLE_SCRIPT_URL + '?action=query&name=' + encodeURIComponent(name) + '&callback=' + callback + '&_=' + Date.now();
-    document.body.appendChild(script);
-  });
-}
-
-function renderQueryResult(data) {
-  const output = document.getElementById('queryResult');
-  if (!data.groups || data.groups.length === 0) {
-    output.innerHTML = '<div class="result error" style="display:block">没有找到该姓名的报名资料，请确认姓名是否与报名时一致。</div>';
-    return;
-  }
-
-  output.innerHTML = data.groups.map(function (group) {
-    const payment = group.payment || { status: PAYMENT_STATUS.UNPAID };
-    const members = group.members.map(function (member) {
-      const discount = member.discount > 0
-        ? '<div class="discount">早期报名优惠：－' + yen(member.discount) + '（原价 ' + yen(member.baseFee) + '）</div>'
-        : '';
-      return '<div class="member">' +
-        '<b>' + escapeHtml(member.name) + '</b><br>' +
-        '所属教会：' + escapeHtml(member.church || '未填写') + '<br>' +
-        '性别：' + escapeHtml(member.gender || '未填写') + '<br>' +
-        '人员类型：' + escapeHtml(member.category || '未填写') + '<br>' +
-        '<span class="member-fee">个人费用：' + yen(member.fee) + '</span>' + discount +
-        '</div>';
-    }).join('');
-
-    return '<section class="query-family">' +
-      '<div class="query-meta">申请人：' + escapeHtml(group.members[0] && group.members[0].name || '') + '<br>报名编号：' + escapeHtml(group.registrationId) + '<br>提交时间：' + escapeHtml(group.submittedAt) +
-      '<br>缴费状态：<span class="payment-status ' + paymentStatusClass(payment.status) + '">' + escapeHtml(payment.status || PAYMENT_STATUS.UNPAID) + '</span>' +
-      (payment.confirmedBy ? '<br>缴费确认者：' + escapeHtml(payment.confirmedBy) : '') +
-      (group.discounted ? '<br><span class="discount">本家庭符合每人减免 500円 条件</span>' : '') + '</div>' +
-      members +
-      '<div class="family-total">家庭总费用：' + yen(group.totalFee) + '</div>' +
-      '</section>';
-  }).join('');
-}
-
-function paymentStatusClass(status) {
-  if (status === PAYMENT_STATUS.PAID) return 'paid';
-  if (status === PAYMENT_STATUS.PENDING) return 'pending';
-  return '';
-}
-
-function paymentAmount(group, halfPrice) {
-  return Number(group.totalFee || 0) / (halfPrice ? 2 : 1);
-}
-
-function renderPaymentOptions(data) {
-  const output = document.getElementById('queryResult');
-  if (!data.groups || data.groups.length === 0) {
-    output.innerHTML = '<div class="result error" style="display:block">没有找到该姓名的报名资料，请确认姓名是否与报名时一致。</div>';
-    return;
-  }
-  output.innerHTML = '<p class="small">请确认家庭费用与付款方式。付款登记后，相关负责人核对实际收款再确认完成。</p>';
-  data.groups.forEach(function(group, groupIndex) {
-    const payment = group.payment || { status: PAYMENT_STATUS.UNPAID, method: '', finalAmount: group.totalFee, halfPrice: false };
-    const card = document.createElement('section');
-    card.className = 'query-family payment-family';
-    const members = group.members.map(function(member) {
-      return '<div class="member"><b>' + escapeHtml(member.name) + '</b>（' + escapeHtml(member.category) + '）<br>' +
-        '<span class="member-fee">个人费用：' + yen(member.fee) + '</span>' +
-        (member.discount > 0 ? '<div class="discount">早期报名优惠：－' + yen(member.discount) + '</div>' : '') + '</div>';
-    }).join('');
-    const status = payment.status || PAYMENT_STATUS.UNPAID;
-    const actualAmount = status === PAYMENT_STATUS.UNPAID
-      ? paymentAmount(group, Boolean(payment.halfPrice))
-      : Number(payment.finalAmount || group.totalFee);
-    card.innerHTML = '<h3>' + escapeHtml(group.members[0] && group.members[0].name || '申请人') + ' 家庭</h3>' +
-      '<div class="query-meta">所属教会：' + escapeHtml(group.church || '') + '<br>报名编号：' + escapeHtml(group.registrationId) +
-      '<br>缴费状态：<span class="payment-status ' + paymentStatusClass(status) + '">' + escapeHtml(status) + '</span></div>' +
-      members +
-      '<div class="payment-amount">家庭应缴金额：<strong class="payment-amount-value">' + yen(actualAmount) + '</strong></div>';
-
-    if (status === PAYMENT_STATUS.PAID) {
-      card.insertAdjacentHTML('beforeend', '<p class="payment-note">此家庭费用已确认缴纳。' +
-        (payment.confirmedAt ? '确认时间：' + escapeHtml(payment.confirmedAt) : '') + '</p>');
-    } else if (status === PAYMENT_STATUS.PENDING) {
-      if (payment.method === 'PayPay') {
-        card.insertAdjacentHTML('beforeend', '<p class="payment-note">已登记 PayPay 付款，等待相关负责人核对。请保留付款验证码。</p>' +
-          '<div class="payment-methods"><button class="btn view-paypay-code" type="button">查看 PayPay 付款验证码</button></div>');
-        card.querySelector('.view-paypay-code').addEventListener('click', function() {
-          showExistingPayPayInstructions(group);
-        });
-      } else {
-        card.insertAdjacentHTML('beforeend', '<p class="payment-note">已登记线下现金缴费，等待相关负责人确认收款。</p>');
-      }
-    } else {
-      let halfPriceOption = '';
-      if (group.church === '户田教会') {
-        halfPriceOption = '<label class="half-price-option"><input class="half-price-checkbox" type="checkbox">' +
-          '<span>所属户田教会，并且符合享受半额待遇</span></label>';
-      }
-      card.insertAdjacentHTML('beforeend', halfPriceOption + '<div class="payment-methods"></div>');
-      const methodButtons = card.querySelector('.payment-methods');
-      if (group.church === '池袋教会') {
-        const paypayButton = document.createElement('button');
-        paypayButton.type = 'button';
-        paypayButton.className = 'btn';
-        paypayButton.textContent = 'PayPay';
-        paypayButton.addEventListener('click', function() {
-          startPayPayPayment(group, false);
-        });
-        methodButtons.appendChild(paypayButton);
-      }
-      const cashButton = document.createElement('button');
-      cashButton.type = 'button';
-      cashButton.className = 'btn cash';
-      cashButton.textContent = '线下现金';
-      cashButton.addEventListener('click', function() {
-        const halfPrice = Boolean(card.querySelector('.half-price-checkbox') && card.querySelector('.half-price-checkbox').checked);
-        openCashConfirmation(group, halfPrice);
-      });
-      methodButtons.appendChild(cashButton);
-      const halfCheckbox = card.querySelector('.half-price-checkbox');
-      if (halfCheckbox) {
-        halfCheckbox.addEventListener('change', function() {
-          if (halfCheckbox.checked && !window.confirm('所属户田教会，并且符合享受半额待遇')) {
-            halfCheckbox.checked = false;
-          }
-          card.querySelector('.payment-amount-value').textContent = yen(paymentAmount(group, halfCheckbox.checked));
-        });
-      }
-    }
-    output.appendChild(card);
-  });
-}
-
-function showModal(content) {
-  document.getElementById('modal-content').innerHTML = content;
-  const doneButton = document.getElementById('modal-done');
-  if (doneButton) doneButton.addEventListener('click', closeModal);
-  document.getElementById('modal-overlay').hidden = false;
-}
-
-function closeModal() {
-  document.getElementById('modal-overlay').hidden = true;
-  document.getElementById('modal-content').innerHTML = '';
-}
-
-function sendBackendRequest(payload) {
-  if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('请粘贴')) {
-    return Promise.reject(new Error('尚未设定报名资料服务。'));
-  }
-  return fetch(GOOGLE_SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(payload)
-  });
-}
-
-function jsonpRequest(action, params, callbackPrefix, timeoutMs) {
-  return new Promise(function(resolve, reject) {
-    const callback = callbackPrefix + Date.now() + Math.floor(Math.random() * 10000);
-    const script = document.createElement('script');
-    let finished = false;
-    const cleanup = function() {
-      delete window[callback];
-      script.remove();
-    };
-    const timer = setTimeout(function() {
-      if (finished) return;
-      finished = true;
-      cleanup();
-      reject(new Error('请求逾时，请稍后再试。'));
-    }, timeoutMs || JSONP_TIMEOUT_MS);
-    window[callback] = function(data) {
-      if (finished) return;
-      finished = true;
-      clearTimeout(timer);
-      cleanup();
-      resolve(data);
-    };
-    script.onerror = function() {
-      if (finished) return;
-      finished = true;
-      clearTimeout(timer);
-      cleanup();
-      reject(new Error('无法连接报名资料服务。'));
-    };
-    const query = Object.keys(params || {}).map(function(key) {
-      return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
-    });
-    query.unshift('callback=' + encodeURIComponent(callback));
-    query.unshift('action=' + encodeURIComponent(action));
-    query.push('_=' + Date.now());
-    script.src = GOOGLE_SCRIPT_URL + '?' + query.join('&');
-    document.body.appendChild(script);
-  });
-}
-
-function getPaymentByJsonp(registrationId, timeoutMs) {
-  return jsonpRequest('payment', { registrationId: registrationId }, '__paymentLookup', timeoutMs).then(function(data) {
-    if (!data || !data.ok || !data.payment) throw new Error((data && data.error) || '未能读取缴费资料。');
-    return data.payment;
-  });
-}
-
-function wait(milliseconds) {
-  return new Promise(function(resolve) { window.setTimeout(resolve, milliseconds); });
-}
-
-async function waitForPaymentResult(registrationId, isComplete) {
-  let lastReadError = null;
-  for (let attempt = 0; attempt < PAYMENT_RESULT_DELAYS_MS.length; attempt++) {
-    const delay = PAYMENT_RESULT_DELAYS_MS[attempt];
-    if (delay) await wait(delay);
-    try {
-      const payment = await getPaymentByJsonp(registrationId, PAYMENT_POLL_TIMEOUT_MS);
-      if (isComplete(payment)) return payment;
-    } catch (error) {
-      lastReadError = error;
-    }
-  }
-  if (lastReadError) {
-    throw new Error('服务器仍在确认处理结果。请先重新查询缴费状态，不要重复提交。');
-  }
-  throw new Error('缴费资料仍在更新。请先重新查询缴费状态，不要重复提交。');
-}
-
-async function createPaymentIntent(group, method, halfPrice) {
-  await sendBackendRequest({
-    action: 'paymentIntent',
-    registrationId: group.registrationId,
-    method: method,
-    halfPrice: halfPrice
-  });
-  return waitForPaymentResult(group.registrationId, function(payment) {
-    return payment.status !== PAYMENT_STATUS.UNPAID;
-  });
-}
-
-async function preparePayPayPayment(group) {
-  await sendBackendRequest({ action: 'preparePayPay', registrationId: group.registrationId });
-  return waitForPaymentResult(group.registrationId, function(payment) {
-    return /^\d{6}$/.test(String(payment.code || ''));
-  });
-}
-
-function applyPaymentToGroup(group, payment) {
-  group.payment = {
-    status: payment.status,
-    method: payment.method,
-    finalAmount: payment.finalAmount,
-    halfPrice: payment.halfPrice,
-    confirmedAt: payment.confirmedAt || '',
-    code: payment.code || ''
-  };
-  latestPaymentSearchAt = Date.now();
-}
-
-async function startPayPayPayment(group, halfPrice) {
-  showModal('<h2 id="modal-title">正在准备 PayPay 缴费资料</h2><p>请稍候……</p>');
-  try {
-    const payment = await preparePayPayPayment(group, halfPrice);
-    applyPaymentToGroup(group, payment);
-    renderPaymentOptions(latestPaymentSearch);
-    showPayPayInstructions(group, payment);
-  } catch (error) {
-    showModal('<h2 id="modal-title">无法准备付款资料</h2><p>' + escapeHtml(error.message || '请稍后再试。') + '</p>' + modalCloseButton());
-  }
-}
-
-async function showExistingPayPayInstructions(group) {
-  showModal('<h2 id="modal-title">正在读取付款验证码</h2><p>请稍候……</p>');
-  try {
-    const payment = await getPaymentByJsonp(group.registrationId);
-    showPayPayInstructions(group, payment);
-  } catch (error) {
-    showModal('<h2 id="modal-title">无法读取付款资料</h2><p>' + escapeHtml(error.message || '请稍后再试。') + '</p>' + modalCloseButton());
-  }
-}
-
-function showPayPayInstructions(group, payment) {
-  const code = String(payment.code || '');
-  if (!/^\d{6}$/.test(code)) {
-    showModal('<h2 id="modal-title">付款验证码无效</h2><p>请联系相关负责人协助处理。</p>' + modalCloseButton());
-    return;
-  }
-  showModal('<h2 id="modal-title">PayPay 缴费</h2>' +
-    '<p>请支付 <strong>' + yen(payment.finalAmount) + '</strong>。付款前请完成以下步骤。</p>' +
-    '<div class="important-note">付款留言必须填写下方 6 位验证码。未填写验证码，负责人将无法快速核对付款。</div>' +
-    '<div class="payment-code"><span>付款留言请仅填写</span><strong>' + escapeHtml(code) + '</strong><button class="copy-code" id="copy-payment-code" type="button">复制验证码</button></div>' +
-    '<ol class="payment-note"><li>在 PayPay 中填写应缴金额。</li><li>将上方 6 位验证码粘贴到付款留言。</li><li>确认金额与验证码无误后再转账。</li></ol>' +
-    '<label class="half-price-option"><input id="paypay-understood" type="checkbox"><span>我已了解：付款留言必须填写此验证码。</span></label>' +
-    '<p class="payment-note">请使用手机自带浏览器（Safari、Chrome 等）打开本页面后，再前往 PayPay 付款。</p>' +
-    '<div class="modal-actions"><button class="btn secondary" id="cancel-paypay" type="button">稍后付款</button><button class="btn" id="open-paypay" type="button" disabled>打开 PayPay 付款</button></div>');
-  document.getElementById('copy-payment-code').addEventListener('click', function() {
-    copyPaymentCode(code);
-  });
-  const understood = document.getElementById('paypay-understood');
-  const openPayPay = document.getElementById('open-paypay');
-  understood.addEventListener('change', function() { openPayPay.disabled = !understood.checked; });
-  document.getElementById('cancel-paypay').addEventListener('click', closeModal);
-  openPayPay.addEventListener('click', async function() {
-    openPayPay.disabled = true;
-    openPayPay.textContent = '正在登记……';
-    try {
-      const confirmedPayment = await createPaymentIntent(group, 'PayPay', false);
-      applyPaymentToGroup(group, confirmedPayment);
-      renderPaymentOptions(latestPaymentSearch);
-      window.open(PAYPAY_URL, '_blank', 'noopener,noreferrer');
-    } catch (error) {
-      openPayPay.disabled = false;
-      openPayPay.textContent = '打开 PayPay 付款';
-      alert(error.message || '无法登记付款状态，请稍后再试。');
-    }
-  });
-}
-
-function copyPaymentCode(code) {
-  const copied = function() {
-    const button = document.getElementById('copy-payment-code');
-    if (button) button.textContent = '已复制';
-  };
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(code).then(copied).catch(function() { fallbackCopyPaymentCode(code, copied); });
-  } else {
-    fallbackCopyPaymentCode(code, copied);
-  }
-}
-
-function fallbackCopyPaymentCode(code, onCopied) {
-  const input = document.createElement('input');
-  input.value = code;
-  document.body.appendChild(input);
-  input.select();
-  try { document.execCommand('copy'); onCopied(); } catch (error) { alert('请手动复制验证码：' + code); }
-  input.remove();
-}
-
-function openCashConfirmation(group, halfPrice) {
-  const amount = paymentAmount(group, halfPrice);
-  showModal('<h2 id="modal-title">确认线下现金缴费</h2>' +
-    '<p>本家庭应缴金额为 <strong>' + yen(amount) + '</strong>。</p>' +
-    '<label class="half-price-option"><input id="cash-agreement" type="checkbox"><span>我已确认以上金额无误，并同意以线下现金方式缴费。</span></label>' +
-    '<p class="payment-note">确认后，缴费状态会更新为「' + PAYMENT_STATUS.PENDING + '」。请将现金交给相关负责人，待实际收款核对后才会更新为「' + PAYMENT_STATUS.PAID + '」。</p>' +
-    '<div class="modal-actions"><button class="btn secondary" id="cancel-cash" type="button">取消</button><button class="btn" id="confirm-cash" type="button" disabled>确认并登记现金缴费</button></div>');
-  const agreement = document.getElementById('cash-agreement');
-  const confirmCash = document.getElementById('confirm-cash');
-  agreement.addEventListener('change', function() { confirmCash.disabled = !agreement.checked; });
-  document.getElementById('cancel-cash').addEventListener('click', closeModal);
-  confirmCash.addEventListener('click', async function() {
-    confirmCash.disabled = true;
-    confirmCash.textContent = '正在登记……';
-    try {
-      const payment = await createPaymentIntent(group, '线下现金', halfPrice);
-      applyPaymentToGroup(group, payment);
-      renderPaymentOptions(latestPaymentSearch);
-      closeModal();
-    } catch (error) {
-      confirmCash.disabled = false;
-      confirmCash.textContent = '确认并登记现金缴费';
-      alert(error.message || '登记失败，请稍后再试。');
-    }
-  });
-}
-
-function modalCloseButton() {
-  return '<div class="modal-actions"><button class="btn" id="modal-done" type="button">知道了</button></div>';
-}
-
-function openAdminLogin() {
-  if (adminToken && adminManagerName && adminManagerChurch) {
-    showAdminPage();
-    return;
-  }
-  adminToken = '';
-  adminManagerName = '';
-  adminManagerChurch = '';
-  sessionStorage.removeItem('retreat2026AdminToken');
-  sessionStorage.removeItem('retreat2026AdminManagerName');
-  sessionStorage.removeItem('retreat2026AdminManagerChurch');
-  showModal('<h2 id="modal-title">管理者验证</h2><p>请输入管理者密码后进入收款确认页面。</p>' +
-    '<label class="title" for="admin-password">密码</label><input id="admin-password" type="password" autocomplete="current-password">' +
-    '<div class="modal-actions"><button class="btn secondary" id="cancel-admin-login" type="button">取消</button><button class="btn" id="submit-admin-login" type="button">验证并进入</button></div>');
-  const password = document.getElementById('admin-password');
-  const submit = document.getElementById('submit-admin-login');
-  document.getElementById('cancel-admin-login').addEventListener('click', closeModal);
-  password.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') submit.click();
-  });
-  submit.addEventListener('click', async function() {
-    if (!password.value) {
-      alert('请输入管理者密码。');
-      return;
-    }
-    submit.disabled = true;
-    submit.textContent = '正在验证……';
-    try {
-      const loginId = createRequestId();
-      await sendBackendRequest({ action: 'adminLogin', loginId: loginId, password: password.value });
-      const session = await waitForAdminSession(loginId);
-      if (!session.ok || !session.token) throw new Error(session.error || '密码验证失败。');
-      adminToken = session.token;
-      adminManagerName = session.managerName || '';
-      adminManagerChurch = session.managerChurch || '';
-      sessionStorage.setItem('retreat2026AdminToken', adminToken);
-      sessionStorage.setItem('retreat2026AdminManagerName', adminManagerName);
-      sessionStorage.setItem('retreat2026AdminManagerChurch', adminManagerChurch);
-      closeModal();
-      showAdminPage();
-    } catch (error) {
-      submit.disabled = false;
-      submit.textContent = '验证并进入';
-      alert(error.message || '密码验证失败。');
-    }
-  });
-  window.setTimeout(function() { password.focus(); }, 0);
-}
-
-function createRequestId() {
-  if (window.crypto && window.crypto.getRandomValues) {
-    const values = new Uint32Array(4);
-    window.crypto.getRandomValues(values);
-    return Array.from(values).map(function(value) { return value.toString(36); }).join('');
-  }
-  return Date.now().toString(36) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
-}
-
-async function waitForAdminSession(loginId) {
-  let lastReadError = null;
-  for (let attempt = 0; attempt < ADMIN_SESSION_DELAYS_MS.length; attempt++) {
-    const delay = ADMIN_SESSION_DELAYS_MS[attempt];
-    if (delay) await wait(delay);
-    try {
-      const data = await jsonpRequest('adminSession', { loginId: loginId }, '__adminSession', ADMIN_SESSION_POLL_TIMEOUT_MS);
-      if (data && data.ok) return data;
-      if (data && data.error && data.error.indexOf('尚未完成') === -1) throw new Error(data.error);
-    } catch (error) {
-      lastReadError = error;
-      if (String(error.message || '').indexOf('尚未完成') === -1) throw error;
-    }
-  }
-  if (lastReadError) throw lastReadError;
-  throw new Error('密码验证仍在处理中，请稍后再试。');
-}
-
-function showAdminPage() {
-  document.getElementById('public-page').hidden = true;
-  document.getElementById('admin-page').hidden = false;
-  renderAdminManagerName();
-  window.scrollTo(0, 0);
-  loadPendingPayments();
-}
-
-function renderAdminManagerName() {
-  document.getElementById('admin-manager-name').textContent = '管理者：' + (adminManagerName || '—');
-  document.getElementById('admin-responsibility-note').textContent = adminManagerChurch
-    ? '本账号负责「' + adminManagerChurch + '」的收款确认。系统仅允许确认该教会成员的款项；请在确认前核对实际收款金额。'
-    : '尚未取得本账号的负责教会资料。请重新登入后再确认收款。';
-}
-
-function hideAdminPage() {
-  document.getElementById('admin-page').hidden = true;
-  document.getElementById('public-page').hidden = false;
-  window.scrollTo(0, 0);
-}
-
-function loadPendingPayments() {
-  const status = document.getElementById('admin-page-status');
-  const list = document.getElementById('admin-payment-list');
-  if (!adminToken) {
-    hideAdminPage();
-    return;
-  }
-  if (pendingPaymentsLoadInProgress) return;
-  pendingPaymentsLoadInProgress = true;
-  status.textContent = '正在读取待确认缴费资料……';
-  list.innerHTML = '';
-  jsonpRequest('adminPendingPayments', { token: adminToken }, '__adminPending')
-    .then(function(data) {
-      if (!data || !data.ok) throw new Error((data && data.error) || '未能读取待确认资料。');
-      adminManagerName = data.managerName || adminManagerName;
-      adminManagerChurch = data.managerChurch || adminManagerChurch;
-      sessionStorage.setItem('retreat2026AdminManagerName', adminManagerName);
-      sessionStorage.setItem('retreat2026AdminManagerChurch', adminManagerChurch);
-      renderAdminManagerName();
-      renderAdminPayments(data.payments || []);
-      status.textContent = '待确认缴费资料已更新。';
-    })
-    .catch(function(error) {
-      status.textContent = '无法读取待确认资料。';
-      if (String(error.message || '').indexOf('验证已失效') !== -1) {
-        adminToken = '';
-        adminManagerName = '';
-        adminManagerChurch = '';
-        sessionStorage.removeItem('retreat2026AdminToken');
-        sessionStorage.removeItem('retreat2026AdminManagerName');
-        sessionStorage.removeItem('retreat2026AdminManagerChurch');
-        hideAdminPage();
-      }
-    })
-    .finally(function() {
-      pendingPaymentsLoadInProgress = false;
-    });
-}
-
-function renderAdminPayments(payments) {
-  const list = document.getElementById('admin-payment-list');
-  if (!payments.length) {
-    list.innerHTML = '<p class="empty">目前没有「' + PAYMENT_STATUS.PENDING + '」的缴费资料。</p>';
-    return;
-  }
-  payments.forEach(function(payment) {
-    const card = document.createElement('section');
-    card.className = 'query-family admin-payment';
-    card.dataset.registrationId = payment.registrationId;
-    const canConfirm = payment.canConfirm === true && payment.church === adminManagerChurch;
-    const memberNames = (payment.members || []).map(function(member) { return escapeHtml(member.name); }).join('、');
-    const code = payment.method === 'PayPay' && payment.code ? '<br>PayPay 验证码：<strong>' + escapeHtml(payment.code) + '</strong>' : '';
-    const restrictedNote = canConfirm ? '' : '<p class="admin-restricted-note">此家庭属于「' + escapeHtml(payment.church || '未填写教会') + '」，请由该教会负责人确认收款。</p>';
-    const confirmationButton = canConfirm
-      ? '<button class="btn confirm-payment" type="button">确认收款并标记为已缴纳</button>'
-      : '<button class="btn confirm-payment" type="button" disabled aria-disabled="true">非负责教会，无法确认</button>';
-    card.innerHTML = '<h3>' + escapeHtml(payment.applicantName) + ' 家庭</h3>' +
-      '<div class="query-meta">报名编号：' + escapeHtml(payment.registrationId) + '<br>所属教会：' + escapeHtml(payment.church) +
-      '<br>家庭成员：' + memberNames + '<br>付款方式：' + escapeHtml(payment.method || '') + code + '</div>' +
-      '<div class="payment-amount">应缴金额：<strong>' + yen(payment.finalAmount) + '</strong>' +
-      (payment.halfPrice ? '<div class="discount">已适用半额待遇</div>' : '') + '</div>' +
-      '<div class="payment-methods">' + confirmationButton + '</div>' + restrictedNote;
-    if (canConfirm) {
-      card.querySelector('.confirm-payment').addEventListener('click', function() {
-        openAdminPaymentConfirmation(payment);
-      });
-    }
-    list.appendChild(card);
-  });
-}
-
-function removeConfirmedAdminPayment(registrationId) {
-  const list = document.getElementById('admin-payment-list');
-  Array.from(list.querySelectorAll('.admin-payment')).forEach(function(card) {
-    if (card.dataset.registrationId === registrationId) card.remove();
-  });
-  if (!list.querySelector('.admin-payment')) {
-    list.innerHTML = '<p class="empty">目前没有「' + PAYMENT_STATUS.PENDING + '」的缴费资料。</p>';
-  }
-  document.getElementById('admin-page-status').textContent = '已确认收款。';
-}
-
-function openAdminPaymentConfirmation(payment) {
-  if (!adminManagerChurch || payment.church !== adminManagerChurch || payment.canConfirm !== true) {
-    alert('当前账号无法确认该教会成员的收款。');
-    return;
-  }
-  showModal('<h2 id="modal-title">确认收到款项</h2><p>请确认已收到 <strong>' + escapeHtml(payment.applicantName) + ' 家庭</strong>的款项 <strong>' + yen(payment.finalAmount) + '</strong>。</p>' +
-    '<p class="important-note">确认后会将 Google Sheets 中该家庭申请人与同行者的缴费状态一并更新为「' + PAYMENT_STATUS.PAID + '」，并记录确认者：' + escapeHtml(adminManagerName) + '。</p>' +
-    '<div class="modal-actions"><button class="btn secondary" id="cancel-admin-confirm" type="button">取消</button><button class="btn" id="confirm-admin-payment" type="button">确认收到款项</button></div>');
-  const confirmButton = document.getElementById('confirm-admin-payment');
-  document.getElementById('cancel-admin-confirm').addEventListener('click', closeModal);
-  confirmButton.addEventListener('click', async function() {
-    confirmButton.disabled = true;
-    confirmButton.textContent = '正在更新……';
-    try {
-      await sendBackendRequest({ action: 'adminConfirmPayment', token: adminToken, registrationId: payment.registrationId });
-      await waitForPaymentResult(payment.registrationId, function(result) {
-        return result.status === PAYMENT_STATUS.PAID;
-      });
-      closeModal();
-      removeConfirmedAdminPayment(payment.registrationId);
-    } catch (error) {
-      confirmButton.disabled = false;
-      confirmButton.textContent = '确认收到款项';
-      alert(error.message || '更新失败，请稍后再试。');
-    }
-  });
-}
-
-function yen(value) {
-  return Number(value || 0).toLocaleString('ja-JP') + '円';
-}
-
-function escapeHtml(value) {
-  return String(value == null ? '' : value).replace(/[&<>"']/g, function (character) {
-    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character];
-  });
-}
-
-document.getElementById('modal-close-button').addEventListener('click', closeModal);
-document.getElementById('modal-overlay').addEventListener('click', function(event) {
-  if (event.target === this) closeModal();
-});
-document.getElementById('admin-entry-button').addEventListener('click', openAdminLogin);
-document.getElementById('admin-back-button').addEventListener('click', hideAdminPage);
-
-loadRegistrationSummary();
-</script>
+    try { const saved = localStorage.getItem('personal-home-lang'); const r = document.getElementById('lang-'+saved); if(r) r.checked=true; } catch (_) {}
+    radios.forEach(r=>r.addEventListener('change',()=>apply(r)));
+    apply(document.querySelector('input[name="language"]:checked'));
+  })();
+  </script>
 </body>
 </html>
