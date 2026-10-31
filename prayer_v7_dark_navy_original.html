@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b1120">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>同心合意的祷告 | V7 深蓝阅读版</title>
+<style>
+        :root {
+            --bg-dark: #0b1120;
+            --card-bg: #151f32;
+            --card-border: #283650;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-red: #f43f5e;
+            --accent-amber: #fbbf24;
+            --accent-emerald: #34d399;
+            --code-bg: #070b14;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans", "Meiryo", sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.65;
+            padding: max(20px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+            overflow-x: hidden;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* Top Bar with Language Switcher & Nav */
+        .top-toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 17, 32, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+            margin: 0 -14px 20px -14px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .quick-nav {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
+            flex-grow: 1;
+        }
+        .quick-nav::-webkit-scrollbar {
+            display: none;
+        }
+        .nav-pill {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            transition: all 0.2s;
+        }
+        .nav-pill:active, .nav-pill:hover {
+            color: #fff;
+            border-color: var(--accent-blue);
+            background: rgba(56, 189, 248, 0.15);
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 999px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-btn.active {
+            background: var(--accent-blue);
+            color: #0b1120;
+        }
+
+        /* Header Styles */
+        header {
+            border-bottom: 2px solid var(--accent-blue);
+            padding-bottom: 18px;
+            margin-bottom: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .badge-row {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .badge-red { background: rgba(244, 63, 94, 0.18); color: var(--accent-red); border: 1px solid rgba(244, 63, 94, 0.5); }
+        .badge-blue { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.5); }
+        .badge-amber { background: rgba(251, 191, 36, 0.15); color: var(--accent-amber); border: 1px solid rgba(251, 191, 36, 0.5); }
+
+        h1 {
+            font-size: clamp(1.35rem, 4.8vw, 1.85rem);
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.35;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        /* Alert Banner */
+        .alert-box {
+            background: rgba(244, 63, 94, 0.1);
+            border: 1px solid rgba(244, 63, 94, 0.35);
+            border-left: 4px solid var(--accent-red);
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            font-size: 0.92rem;
+        }
+
+        .alert-title {
+            color: var(--accent-red);
+            font-weight: 700;
+            font-size: 0.96rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 18px 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+            scroll-margin-top: 60px;
+        }
+
+        @media (min-width: 640px) {
+            body { padding: 30px 24px; }
+            .section-card { padding: 26px 28px; margin-bottom: 26px; }
+            .top-toolbar { margin: 0 0 24px 0; border-radius: 8px; }
+        }
+
+        h2 {
+            font-size: clamp(1.12rem, 3.8vw, 1.3rem);
+            color: var(--accent-blue);
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        @media (min-width: 640px) {
+            h2 {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        h2 span.en-sub {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        h3 {
+            font-size: 1rem;
+            color: var(--accent-amber);
+            margin: 16px 0 8px 0;
+            line-height: 1.4;
+        }
+
+        p {
+            font-size: 0.94rem;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-position: outside;
+            margin-left: 18px;
+            margin-bottom: 12px;
+            font-size: 0.93rem;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: #ffffff;
+        }
+
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            background-color: var(--code-bg);
+            color: var(--accent-emerald);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            border: 1px solid #1e293b;
+            word-break: break-all;
+        }
+
+        .code-block {
+            background-color: var(--code-bg);
+            border: 1px solid var(--card-border);
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 0.82rem;
+            color: var(--accent-emerald);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+            margin: 10px 0 14px 0;
+        }
+
+        /* Responsive Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-top: 12px;
+        }
+
+        @media (min-width: 720px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+                gap: 18px;
+            }
+        }
+
+        .sub-box {
+            background: rgba(11, 17, 32, 0.55);
+            border: 1px solid var(--card-border);
+            padding: 14px 15px;
+            border-radius: 8px;
+        }
+
+        .sub-box h3 {
+            margin-top: 0;
+        }
+
+        /* Responsive Table */
+        .forensic-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            font-size: 0.9rem;
+        }
+
+        .forensic-table th, .forensic-table td {
+            border: 1px solid var(--card-border);
+            padding: 12px 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .forensic-table th {
+            background-color: rgba(11, 17, 32, 0.85);
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        @media (max-width: 680px) {
+            .forensic-table thead {
+                display: none;
+            }
+            .forensic-table, .forensic-table tbody, .forensic-table tr, .forensic-table td {
+                display: block;
+                width: 100%;
+            }
+            .forensic-table tr {
+                background: rgba(11, 17, 32, 0.55);
+                border: 1px solid var(--card-border);
+                border-radius: 8px;
+                margin-bottom: 12px;
+                padding: 12px;
+            }
+            .forensic-table td {
+                border: none;
+                padding: 6px 0;
+            }
+            .forensic-table td::before {
+                content: attr(data-label);
+                display: block;
+                font-size: 0.75rem;
+                font-weight: 700;
+                color: var(--accent-blue);
+                text-transform: uppercase;
+                margin-bottom: 2px;
+            }
+            .forensic-table td:first-child {
+                border-bottom: 1px solid var(--card-border);
+                padding-bottom: 8px;
+                margin-bottom: 6px;
+                font-size: 1rem;
+                color: var(--accent-amber);
+            }
+            .forensic-table td:first-child::before {
+                display: none;
+            }
+        }
+
+        /* Quote Block */
+        blockquote {
+            background: rgba(11, 17, 32, 0.65);
+            border-left: 3px solid var(--accent-amber);
+            padding: 12px 14px;
+            margin: 12px 0;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Metric Cards */
+        .metrics-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 14px 0;
+        }
+
+        @media (min-width: 640px) {
+            .metrics-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .metric-card {
+            background: rgba(11, 17, 32, 0.7);
+            border: 1px solid var(--card-border);
+            padding: 14px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .metric-val {
+            font-size: 1.45rem;
+            font-weight: 800;
+            margin: 4px 0;
+        }
+
+        .val-red { color: var(--accent-red); }
+        .val-amber { color: var(--accent-amber); }
+        .val-emerald { color: var(--accent-emerald); }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Timeline */
+        .timeline {
+            border-left: 2px solid var(--accent-blue);
+            margin-left: 8px;
+            padding-left: 16px;
+            margin-top: 14px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -23px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent-blue);
+            border-radius: 50%;
+            border: 2px solid var(--bg-dark);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--accent-amber);
+            font-size: 0.92rem;
+            margin-bottom: 2px;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 1px solid var(--card-border);
+        }
+    
+
+
+/* V7 prayer reading adaptation; article body is not edited. */
+:root{color-scheme:dark}
+body{background:var(--bg-dark)}
+.container{max-width:960px}
+.top-toolbar{border-radius:8px}
+.quick-nav{min-width:0}
+.quick-nav .nav-pill{flex-shrink:0}
+.original-tag{display:inline-flex;align-items:center;flex-shrink:0;border:1px solid var(--card-border);border-radius:999px;background:var(--card-bg);color:var(--accent-blue);font-size:.75rem;letter-spacing:.02em;font-weight:700;padding:5px 11px;white-space:nowrap}
+header{padding-top:8px}
+header h1{font-size:clamp(1.75rem,4.5vw,2.35rem);letter-spacing:.03em}
+header .subtitle{font-size:.94rem;max-width:64ch}
+.section-card{scroll-margin-top:84px}
+h2{color:var(--accent-blue);font-size:clamp(1.08rem,3.5vw,1.3rem)}
+h2 .en-sub{font-size:.67rem;letter-spacing:.08em}
+.prayer-text{margin-top:4px}
+.prayer-text p{font-size:clamp(1.04rem,2.8vw,1.12rem);font-weight:600;line-height:2.15;letter-spacing:.013em;margin:0;color:#edf3fa;text-wrap:pretty;overflow-wrap:anywhere;}
+.prayer-text p+p{margin-top:1.35em}
+.prayer-text .ending{color:#ffffff}
+.prayer-text .lord-prayer-heading{margin-top:1.85em;font-size:1.23rem;font-weight:800;color:var(--accent-amber);border-top:1px solid var(--card-border);padding-top:20px;line-height:1.5}
+.section-eyebrow{color:var(--accent-amber);font-size:.73rem;letter-spacing:.12em;font-weight:800;margin-bottom:10px}
+.decor-line{height:3px;width:44px;border-radius:999px;background:var(--accent-amber);margin:5px 0 16px}
+.section-card:target{border-color:rgba(56,189,248,.65)}
+a:focus-visible{outline:2px solid var(--accent-blue);outline-offset:3px}
+.back-top{display:inline-flex;text-decoration:none;color:var(--accent-blue);border:1px solid var(--card-border);border-radius:999px;padding:6px 13px;margin-top:7px}
+@media(min-width:640px){.prayer-text p{line-height:2.1}.section-card{padding:27px 30px}.top-toolbar{margin-bottom:26px}}
+@media print{body{color:#101827;background:#fff!important;padding:0}.top-toolbar, .back-top,footer,.badge-row,.section-eyebrow,.decor-line{display:none!important} header{border-color:#111}h1{color:#111}.section-card{background:#fff;border:0;box-shadow:none;break-inside:avoid-page;padding:0;margin-bottom:20px}.prayer-text p{color:#111;font-size:12pt;line-height:1.85}h2{color:#132a42}.prayer-text .lord-prayer-heading{color:#111}}
+</style>
+</head>
+<body>
+<div class="container" id="top">
+ <div class="top-toolbar">
+  <nav class="quick-nav" aria-label="祷告文段落导航"><a class="nav-pill" href="#sec-grace">感恩、救恩与悔改</a><a class="nav-pill" href="#sec-world">为世界祷告</a><a class="nav-pill" href="#sec-japan">为日本祷告</a><a class="nav-pill" href="#sec-outdoor">昭和纪念公园户外礼拜</a><a class="nav-pill" href="#sec-church">东京池袋基督教会</a><a class="nav-pill" href="#sec-service">执事、同工与牧者</a><a class="nav-pill" href="#sec-children">儿童主日学与孩子</a><a class="nav-pill" href="#sec-amen">结束祷告与主祷文</a></nav>
+  <span class="original-tag" aria-label="中文原文，未作删改">中文原文</span>
+ </div>
+ <header>
+  <div class="badge-row"><span class="badge badge-blue">PRAYER & WORSHIP</span><span class="badge badge-amber">ORIGINAL TEXT</span></div>
+  <h1>同心合意的祷告</h1>
+  <p class="subtitle">感恩与救恩 · 悔改与跟随 · 世界与日本 · 户外礼拜 · 东京池袋基督教会 · 牧者同工 · 儿童主日学</p>
+ </header>
+ <main id="prayer-text" aria-label="祷告文原文">
+  <section class="section-card" id="sec-grace" aria-labelledby="heading-sec-grace">
+      <div class="section-eyebrow">01 / PRAYER</div>
+      <h2 id="heading-sec-grace"><span>感恩、救恩与悔改</span><span class="en-sub">GRACE &amp; REPENTANCE</span></h2>
+      <div class="prayer-text"><p>慈悲怜悯的天父，创造天地万有的真神，我们感谢你、赞美你。主啊，一次次的感谢和赞美都是你所配得的，因为世上一切的言语，都不足以述说你向我们所显明的慈爱、信实和恩典。感谢你在过去的日子里一直保守、供应和带领我们，使我们今天能够再次来到你的面前，一同敬拜你、亲近你。</p><p>天父，我们特别感谢你赐下独生爱子主耶稣基督。我们原本因着罪与神隔绝，却因着主耶稣甘愿走上十字架，为我们舍己，使凡信靠他的人得蒙赦免，重新与父神和好。主啊，这救恩不是我们靠自己的行为换来的，也不是我们比别人更加配得，而是你白白赐下的恩典。想到我们这些原本远离你的人，今天竟然能够称你为父，能够来到你的面前祷告、敬拜，这是何等大的恩典。</p><p>主啊，我们也带着悔改的心来到你面前。我们虽然已经蒙恩，却仍然有许多软弱。面对这个世界的诱惑，我们有时会依靠自己，有时会顺从自己的欲望，有时明明知道你的话语，却仍然选择自己的道路。圣灵提醒我们的时候，我们也常常迟钝、不愿顺服。求你赦免我们过去一周在思想、言语和行为上一切不讨你喜悦的地方。</p><p>求你帮助我们，不要因为一次次蒙赦免，就轻看罪；反而让我们因为更加认识你的恩典和主耶稣十字架上的爱，心里面越来越不愿意得罪你。求圣灵继续在我们里面做工，使我们在罪的诱惑面前更加警醒，不依靠自己的意志，而是靠着从你而来的力量与罪争战。</p><p>主啊，让我们在自己的有限中更加看见你的无限，在自己的不足中更加懂得依靠基督，在人生的短暂中更加看见你国度的永恒。求你帮助我们常常定睛在主耶稣的十字架上，也愿意背起自己的十字架来跟随你。即使跟随的道路上有挣扎、有眼泪、有舍己，也让我们知道，你已经胜过这个世界，我们真正的盼望不在今生短暂的得失，而是在基督里那不能朽坏、不能夺去的永恒生命。</p></div>
+    </section>
+<section class="section-card" id="sec-world" aria-labelledby="heading-sec-world">
+      <div class="section-eyebrow">02 / PRAYER</div>
+      <h2 id="heading-sec-world"><span>为世界祷告</span><span class="en-sub">PRAYER FOR THE WORLD</span></h2>
+      <div class="prayer-text"><p>主啊，我们也把今天这个世界交托在你的手中。我们看见战争、冲突、经济压力、人与人之间的隔阂，以及许多人对未来的焦虑和不安。人的知识越来越多，能力越来越强，却仍然无法真正掌握明天。求你怜悯这个世代，安慰正在痛苦中的人，保护在战争和灾难中受苦的人，也赐给各国执政掌权者智慧，使他们能够更多顾念生命、公义与和平。</p><p>也求你借着这个时代提醒我们，人终究是有限的。让更多的人不是在绝望中失去方向，而是在人的办法走到尽头的时候，开始寻找那位真正掌管生命和历史的神。</p></div>
+    </section>
+<section class="section-card" id="sec-japan" aria-labelledby="heading-sec-japan">
+      <div class="section-eyebrow">03 / PRAYER</div>
+      <h2 id="heading-sec-japan"><span>为日本祷告</span><span class="en-sub">PRAYER FOR JAPAN</span></h2>
+      <div class="prayer-text"><p>主啊，我们也特别为我们所居住的日本祷告。感谢你让我们能够在这片土地上生活、工作、养育家庭，也享受这里许多平安和便利。你知道这里仍然有许多人尚未认识主耶稣，有人在忙碌中疲惫，有人在孤独中生活，有人在不断寻找人生的意义，却不知道真正的盼望在哪里。</p><p>求圣灵继续在这片土地上做工，兴起更多忠心传扬福音的教会、牧者和工人。也求你使用我们这些生活在日本的基督徒，使我们不只是用口传讲福音，更能够在每天的生活中活出基督的样式。让我们的诚实、温柔、忍耐、彼此相爱，成为无声的见证，使身边的人从我们的生命中看见基督。</p></div>
+    </section>
+<section class="section-card" id="sec-outdoor" aria-labelledby="heading-sec-outdoor">
+      <div class="section-eyebrow">04 / PRAYER</div>
+      <h2 id="heading-sec-outdoor"><span>昭和纪念公园户外礼拜</span><span class="en-sub">OUTDOOR WORSHIP</span></h2>
+      <div class="prayer-text"><p>主啊，我们也特别把今天在昭和纪念公园举行的第一次户外礼拜交托在你的手中。感谢你给我们这样特别的机会，让我们离开平时熟悉的会堂，在你所创造的天地之间一同敬拜你。看见天空、树木、阳光和你所创造的一切，也再次提醒我们，天地万有都是你手所造，我们无论在哪里，都可以来到你的面前敬拜你。</p><p>求你亲自保守今天户外礼拜所有的安排，保守天气、交通、场地和每一位参加弟兄姊妹的身体平安，也特别看顾有需要的人。让我们不是因为换了一个地方而分心，反而因着这样的环境，更加安静自己的心，更加真实地经历你的同在。</p><p>主啊，也求你使用这第一次户外礼拜，成为一次美好的福音见证。也许在我们周围会有经过的人、停下来观看的人，或者第一次接触教会的新朋友，求你亲自预备他们的心。让我们的敬拜不成为一种表演，而是从里面真实流露出来的敬拜；让人从我们的诗歌、祷告和彼此相爱中，看见基督的生命。</p><p>若今天有新朋友来到我们当中，求你除去他们心里的陌生和顾虑，使他们感受到从神家而来的温暖。愿今天撒下的每一颗福音种子，都在你所预备的时间里发芽、成长、结果。</p></div>
+    </section>
+<section class="section-card" id="sec-church" aria-labelledby="heading-sec-church">
+      <div class="section-eyebrow">05 / PRAYER</div>
+      <h2 id="heading-sec-church"><span>东京池袋基督教会</span><span class="en-sub">CHURCH &amp; COMMUNITY</span></h2>
+      <div class="prayer-text"><p>主啊，我们也把东京池袋基督教会交在你的手中。感谢你一步一步带领我们走到今天。我们知道教会真正的主人是你，我们的使命也仍然没有改变，就是拯救灵魂、培养门徒。</p><p>求你让“使命”真正刻在每一位弟兄姊妹的心里。让我们知道，教会不是只为已经信主的人存在，也不是一个只在主日聚会的地方，而是你放在这个城市中的灯台，是将福音带给周围人的器皿。</p><p>求你把池袋周围那些正在寻找真理、经历孤独、软弱和重担的人带到我们当中，也预备我们的心去接待他们。让我们不论面对什么样的人，都学习用基督的爱去回应。你怎样爱我们，也帮助我们怎样去爱别人，让从你而来的爱，在这片土地上一点一点传开。</p><p>主啊，我们也把教会每一位弟兄姊妹交托给你。那些因为身体、家庭、工作或其他原因不能来到聚会中的，求你亲自与他们同在。信心软弱的，求你坚固；灰心的，求你安慰；跌倒的，求你扶持他们重新站起来；患病的，求你按照你的旨意施行医治；心里有重担、不容易向别人诉说的，求你亲自成为他们最真实的安慰。</p><p>也求你改变我们的心，使我们不要只顾自己的需要，而是越来越懂得为别人祷告、彼此担当。让刚强的扶持软弱的，年长的帮助年轻的，有能力的帮助有需要的，使我们在基督里面真正成为一家人。</p></div>
+    </section>
+<section class="section-card" id="sec-service" aria-labelledby="heading-sec-service">
+      <div class="section-eyebrow">06 / PRAYER</div>
+      <h2 id="heading-sec-service"><span>执事、同工与牧者</span><span class="en-sub">MINISTRY &amp; LEADERSHIP</span></h2>
+      <div class="prayer-text"><p>主啊，我们也为教会所有的执事和同工祷告。感谢他们愿意把自己的时间、精力和恩赐摆上来服事你的家。你知道每一项服事背后许多别人看不见的辛苦，也知道他们还要面对自己的家庭、工作和生活。</p><p>求你亲自纪念他们的摆上，保守他们的身体、家庭和工作，赐给他们智慧、力量和合一的心。让他们在服事中不是依靠自己的经验和能力，而是常常回到你面前寻求圣灵的引导。也求你感动更多弟兄姊妹起来服事，使教会不是少数人在承担，而是每一个肢体都按着你所赐的恩赐，各尽其职，一同建造基督的身体。</p><p>主啊，我们也特别把牧师和传道人交托给你。感谢你使用他们来牧养、教导和服事教会。求你保守他们的身体、家庭和属灵生命，使他们在繁忙的服事中仍然有安静来到你面前的时间，不靠自己勉强支撑，而是不断从你那里重新得力。</p><p>也求你使用他们所传讲的话语，使我们不只是听见更多道理，而是真正被你的话光照、改变。让我们听了以后愿意去行，使我们的生命越来越成熟，也渐渐成为能够服事、帮助别人的门徒。</p></div>
+    </section>
+<section class="section-card" id="sec-children" aria-labelledby="heading-sec-children">
+      <div class="section-eyebrow">07 / PRAYER</div>
+      <h2 id="heading-sec-children"><span>儿童主日学与孩子</span><span class="en-sub">CHILDREN &amp; FAITH</span></h2>
+      <div class="prayer-text"><p>主啊，我们也把儿童主日学和教会所有的孩子们交托给你。求你保守他们平安健康地成长，让他们从小就在你的爱和话语中扎根。这个世界会不断给他们许多不同的声音和价值观，求圣灵亲自保护他们，使他们知道自己是谁，也知道自己属于谁。</p><p>求你赐给儿童主日学老师爱心、耐心和智慧，不只是把圣经知识教给孩子，而是用自己的生命把他们带到主耶稣面前。愿这些孩子随着年龄增长，不是离你越来越远，而是越来越认识你、爱你、信靠你。愿这份信仰不是只从父母那里继承来的习惯，而是将来成为他们自己真实经历过、确认过、愿意持守一生。</p></div>
+    </section>
+<section class="section-card" id="sec-amen" aria-labelledby="heading-sec-amen">
+      <div class="section-eyebrow">08 / PRAYER</div>
+      <h2 id="heading-sec-amen"><span>结束祷告与主祷文</span><span class="en-sub">CLOSING PRAYER</span></h2>
+      <div class="prayer-text"><p class="ending">我们如此同心合意地祈求祷告，都是奉主耶稣基督得胜的圣名求，阿们。</p><h3 class="lord-prayer-heading">主祷文</h3></div>
+    </section>
+
+ </main>
+ <footer><a class="back-top" href="#top">↑ 返回顶部</a><p>PRAYER · WORSHIP · FAITH</p></footer>
+</div>
+</body>
+</html>
